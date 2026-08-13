@@ -14,6 +14,7 @@ export interface Donation {
 export interface Milestone {
   id: string;
   amount: number;
+  tokenBonus: number;
   title: string;
   description: string;
   icon: string;
@@ -50,7 +51,7 @@ export interface CampaignData {
   subtitle: string;
   candidateName: string;
   targetGoal: number;
-  votePrice: number; // e.g. 100 THB per vote
+  votePrice: number; // e.g. 68 THB per vote
   deadline: string; // ISO string
   promptPayNumber: string;
   bankAccountName: string;

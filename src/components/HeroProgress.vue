@@ -64,7 +64,7 @@ onUnmounted(() => {
 
         <div class="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-50 px-3 py-1 rounded-full border border-slate-100">
           <Clock class="w-3.5 h-3.5 text-slate-400" />
-          <span>เหลืออีก {{ timeLeft.days }} วัน {{ timeLeft.hours }} ชม. {{ timeLeft.minutes }} นาที</span>
+          <span>เหลืออีก {{ timeLeft.days }} วัน {{ timeLeft.hours }} ชม. {{ timeLeft.minutes }} นาที {{ timeLeft.seconds }} วินาที</span>
         </div>
       </div>
 
@@ -74,7 +74,7 @@ onUnmounted(() => {
           {{ campaign.title }}
         </h2>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
-          {{ campaign.subtitle }} ร่วมสร้างรอยยิ้มและพานีย่าก้าวสู่ Senbatsu ด้วยกัน!
+          {{ campaign.subtitle }} ร่วมสร้างรอยยิ้มและพานีญ่าก้าวสู่ Senbatsu ด้วยกัน!
         </p>
       </div>
 
@@ -167,21 +167,23 @@ onUnmounted(() => {
           <ChevronRight class="w-4 h-4 opacity-75" />
         </button>
 
+        <!--
         <button
           @click="emit('scrollToCalculator')"
           class="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-white border border-pink-200 text-slate-700 hover:text-pink-600 hover:bg-pink-50/50 transition-all text-sm font-medium flex items-center justify-center gap-2 cursor-pointer"
         >
           <Sparkles class="w-4 h-4 text-pink-500" />
           <span>คำนวณของรางวัล</span>
-        </button>
+        </button>-->
 
+        <!--
         <button
           @click="emit('scrollToWish')"
           class="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-white border border-purple-200 text-slate-700 hover:text-purple-600 hover:bg-purple-50/50 transition-all text-sm font-medium flex items-center justify-center gap-2 cursor-pointer"
         >
           <Heart class="w-4 h-4 text-purple-500" />
           <span>เขียนคำอวยพร</span>
-        </button>
+        </button>-->
       </div>
     </div>
   </div>

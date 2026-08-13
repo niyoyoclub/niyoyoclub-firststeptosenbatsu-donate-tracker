@@ -127,20 +127,24 @@ const scrollToTop = () => {
       />
 
       <!-- Leaderboard & Recent Donations -->
-      <DonationLeaderboard :donations="donations" />
+      <DonationLeaderboard :donations="donations" :campaign="campaign" />
 
       <!-- Reward & Perk Calculator -->
+      <!--
       <RewardCalculator
         :rewardTiers="rewardTiers"
         @openDonateWithAmount="(amt) => { isDonateOpen = true; }"
       />
+      -->
 
       <!-- Wish & Message Wall -->
+      <!--
       <WishWall
         :wishes="wishes"
         @addWish="handleAddWish"
         @likeWish="handleLikeWish"
       />
+      -->
 
       <!-- Financial Transparency -->
       <TransparencyBoard

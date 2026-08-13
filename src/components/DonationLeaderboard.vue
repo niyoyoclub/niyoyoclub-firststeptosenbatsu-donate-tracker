@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { Award, Search, Sparkles, Trophy, Heart, Clock } from 'lucide-vue-next';
-import { Donation } from '../types';
+import { Donation, CampaignData } from '../types';
 
 const props = defineProps<{
+  campaign: CampaignData;
   donations: Donation[];
 }>();
 
@@ -157,7 +158,7 @@ const filteredDonations = computed(() => {
             +฿{{ item.amount.toLocaleString() }}
           </span>
           <span class="text-xs text-slate-400 block font-normal">
-            ({{ Math.floor(item.amount / 100) }} Votes)
+            ({{ Math.floor(item.amount / props.campaign.votePrice) }} Votes)
           </span>
         </div>
       </div>

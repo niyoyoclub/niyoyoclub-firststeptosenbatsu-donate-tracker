@@ -68,13 +68,15 @@ export function parseCSVDonations(csvText: string): Donation[] {
   // Skip header line
   for (let i = 1; i < lines.length; i++) {
     // Basic CSV splitting handling quotes
-    const row = lines[i].match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || lines[i].split(',');
+    console.log('line=', lines[i]);
+    const row = lines[i].split(',');
+    console.log('row=', row);
     if (row && row.length >= 2) {
-      const name = row[0] ? row[0].replace(/^"|"$/g, '').trim() : 'Donation';
-      const rawAmount = row[1] ? row[1].replace(/[^0-9.]/g, '') : '0';
+      const name = row[2] ? row[2].trim() : 'Donation';
+      const rawAmount = row[3] ? row[3].replace(/[^0-9.]/g, '') : '0';
       const amount = parseFloat(rawAmount) || 0;
-      const note = row[2] ? row[2].replace(/^"|"$/g, '').trim() : '';
-      const time = row[3] ? row[3].replace(/^"|"$/g, '').trim() : new Date().toISOString().split('T')[0];
+      const note = row[6] ? row[6].trim() : '';
+      const time = row[1] ? row[1].trim() : new Date().toISOString().split('T')[0];
 
       if (amount > 0) {
         let tier: 'tier-normal' | 'tier-silver' | 'tier-gold' | 'tier-diamond' = 'tier-normal';

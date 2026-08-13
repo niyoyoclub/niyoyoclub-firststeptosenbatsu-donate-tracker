@@ -14,7 +14,7 @@ const emit = defineEmits<{
   (e: 'importDonations', donations: Donation[], sheetUrl: string): void;
 }>();
 
-const sheetUrl = ref(props.currentSheetUrl || '');
+const sheetUrl = ref(props.currentSheetUrl || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQjjo3Gd1VwUWxVHYEy01Rar9ueGqpxeiQtpRR-Q9U1IxD5ew15gf0YQ0KPtyGAbj8XAKO8JXLm_RjF/pub?gid=0&single=true&output=csv');
 const isLoading = ref(false);
 const error = ref<string | null>(null);
 const successCount = ref<number | null>(null);

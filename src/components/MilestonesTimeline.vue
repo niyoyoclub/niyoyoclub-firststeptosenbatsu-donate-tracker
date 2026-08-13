@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue';
 import { Tv, Coffee, Sparkles, Trophy, CheckCircle2, Lock } from 'lucide-vue-next';
 import { Milestone } from '../types';
 
@@ -11,11 +12,35 @@ const getIcon = (iconName: string) => {
   switch (iconName) {
     case 'Tv': return Tv;
     case 'Coffee': return Coffee;
+    case 'Difuku': return Difuku;
     case 'Sparkles': return Sparkles;
     case 'Trophy': return Trophy;
     default: return Sparkles;
   }
 };
+
+const milestoneShown = ref([false, false]);
+
+function canShowMilestone(amt: number, mAmt: number, step: number) { 
+  console.log("canShowMilestone() called");
+
+  var result = false;
+
+  // ยังไม่ได้แสดง หลักเป้าหมาย
+  if (milestoneShown.value[step] === false) {
+    if (amt <= mAmt) {
+      result = true;
+      milestoneShown.value[step] = true;
+    }
+    else {
+      result = true;
+    }
+  }
+  
+  console.log("amt=", amt, "mAmt=", mAmt, "result=", result, "step=", step, "milestoneShown=", milestoneShown.value);
+  console.log("canShowMilestone() end");
+  return result;
+}
 </script>
 
 <template>
@@ -43,6 +68,7 @@ const getIcon = (iconName: string) => {
             : 'bg-slate-50/50 border-slate-100 opacity-80'
         ]"
       >
+        <!-- v-show="canShowMilestone(currentTotal, m.amount, 0)" -->
         <div class="flex items-start justify-between gap-3 mb-3">
           <div class="flex items-center gap-3">
             <div
@@ -78,6 +104,7 @@ const getIcon = (iconName: string) => {
         </div>
 
         <!-- Progress Bar for Milestone -->
+        <!-- v-show="canShowMilestone(currentTotal, m.amount, 1)" -->
         <div class="mt-3">
           <div class="flex justify-between items-center text-[11px] font-medium text-slate-500 mb-1">
             <span>เป้าหมาย ฿{{ m.amount.toLocaleString() }}</span>

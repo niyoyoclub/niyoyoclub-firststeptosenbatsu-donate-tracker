@@ -5,13 +5,14 @@ export const INITIAL_CAMPAIGN: CampaignData = {
   subtitle: "โครงการโดเนทเพื่อส่ง 'นีญ่า' ติดตำแหน่ง 13 หรือ เซ็มบัตสึ General Election 2026",
   candidateName: "Niya (นีญ่า)",
   targetGoal: 136000,
-  votePrice: 100, // 100 Baht per vote
+  votePrice: 68, // 68 Baht per vote
   deadline: "2026-11-12T19:59:59Z",
   promptPayNumber: "236-1-62262-9",
   bankAccountName: "นาย วัฒนชัย ยิ้มงาม",
   bankName: "ธนาคารกสิกรไทย (KBank)",
   bankAccountNumber: "236-1-62262-9",
-  sheetCsvUrl: ""
+  sheetCsvUrl: "",
+  startToken: 2085,
 };
 
 export const INITIAL_MILESTONES: Milestone[] = [
@@ -19,49 +20,55 @@ export const INITIAL_MILESTONES: Milestone[] = [
     id: "m1",
     amount: 6000,
     title: "6,000 ฿ — Bonus +600 Tokens",
-    description: "โบนัสพิเศษ +600 Tokens",
+    description: "ทบจากผู้สนับสนุน +600 Tokens",
     icon: "Tv",
-    isUnlocked: true
+    isUnlocked: true,
+    tokenBonus: 600
   },
   {
     id: "m2",
     amount: 12000,
     title: "12,000 ฿ — Bonus +600 Tokens",
-    description: "โบนัสพิเศษ +600 Tokens รวมทบจากผู้สนับสนุน 1,200 Tokens",
+    description: "ทบจากผู้สนับสนุน +600 Tokens รวมทบ 1,200 Tokens",
     icon: "Daifuku",
-    isUnlocked: true
+    isUnlocked: true,
+    tokenBonus: 1200,
   },
   {
     id: "m3",
     amount: 24000,
     title: "24,000 ฿ — Bonus +1,200 Tokens",
-    description: "โบนัสพิเศษ +1,200 Tokens รวมทบจากผู้สนับสนุน 2,400 Tokens",
+    description: "ทบจากผู้สนับสนุน +1,200 Tokens รวมทบ 2,400 Tokens",
     icon: "Sparkles",
-    isUnlocked: false
+    isUnlocked: false,
+    tokenBonus: 2400
   },
   {
     id: "m4",
     amount: 48000,
     title: "48,000 ฿ — Bonus +2,400 Tokens",
-    description: "โบนัสพิเศษ +2,400 Tokens รวมทบจากผู้สนับสนุน 4,800 Tokens",
+    description: "ทบจากผู้สนับสนุน +2,400 Tokens รวมทบ 4,800 Tokens",
     icon: "Trophy",
-    isUnlocked: false
+    isUnlocked: false,
+    tokenBonus: 4800
   },
   {
     id: "m5",
     amount: 68000,
     title: "68,000 ฿ — Bonus +2,000 Tokens",
-    description: "โบนัสพิเศษ +2,000 Tokens รวมทบจากผู้สนับสนุน 6,800 Tokens",
+    description: "ทบจากผู้สนับสนุน +2,000 Tokens รวมทบ 6,800 Tokens",
     icon: "Trophy",
-    isUnlocked: false
+    isUnlocked: false,
+    tokenBonus: 6800
   },
   {
     id: "m6",
     amount: 136000,
     title: "136,000 ฿ — Final Bonus +6,800 Tokens",
-    description: "โบนัสพิเศษปิดท้าย +6,800 Tokens รวมทบจากผู้สนับสนุน 13,600 Tokens",
+    description: "ทบจากผู้สนับสนุน +6,800 Tokens รวมทบตลอดแคมเปญ 13,600 Tokens",
     icon: "Trophy",
-    isUnlocked: false
+    isUnlocked: false,
+    tokenBonus: 13600
   }
 ];
 
