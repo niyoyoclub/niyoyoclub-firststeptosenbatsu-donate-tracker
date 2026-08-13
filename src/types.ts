@@ -59,4 +59,6 @@ export interface CampaignData {
   bankAccountNumber: string;
   sheetCsvUrl?: string;
   startToken: number;
+  maxAddonToken: number;
+  currentBonusToken: number;
 }

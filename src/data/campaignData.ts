@@ -6,13 +6,15 @@ export const INITIAL_CAMPAIGN: CampaignData = {
   candidateName: "Niya BNK48 (นีญ่า)",
   targetGoal: 136000,
   votePrice: 68, // 68 Baht per vote
-  deadline: "2026-11-12T19:59:59Z",
+  deadline: "2026-10-01T00:00:00Z",
   promptPayNumber: "236-1-62262-9",
   bankAccountName: "นาย วัฒนชัย ยิ้มงาม",
   bankName: "ธนาคารกสิกรไทย (KBank)",
   bankAccountNumber: "236-1-62262-9",
   sheetCsvUrl: "",
   startToken: 2085,
+  maxAddonToken: 6000,
+  currentBonusToken: 0,
 };
 
 export const INITIAL_MILESTONES: Milestone[] = [

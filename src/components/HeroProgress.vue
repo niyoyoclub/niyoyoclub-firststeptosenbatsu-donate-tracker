@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { Heart, Trophy, Users, Vote, Clock, Sparkles, ChevronRight } from 'lucide-vue-next';
-import { CampaignData } from '../types';
+import { CampaignData, Milestone } from '../types';
 
 const props = defineProps<{
   campaign: CampaignData;
+  milestones: Milestone[];
   totalAmount: number;
   totalDonors: number;
 }>();
@@ -23,12 +24,33 @@ const totalVotes = computed(() =>
   Math.floor(props.totalAmount / props.campaign.votePrice)
 );
 
-const addOnVotes = computed(() => 
-  Math.floor(props.totalAmount / props.campaign.votePrice / 5) * 10
-);
+function findMatchMilestoneTokenBonus(amt:number) {
+  for (let i = props.milestones.length - 1; i >= 0; i--) {
+    if (amt >= props.milestones[i].amount) {
+      props.campaign.currentBonusToken = props.milestones[i].tokenBonus;
+      return props.milestones[i].tokenBonus;
+    }
+  }
+
+  props.campaign.currentBonusToken = 0;
+  return 0;
+};
+
+const addOnVotes = computed(() => {
+  let result = Math.floor(props.totalAmount / props.campaign.votePrice / 5) * 10;
+  
+  if (result > props.campaign.maxAddonToken) {
+    result = props.campaign.maxAddonToken;
+  }
+
+  return result;
+});
 
 const gTotalVotes = computed(() =>
-  totalVotes.value + addOnVotes.value + props.campaign.startToken
+  totalVotes.value
+   + addOnVotes.value
+   + props.campaign.startToken
+   + findMatchMilestoneTokenBonus(props.totalAmount)
 );
 
 const timeLeft = ref({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -72,7 +94,7 @@ onUnmounted(() => {
 
         <div class="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-50 px-3 py-1 rounded-full border border-slate-100">
           <Clock class="w-3.5 h-3.5 text-slate-400" />
-          <span>เหลืออีก {{ timeLeft.days }} วัน {{ timeLeft.hours }} ชม. {{ timeLeft.minutes }} นาที {{ timeLeft.seconds }} วินาที</span>
+          <span>เหลืออีก {{ timeLeft.days }} วัน {{ timeLeft.hours }} ชม. {{ timeLeft.minutes }} นาที {{ timeLeft.seconds }} วินาที เริ่มโหวต</span>
         </div>
       </div>
 
@@ -86,6 +108,7 @@ onUnmounted(() => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           ทบ Token จากผู้สนับสนุน 3 กิจกรรม 191 x 5 = 955 | Niya Busking Fancam 75 x 10 = 150 | ดันคลิป Tiktok Niya มีรายการ 19 x 10 = 190 ผู้สนับสนุนทบให้อีก 190 = 380 รวม <span class="text-xs font-bold text-slate-800">{{ props.campaign.startToken.toLocaleString() }}</span> Tokens
+          และ ทุกๆ การซื้อ 5 Tokens ผู้สนับสนุนจะทบให้อีก 10 Tokens ทบสูงสุด 6,000 Tokens
         </p>
       </div>
 
@@ -135,7 +158,7 @@ onUnmounted(() => {
             <Vote class="w-5 h-5" />
           </div>
           <div>
-            <div class="text-xs text-slate-500 font-medium">คะแนนโหวตโดยประมาณ {{ totalVotes.toLocaleString() }} ทบ {{ addOnVotes.toLocaleString() }}</div>
+            <div class="text-xs text-slate-500 font-medium">คะแนนโหวตโดยประมาณ {{ totalVotes.toLocaleString() }} ทบ {{ addOnVotes.toLocaleString() }} โบนัส {{ props.campaign.currentBonusToken.toLocaleString() }}</div>
             <div class="text-base sm:text-lg font-bold text-slate-800 font-heading">
               {{ gTotalVotes.toLocaleString() }} <span class="text-xs font-normal text-slate-500">Tokens</span>
             </div>

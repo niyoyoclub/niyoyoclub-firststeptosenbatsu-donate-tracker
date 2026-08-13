@@ -68,9 +68,9 @@ export function parseCSVDonations(csvText: string): Donation[] {
   // Skip header line
   for (let i = 1; i < lines.length; i++) {
     // Basic CSV splitting handling quotes
-    console.log('line=', lines[i]);
+    //console.log('line=', lines[i]);
     const row = lines[i].split(',');
-    console.log('row=', row);
+    //console.log('row=', row);
     if (row && row.length >= 2) {
       const name = row[2] ? row[2].trim() : 'Donation';
       const rawAmount = row[3] ? row[3].replace(/[^0-9.]/g, '') : '0';

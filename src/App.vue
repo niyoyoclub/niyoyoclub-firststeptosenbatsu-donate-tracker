@@ -113,6 +113,7 @@ const scrollToTop = () => {
       <!-- Hero Banner & Goal Tracker -->
       <HeroProgress
         :campaign="campaign"
+        :milestones="milestones"
         :totalAmount="totalAmount"
         :totalDonors="totalDonors"
         @openDonate="isDonateOpen = true"
