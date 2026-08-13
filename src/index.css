@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  
+  h1, h2, h3, .font-heading {
+    font-family: 'Fredoka', 'Prompt', sans-serif;
+  }
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f8f6fb;
+}
+::-webkit-scrollbar-thumb {
+  background: #e2d9f3;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f472b6;
+}
+
+/* Cute soft glow utilities */
+.soft-pink-card {
+  background: #ffffff;
+  border: 1px solid rgba(251, 207, 232, 0.6);
+  box-shadow: 0 4px 20px -2px rgba(255, 182, 193, 0.15);
+}
+
+.soft-purple-card {
+  background: #ffffff;
+  border: 1px solid rgba(221, 214, 254, 0.6);
+  box-shadow: 0 4px 20px -2px rgba(192, 132, 252, 0.12);
+}
+
+.soft-blue-card {
+  background: #ffffff;
+  border: 1px solid rgba(186, 230, 253, 0.6);
+  box-shadow: 0 4px 20px -2px rgba(125, 211, 252, 0.15);
+}
+
+.pastel-gradient-pink {
+  background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E6 100%);
+}
+
+.pastel-gradient-header {
+  background: linear-gradient(135deg, #FFF5F7 0%, #F3E8FF 50%, #E0F2FE 100%);
+}

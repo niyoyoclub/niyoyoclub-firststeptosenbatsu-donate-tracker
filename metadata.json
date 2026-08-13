@@ -1,0 +1,6 @@
+{
+  "name": "Niya First Step To Senbatsu - Donation Tracker",
+  "description": "Minimal, cute and vibrant donation tracker for Niya General Election Project with goal progress, live leaderboard, donation calculator, and wish wall.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
