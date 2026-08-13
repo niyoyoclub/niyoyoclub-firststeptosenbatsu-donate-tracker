@@ -23,6 +23,14 @@ const totalVotes = computed(() =>
   Math.floor(props.totalAmount / props.campaign.votePrice)
 );
 
+const addOnVotes = computed(() => 
+  Math.floor(props.totalAmount / props.campaign.votePrice / 5) * 10
+);
+
+const gTotalVotes = computed(() =>
+  totalVotes.value + addOnVotes.value + props.campaign.startToken
+);
+
 const timeLeft = ref({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 let timerInterval: any = null;
 
@@ -74,7 +82,10 @@ onUnmounted(() => {
           {{ campaign.title }}
         </h2>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
-          {{ campaign.subtitle }} ร่วมสร้างรอยยิ้มและพานีญ่าก้าวสู่ Senbatsu ด้วยกัน!
+          {{ campaign.subtitle }}  ในการเลือกตั้งทั้วไปครั้งที่ 6 (General Election 2026) #BNK48CGM48_GE2026 มาร่วมสร้างรอยยิ้มและนำพาน้องนีญ่าก้าวสู่ตำแหน่งที่น้องใฝ่ฝันด้วยกัน!
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          ทบ Token จากผู้สนับสนุน 3 กิจกรรม 191 x 5 = 955 | Niya Busking Fancam 75 x 10 = 150 | ดันคลิป Tiktok Niya มีรายการ 19 x 10 = 190 ผู้สนับสนุนทบให้อีก 190 = 380 รวม <span class="text-xs font-bold text-slate-800">{{ props.campaign.startToken.toLocaleString() }}</span> Tokens
         </p>
       </div>
 
@@ -124,9 +135,9 @@ onUnmounted(() => {
             <Vote class="w-5 h-5" />
           </div>
           <div>
-            <div class="text-xs text-slate-500 font-medium">คะแนนโหวตโดยประมาณ</div>
+            <div class="text-xs text-slate-500 font-medium">คะแนนโหวตโดยประมาณ {{ totalVotes.toLocaleString() }} ทบ {{ addOnVotes.toLocaleString() }}</div>
             <div class="text-base sm:text-lg font-bold text-slate-800 font-heading">
-              {{ totalVotes.toLocaleString() }} <span class="text-xs font-normal text-slate-500">Votes</span>
+              {{ gTotalVotes.toLocaleString() }} <span class="text-xs font-normal text-slate-500">Tokens</span>
             </div>
           </div>
         </div>

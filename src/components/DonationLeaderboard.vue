@@ -158,7 +158,7 @@ const filteredDonations = computed(() => {
             +฿{{ item.amount.toLocaleString() }}
           </span>
           <span class="text-xs text-slate-400 block font-normal">
-            ({{ Math.floor(item.amount / props.campaign.votePrice) }} Votes)
+            ({{ Math.floor(item.amount / props.campaign.votePrice) }} Tokens)
           </span>
         </div>
       </div>

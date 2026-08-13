@@ -45,7 +45,7 @@ const handleShare = () => {
         <div>
           <div class="flex items-center gap-2">
             <h1 class="text-lg sm:text-xl font-bold text-slate-800 font-heading tracking-tight">
-              {{ campaign.candidateName }} Senbatsu Project
+              {{ campaign.candidateName }} GE6 Project
             </h1>
             <span class="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-pink-50 text-pink-600 border border-pink-200/60">
               <Sparkles class="w-3 h-3" /> Election 2026
@@ -57,6 +57,7 @@ const handleShare = () => {
 
       <!-- Right Actions -->
       <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+        <!--
         <button
           @click="emit('openSheetModal')"
           class="p-2.5 rounded-xl text-slate-600 hover:text-purple-600 hover:bg-purple-50 transition-colors border border-slate-200/70 hover:border-purple-200 text-xs font-medium flex items-center gap-1.5 cursor-pointer"
@@ -65,6 +66,7 @@ const handleShare = () => {
           <Table class="w-4 h-4 text-purple-500" />
           <span class="hidden md:inline">Google Sheet</span>
         </button>
+        -->
 
         <button
           @click="handleShare"
