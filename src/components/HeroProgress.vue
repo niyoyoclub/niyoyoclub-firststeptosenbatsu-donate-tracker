@@ -94,7 +94,7 @@ onUnmounted(() => {
 
         <div class="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-50 px-3 py-1 rounded-full border border-slate-100">
           <Clock class="w-3.5 h-3.5 text-slate-400" />
-          <span>เหลืออีก {{ timeLeft.days }} วัน {{ timeLeft.hours }} ชม. {{ timeLeft.minutes }} นาที {{ timeLeft.seconds }} วินาที เริ่มโหวต</span>
+          <span>เริ่มโหวตในอีก {{ timeLeft.days }} วัน {{ timeLeft.hours }} ชม. {{ timeLeft.minutes }} นาที {{ timeLeft.seconds }} วินาที</span>
         </div>
       </div>
 

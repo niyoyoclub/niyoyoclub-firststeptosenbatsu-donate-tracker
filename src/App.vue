@@ -58,6 +58,7 @@ onUnmounted(() => {
 });
 
 const handleAddDonation = (newDonation: Donation) => {
+  // ส่งข้อมูลการ donate ลง google sheet
   donations.value.unshift(newDonation);
 };
 
