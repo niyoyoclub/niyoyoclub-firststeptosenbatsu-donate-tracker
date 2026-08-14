@@ -22,7 +22,7 @@ const copiedAccount = ref(false);
 const copiedPromptpay = ref(false);
 const slipFileName = ref<string | null>(null);
 
-const presetAmounts = [50, 68, 100, 136, 340, 500, 680, 1000];
+const presetAmounts = [50, 68, 100, 136, 204, 340, 500, 680, 1000];
 
 const handleCopyAccount = () => {
   navigator.clipboard.writeText(props.campaign.bankAccountNumber);
@@ -134,10 +134,17 @@ const handleSubmit = () => {
 
           <!-- Bank Account -->
           <div class="p-4 bg-white rounded-xl border border-slate-200/80 shadow-sm">
+
             <!-- Header: Bank Name -->
             <div class="flex items-center gap-1.5 mb-2 text-xs font-medium text-slate-400">
-              <CreditCard class="w-4 h-4 text-purple-500" />
-              <span>{{ campaign.bankName }}</span>
+              <!-- QR Code -->
+              <div class="flex justify-center mb-4 w-full"> <!-- เพิ่ม w-full -->
+                <img
+                  src="/assets/bank_qr_code.jpg"
+                  alt="Bank QR Code"
+                  class="w-40 h-40 rounded-lg object-cover border border-slate-200/60 shadow-xs"
+                />
+              </div>
             </div>
 
             <!-- Main Content -->
@@ -145,20 +152,18 @@ const handleSubmit = () => {
               <!-- Left: Account Details -->
               <div class="space-y-0.5 min-w-0">
                 <div class="text-base font-bold text-slate-800 font-heading tracking-wide truncate">
-                  {{ campaign.bankAccountNumber }}
+                  <span class="text-green-500" >{{ campaign.bankName }}</span>
                 </div>
-                <div class="text-xs text-slate-500 truncate">
-                  {{ campaign.bankAccountName }}
+                <div class="text-base font-bold text-slate-800 font-heading tracking-wide truncate">
+                  <span class="text-green-800">{{ campaign.bankAccountNumber }}</span>
+                </div>
+                <div class="text-base font-bold text-slate-800 font-heading tracking-wide truncate">
+                  <span class="text-green-800">{{ campaign.bankAccountName }}</span>
                 </div>
               </div>
 
               <!-- Right: QR Code & Copy Button Group -->
-              <div class="flex items-center gap-2.5 shrink-0">
-                <img
-                  src="/assets/bank_qr_code.jpg"
-                  alt="Bank QR Code"
-                  class="w-20 h-20 rounded-lg object-cover border border-slate-200/60 shadow-xs"
-                />
+              <div class="flex items-center gap-2.5 shrink-0">                
                 <button
                   @click="handleCopyAccount"
                   class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 cursor-pointer active:scale-95"

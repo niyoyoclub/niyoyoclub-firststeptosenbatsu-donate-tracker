@@ -11,6 +11,7 @@ const emit = defineEmits<{
   (e: 'openDonate'): void;
   (e: 'openSheetModal'): void;
   (e: 'resetData'): void;
+  (e: 'openChatOpen'): void;
 }>();
 
 const copied = ref(false);
@@ -75,6 +76,14 @@ const handleShare = () => {
         >
           <Share2 class="w-4 h-4 text-pink-500" />
           <span class="hidden md:inline">{{ copied ? 'คัดลอกลิงก์แล้ว!' : 'แชร์' }}</span>
+        </button>
+
+        <button
+          @click="emit('openChatOpen')"
+          class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-gradient-to-r from-green-500 to-rose-400 text-white font-medium text-xs sm:text-sm shadow-sm hover:shadow-md hover:opacity-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <Heart class="w-4 h-4 fill-white" />
+          <span>เข้าร่วมชุมชน</span>
         </button>
 
         <button

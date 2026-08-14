@@ -14,6 +14,7 @@ const emit = defineEmits<{
   (e: 'openDonate'): void;
   (e: 'scrollToCalculator'): void;
   (e: 'scrollToWish'): void;
+  (e: 'openChatOpen'): void;
 }>();
 
 const percentage = computed(() =>
@@ -89,7 +90,7 @@ onUnmounted(() => {
       <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-50 text-pink-600 border border-pink-200/80 text-xs font-semibold">
           <Sparkles class="w-3.5 h-3.5 text-pink-500" />
-          <span>โครงการระดมทุนเลือกตั้ง</span>
+          <span>โครงการระดมทุนเลือกตั้งเพื่อ {{ campaign.candidateName }}</span>
         </div>
 
         <div class="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-50 px-3 py-1 rounded-full border border-slate-100">
@@ -100,16 +101,21 @@ onUnmounted(() => {
 
       <!-- Campaign Heading -->
       <div class="mb-6">
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 font-heading tracking-tight mb-2">
-          {{ campaign.title }}
-        </h2>
-        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
-          {{ campaign.subtitle }}  ในการเลือกตั้งทั้วไปครั้งที่ 6 (General Election 2026) #BNK48CGM48_GE2026 มาร่วมสร้างรอยยิ้มและนำพาน้องนีญ่าก้าวสู่ตำแหน่งที่น้องใฝ่ฝันด้วยกัน!
-        </p>
-        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
-          ทบ Token จากผู้สนับสนุน 3 กิจกรรม 191 x 5 = 955 | Niya Busking Fancam 75 x 10 = 150 | ดันคลิป Tiktok Niya มีรายการ 19 x 10 = 190 ผู้สนับสนุนทบให้อีก 190 = 380 รวม <span class="text-xs font-bold text-slate-800">{{ props.campaign.startToken.toLocaleString() }}</span> Tokens
-          และ ทุกๆ การซื้อ 5 Tokens ผู้สนับสนุนจะทบให้อีก 10 Tokens ทบสูงสุด 6,000 Tokens
-        </p>
+        <!-- Column 1 -->
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 font-heading tracking-tight mb-2">
+            {{ campaign.title }}
+          </h2>
+          <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+            {{ campaign.subtitle }}  ในการเลือกตั้งทั้วไปครั้งที่ 6 (General Election 2026) #BNK48CGM48_GE2026 มาร่วมสร้างรอยยิ้มและนำพาน้องนีญ่าก้าวสู่ตำแหน่งที่น้องใฝ่ฝันด้วยกัน!
+          </p>
+          <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+            ทบ Token จากผู้สนับสนุน 3 กิจกรรม 191 x 5 = 955 | Niya Busking Fancam 75 x 10 = 150 | ดันคลิป Tiktok Niya มีรายการ 19 x 10 = 190 ผู้สนับสนุนทบให้อีก 190 = 380 รวม <span class="text-xs font-bold text-slate-800">{{ props.campaign.startToken.toLocaleString() }}</span> Tokens
+            และ ทุกๆ การซื้อ 5 Tokens ผู้สนับสนุนจะทบให้อีก 10 Tokens ทบสูงสุด 6,000 Tokens
+          </p>
+        </div>
+        <!-- Column 2 -->
+        <div></div>
       </div>
 
       <!-- Progress Bar Container -->
@@ -191,16 +197,44 @@ onUnmounted(() => {
       </div>
 
       <!-- Action Buttons -->
+      <!--
       <div class="flex flex-col sm:flex-row items-center gap-3">
-        <button
-          @click="emit('openDonate')"
-          class="w-full sm:w-auto flex-1 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold text-sm shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group cursor-pointer"
-        >
-          <Heart class="w-4 h-4 fill-white group-hover:scale-110 transition-transform" />
-          <span>ร่วมโดเนทเข้าโครงการ</span>
-          <ChevronRight class="w-4 h-4 opacity-75" />
-        </button>
+        <div>
+          <button
+            @click="emit('openChatOpen')"
+            class="w-full sm:w-auto flex-1 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-green-500 to-rose-400 text-white font-semibold text-sm shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+          >
+            <Heart class="w-4 h-4 fill-white group-hover:scale-110 transition-transform" />
+            <span>เข้าร่วมชุมชน</span>
+            <ChevronRight class="w-4 h-4 opacity-75" />
+          </button>
+          <div class="flex justify-center items-center">
+            <img
+              src="/assets/opc_qr_code.jpg"
+              alt="Open Chat QR Code"
+              class="w-50 h-50 sm:w-auto px-5 py-3.5 rounded-2xl bg-white border border-pink-200 text-slate-700 hover:text-pink-600 hover:bg-pink-50/50 transition-all text-sm font-medium flex items-center justify-center gap-2 cursor-pointer"
+            />
+          </div>
+        </div>
 
+        <div>
+          <button
+            @click="emit('openDonate')"
+            class="w-full sm:w-auto flex-1 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold text-sm shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+          >
+            <Heart class="w-4 h-4 fill-white group-hover:scale-110 transition-transform" />
+            <span>แจ้งการโดเนทเข้าโครงการ</span>
+            <ChevronRight class="w-4 h-4 opacity-75" />
+          </button>
+          <div class="flex justify-center items-center">
+            <img
+              src="/assets/bank_qr_code.jpg"
+              alt="Bank QR Code"
+              class="w-50 h-50 sm:w-auto px-5 py-3.5 rounded-2xl bg-white border border-pink-200 text-slate-700 hover:text-pink-600 hover:bg-pink-50/50 transition-all text-sm font-medium flex items-center justify-center gap-2 cursor-pointer"
+            />
+          </div>
+        </div>
+-->
         <!--
         <button
           @click="emit('scrollToCalculator')"
@@ -218,6 +252,54 @@ onUnmounted(() => {
           <Heart class="w-4 h-4 text-purple-500" />
           <span>เขียนคำอวยพร</span>
         </button>-->
+      <!--
+      </div>
+      -->
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+        <!-- Column 1: Open Chat -->
+        <div class="flex flex-col items-center justify-center gap-3 w-full">
+          <button
+            @click="emit('openChatOpen')"
+            class="w-full max-w-xs px-6 py-3.5 rounded-2xl bg-gradient-to-r from-green-500 to-rose-400 text-white font-semibold text-sm shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+          >
+            <Heart class="w-4 h-4 fill-white group-hover:scale-110 transition-transform" />
+            <span>เข้าร่วมชุมชน</span>
+            <ChevronRight class="w-4 h-4 opacity-75" />
+          </button>
+          <img
+            src="/assets/opc_qr_code.jpg"
+            alt="Open Chat QR Code"
+            class="w-48 h-48 object-contain rounded-2xl bg-white border border-pink-200 p-2 shadow-xs"
+          />
+          <div class="justify-center items-center text-center text-xs text-slate-500 font-medium">
+            <span class="text-rose-500" >ติดตามข่าวสาร อัพเดทล่าสุด ของ</span><br/>
+            <span class="text-rose-600">{{ campaign.candidateName }}</span><br/>
+            <span class="text-rose-700">{{ campaign.title }}</span>
+          </div>
+        </div>
+
+        <!-- Column 2: Donation -->
+        <div class="flex flex-col items-center justify-center gap-3 w-full">
+          <button
+            @click="emit('openDonate')"
+            class="w-full max-w-xs px-6 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold text-sm shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+          >
+            <Heart class="w-4 h-4 fill-white group-hover:scale-110 transition-transform" />
+            <span>แจ้งการโดเนทเข้าโครงการ</span>
+            <ChevronRight class="w-4 h-4 opacity-75" />
+          </button>
+          <img
+            src="/assets/bank_qr_code.jpg"
+            alt="Bank QR Code"
+            class="w-48 h-48 object-contain rounded-2xl bg-white border border-pink-200 p-2 shadow-xs"
+          />
+          <div class="justify-center items-center text-center text-xs text-slate-500 font-medium">
+            <span class="text-green-500 font-bold" >{{ campaign.bankName }}</span><br/>
+            <span class="text-green-600 font-bold">{{ campaign.bankAccountName }}</span><br/>
+            <span class="text-green-800 font-bold">{{ campaign.bankAccountNumber }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
