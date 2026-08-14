@@ -17,7 +17,7 @@ const message = ref('');
 const tag = ref('ส่งกำลังใจ ✨');
 const selectedTagFilter = ref('All');
 
-const tags = ['ส่งกำลังใจ ✨', 'เป้าหมาย Senbatsu 🌟', 'รักนีย่า 💗', 'พรจากแฟนคลับ 🌸'];
+const tags = ['ส่งกำลังใจ ✨', 'เป้าหมาย Senbatsu 🌟', 'รักนีญ่า 💗', 'พรจากแฟนคลับ 🌸'];
 const colors = [
   'bg-pink-100 text-pink-600 border-pink-200',
   'bg-purple-100 text-purple-600 border-purple-200',
@@ -60,7 +60,7 @@ const filteredWishes = computed(() => {
       </h3>
     </div>
     <p class="text-xs text-slate-500 mb-6 pl-9">
-      ส่งข้อความให้กำลังใจนีย่า เพื่อเป็นพลังใจสู้ศึกงานเลือกตั้ง
+      ส่งข้อความให้กำลังใจนีญ่า เพื่อเป็นพลังใจสู้ศึกงานเลือกตั้ง
     </p>
 
     <!-- Form -->
@@ -88,10 +88,10 @@ const filteredWishes = computed(() => {
       </div>
 
       <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1">ข้อความอวยพรนีย่า</label>
+        <label class="block text-xs font-semibold text-slate-700 mb-1">ข้อความอวยพรนีญ่า</label>
         <textarea
           rows="2"
-          placeholder="พิมพ์คำอวยพรหรือข้อความให้กำลังใจนีย่าที่นี่..."
+          placeholder="พิมพ์คำอวยพรหรือข้อความให้กำลังใจนีญ่าที่นี่..."
           v-model="message"
           class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-pink-300 bg-white resize-none"
         />

@@ -8,6 +8,7 @@ import RewardCalculator from './components/RewardCalculator.vue';
 import WishWall from './components/WishWall.vue';
 import TransparencyBoard from './components/TransparencyBoard.vue';
 import QuickDonateModal from './components/QuickDonateModal.vue';
+import QuickJoinOpenChatModal from './components/QuickJoinOpenChatModal.vue';
 import GoogleSheetsModal from './components/GoogleSheetsModal.vue';
 
 import { CampaignData, Donation, Milestone, RewardTier, WishMessage, ExpenseCategory } from './types';
@@ -32,6 +33,7 @@ const expenses = ref<ExpenseCategory[]>(INITIAL_EXPENSES);
 const isDonateOpen = ref(false);
 const isSheetOpen = ref(false);
 const showScrollTop = ref(false);
+const isOpenChatOpen = ref(false);
 
 const totalAmount = computed(() =>
   donations.value.reduce((sum, item) => sum + item.amount, 0)
@@ -58,6 +60,7 @@ onUnmounted(() => {
 });
 
 const handleAddDonation = (newDonation: Donation) => {
+  // ส่งข้อมูลการ donate ลง google sheet
   donations.value.unshift(newDonation);
 };
 
@@ -103,7 +106,8 @@ const scrollToTop = () => {
     <!-- Header -->
     <Header
       :campaign="campaign"
-      @openDonate="isDonateOpen = true"
+      @openDonate="isDonateOpen = false"
+      @openChatOpen="isOpenChatOpen = true"
       @openSheetModal="isSheetOpen = true"
       @resetData="handleResetData"
     />
@@ -113,9 +117,11 @@ const scrollToTop = () => {
       <!-- Hero Banner & Goal Tracker -->
       <HeroProgress
         :campaign="campaign"
+        :milestones="milestones"
         :totalAmount="totalAmount"
         :totalDonors="totalDonors"
-        @openDonate="isDonateOpen = true"
+        @openDonate="isDonateOpen = false"
+        @openChatOpen="isOpenChatOpen = true"
         @scrollToCalculator="scrollToSection('reward-calculator')"
         @scrollToWish="scrollToSection('wish-wall')"
       />
@@ -185,6 +191,13 @@ const scrollToTop = () => {
       :campaign="campaign"
       @close="isDonateOpen = false"
       @addDonation="handleAddDonation"
+    />
+
+    <!-- Quick Join Open Modal -->
+    <QuickJoinOpenChatModal
+      :isOpen="isOpenChatOpen"
+      :campaign="campaign"
+      @close="isOpenChatOpen = false"
     />
 
     <!-- Google Sheets Modal -->

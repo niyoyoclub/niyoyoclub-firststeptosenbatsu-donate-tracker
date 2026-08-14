@@ -45,7 +45,7 @@ const filteredDonations = computed(() => {
           </h3>
         </div>
         <p class="text-xs text-slate-500 pl-9">
-          อัปเดตเรียลไทม์ ตรวจสอบความถูกต้องและโปร่งใส
+          อัปเดตเรียลไทม์ ทุกๆ 5 นาที ตรวจสอบความถูกต้องและโปร่งใส
         </p>
       </div>
 
@@ -158,7 +158,7 @@ const filteredDonations = computed(() => {
             +฿{{ item.amount.toLocaleString() }}
           </span>
           <span class="text-xs text-slate-400 block font-normal">
-            ({{ Math.floor(item.amount / props.campaign.votePrice) }} Votes)
+            ({{ Math.floor(item.amount / props.campaign.votePrice) }} Tokens)
           </span>
         </div>
       </div>

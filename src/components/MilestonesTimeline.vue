@@ -22,7 +22,7 @@ const getIcon = (iconName: string) => {
 const milestoneShown = ref([false, false]);
 
 function canShowMilestone(amt: number, mAmt: number, step: number) { 
-  console.log("canShowMilestone() called");
+  //console.log("canShowMilestone() called");
 
   var result = false;
 
@@ -37,8 +37,8 @@ function canShowMilestone(amt: number, mAmt: number, step: number) {
     }
   }
   
-  console.log("amt=", amt, "mAmt=", mAmt, "result=", result, "step=", step, "milestoneShown=", milestoneShown.value);
-  console.log("canShowMilestone() end");
+  //console.log("amt=", amt, "mAmt=", mAmt, "result=", result, "step=", step, "milestoneShown=", milestoneShown.value);
+  //console.log("canShowMilestone() end");
   return result;
 }
 </script>

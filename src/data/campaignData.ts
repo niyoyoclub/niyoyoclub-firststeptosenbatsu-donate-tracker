@@ -1,18 +1,20 @@
 import { CampaignData, Donation, Milestone, RewardTier, WishMessage, ExpenseCategory } from '../types';
 
 export const INITIAL_CAMPAIGN: CampaignData = {
-  title: "NIYA - FIRST STEP TO SENBATSU 🌸",
-  subtitle: "โครงการโดเนทเพื่อส่ง 'นีญ่า' ติดตำแหน่ง 13 หรือ เซ็มบัตสึ General Election 2026",
-  candidateName: "Niya (นีญ่า)",
+  title: "#NiyaFirstStepToSenbatsu 🌸",
+  subtitle: "โครงการโดเนทเพื่อส่ง 'นีญ่า' สู่ตำแหน่ง 13 หรือ เซ็มบัตสึ",  
+  candidateName: "Niya BNK48 (นีญ่า)",
   targetGoal: 136000,
   votePrice: 68, // 68 Baht per vote
-  deadline: "2026-11-12T19:59:59Z",
+  deadline: "2026-10-01T00:00:00Z",
   promptPayNumber: "236-1-62262-9",
   bankAccountName: "นาย วัฒนชัย ยิ้มงาม",
   bankName: "ธนาคารกสิกรไทย (KBank)",
   bankAccountNumber: "236-1-62262-9",
   sheetCsvUrl: "",
   startToken: 2085,
+  maxAddonToken: 6000,
+  currentBonusToken: 0,
 };
 
 export const INITIAL_MILESTONES: Milestone[] = [
@@ -76,28 +78,28 @@ export const INITIAL_REWARD_TIERS: RewardTier[] = [
   {
     minAmount: 100,
     title: "Supporter Tier",
-    perks: ["Digital Wallpaper นีย่าสุดพิเศษ", "บันทึกชื่อในรายชื่อขอบคุณท้ายโครงการ"],
+    perks: ["Digital Wallpaper นีญ่าสุดพิเศษ", "บันทึกชื่อในรายชื่อขอบคุณท้ายโครงการ"],
     badgeColor: "bg-pink-100 text-pink-700 border-pink-200",
     iconName: "Heart"
   },
   {
     minAmount: 500,
     title: "Bronze Fan Tier",
-    perks: ["พวงกุญแจอะคริลิคนีย่า Limited Edition", "สิทธิ์เข้าร่วม Exclusive Live สรุปยอด", "Perks ทั้งหมดของ Supporter"],
+    perks: ["พวงกุญแจอะคริลิคนีญ่า Limited Edition", "สิทธิ์เข้าร่วม Exclusive Live สรุปยอด", "Perks ทั้งหมดของ Supporter"],
     badgeColor: "bg-purple-100 text-purple-700 border-purple-200",
     iconName: "Star"
   },
   {
     minAmount: 2000,
     title: "Silver Senbatsu Tier",
-    perks: ["เข็มกลัดยิ้มสดใสนีย่า", "โปสการ์ดพร้อมลายเซ็นสกรีนพิเศษ", "สิทธิ์สุ่มรับรูปถ่าย Exclusive Cheki"],
+    perks: ["เข็มกลัดยิ้มสดใสนีญ่า", "โปสการ์ดพร้อมลายเซ็นสกรีนพิเศษ", "สิทธิ์สุ่มรับรูปถ่าย Exclusive Cheki"],
     badgeColor: "bg-blue-100 text-blue-700 border-blue-200",
     iconName: "Award"
   },
   {
     minAmount: 5000,
     title: "Gold VIP Tier",
-    perks: ["กรอบรูปพร้อมลายเซ็นสดจากนีย่า", "เสื้อยืดสกรีนลายโครงการ Niya Senbatsu", "Special Video Thanks ส่งตรงถึงคุณ"],
+    perks: ["กรอบรูปพร้อมลายเซ็นสดจากนีญ่า", "เสื้อยืดสกรีนลายโครงการ Niya Senbatsu", "Special Video Thanks ส่งตรงถึงคุณ"],
     badgeColor: "bg-amber-100 text-amber-800 border-amber-200",
     iconName: "Crown"
   }
@@ -109,10 +111,10 @@ export const INITIAL_DONATIONS: Donation[] = [];
 export const INITIAL_DONATIONS: Donation[] = [
   {
     id: "don-001",
-    donorName: "แมวน้อยของนีย่า 💗",
+    donorName: "แมวน้อยของนีญ่า 💗",
     amount: 15000,
     timestamp: "2026-08-13 09:30",
-    note: "ส่งนีย่าติดเซ็มบัตสึให้ได้นะ! จะคอยซัพพอร์ตเสมอจ้า ✨",
+    note: "ส่งนีญ่าติดเซ็มบัตสึให้ได้นะ! จะคอยซัพพอร์ตเสมอจ้า ✨",
     tier: "tier-diamond",
     verified: true
   },
@@ -130,7 +132,7 @@ export const INITIAL_DONATIONS: Donation[] = [
     donorName: "คุณหมีพูห์สดใส",
     amount: 2500,
     timestamp: "2026-08-12 18:04",
-    note: "รอยยิ้มนีย่าคือพลังใจของพวกเรา สู้ๆ น้า",
+    note: "รอยยิ้มนีญ่าคือพลังใจของพวกเรา สู้ๆ น้า",
     tier: "tier-gold",
     verified: true
   },
@@ -139,7 +141,7 @@ export const INITIAL_DONATIONS: Donation[] = [
     donorName: "ผู้ไม่ประสงค์ออกนาม",
     amount: 1000,
     timestamp: "2026-08-12 14:20",
-    note: "ขอให้นีย่าโชคดีสมหวังในงานเลือกตั้งครั้งนี้นะครับ",
+    note: "ขอให้นีญ่าโชคดีสมหวังในงานเลือกตั้งครั้งนี้นะครับ",
     isAnonymous: true,
     tier: "tier-silver",
     verified: true
@@ -149,7 +151,7 @@ export const INITIAL_DONATIONS: Donation[] = [
     donorName: "P'Korn_NiyaFan",
     amount: 5000,
     timestamp: "2026-08-11 20:00",
-    note: "จัดไปเพื่อป้ายสยาม! อยากเห็นรอยยิ้มนีย่าบนจอยักษ์",
+    note: "จัดไปเพื่อป้ายสยาม! อยากเห็นรอยยิ้มนีญ่าบนจอยักษ์",
     tier: "tier-gold",
     verified: true
   },
@@ -167,7 +169,7 @@ export const INITIAL_DONATIONS: Donation[] = [
     donorName: "Niya_Oshi_Always",
     amount: 10000,
     timestamp: "2026-08-10 11:10",
-    note: "ขอให้นีย่าส่องประกายสว่างที่สุดบนเวทีนะ!",
+    note: "ขอให้นีญ่าส่องประกายสว่างที่สุดบนเวทีนะ!",
     tier: "tier-diamond",
     verified: true
   },
@@ -176,7 +178,7 @@ export const INITIAL_DONATIONS: Donation[] = [
     donorName: "น้องส้มส้ม 🍊",
     amount: 300,
     timestamp: "2026-08-09 19:22",
-    note: "สู้ๆ นะคะนีย่าคนเก่ง!",
+    note: "สู้ๆ นะคะนีญ่าคนเก่ง!",
     tier: "tier-normal",
     verified: true
   }
@@ -188,7 +190,7 @@ export const INITIAL_WISHES: WishMessage[] = [
   {
     id: "w1",
     author: "น้องส้มสดใส",
-    message: "นีย่าคือพลังบวกของพวกเราทุกคนเลยนะ ขอให้รอบนี้ติดเซ็มบัตสึตามที่ตั้งใจไว้! รักนีย่าเสมอนะคะ 💖",
+    message: "นีญ่าคือพลังบวกของพวกเราทุกคนเลยนะ ขอให้รอบนี้ติดเซ็มบัตสึตามที่ตั้งใจไว้! รักนีญ่าเสมอนะคะ 💖",
     timestamp: "2026-08-13 08:12",
     likes: 42,
     tag: "ส่งกำลังใจ ✨",
@@ -197,7 +199,7 @@ export const INITIAL_WISHES: WishMessage[] = [
   {
     id: "w2",
     author: "พี่ก้องใจดี",
-    message: "ติดตามมาตั้งแต่วันแรก เห็นความพยายามของนีย่ามาตลอด ครั้งนี้พวกเราจะพานีย่าไปยืนบนแถวหน้าให้ได้!",
+    message: "ติดตามมาตั้งแต่วันแรก เห็นความพยายามของนีญ่ามาตลอด ครั้งนี้พวกเราจะพานีญ่าไปยืนบนแถวหน้าให้ได้!",
     timestamp: "2026-08-12 22:50",
     likes: 38,
     tag: "เป้าหมาย Senbatsu 🌟",
@@ -206,10 +208,10 @@ export const INITIAL_WISHES: WishMessage[] = [
   {
     id: "w3",
     author: "Strawberry_Cake",
-    message: "รอยยิ้มนีย่าทำให้วันแย่ๆ กลายเป็นวันที่ดีได้เสมอ เป็นกำลังใจให้นะคะ นีย่าทำได้แน่นอน!",
+    message: "รอยยิ้มนีญ่าทำให้วันแย่ๆ กลายเป็นวันที่ดีได้เสมอ เป็นกำลังใจให้นะคะ นีญ่าทำได้แน่นอน!",
     timestamp: "2026-08-12 17:30",
     likes: 29,
-    tag: "รักนีย่า 💗",
+    tag: "รักนีญ่า 💗",
     avatarColor: "bg-rose-100 text-rose-600"
   }
 ];

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { X, Table, RefreshCw, Check, AlertCircle, HelpCircle } from 'lucide-vue-next';
 import { parseCSVDonations } from '../utils/storage';
 import { Donation } from '../types';
@@ -14,28 +14,46 @@ const emit = defineEmits<{
   (e: 'importDonations', donations: Donation[], sheetUrl: string): void;
 }>();
 
-const sheetUrl = ref(props.currentSheetUrl || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQjjo3Gd1VwUWxVHYEy01Rar9ueGqpxeiQtpRR-Q9U1IxD5ew15gf0YQ0KPtyGAbj8XAKO8JXLm_RjF/pub?gid=0&single=true&output=csv');
+const sheetUrl = ref(
+  props.currentSheetUrl ||
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vQjjo3Gd1VwUWxVHYEy01Rar9ueGqpxeiQtpRR-Q9U1IxD5ew15gf0YQ0KPtyGAbj8XAKO8JXLm_RjF/pub?gid=0&single=true&output=csv'
+);
+
+// ตัวแปรสำหรับ Auto Fetch
+const isAutoFetchEnabled = ref(true);
+let autoFetchInterval: number | null = null;
+
 const isLoading = ref(false);
 const error = ref<string | null>(null);
 const successCount = ref<number | null>(null);
 
-const handleFetchCSV = async () => {
+const handleFetchCSV = async (isSilent = false) => {
   if (!sheetUrl.value.trim()) return;
 
-  isLoading.value = true;
-  error.value = null;
-  successCount.value = null;
+  // ถ้าเป็นการดึงอัตโนมัติ ไม่ต้องสั่งสั่งปิด Modal หรือเคลียร์ state ให้รบกวนผู้ใช้
+  if (!isSilent) {
+    isLoading.value = true;
+    error.value = null;
+    successCount.value = null;
+  }
 
   try {
     let fetchUrl = sheetUrl.value.trim();
-    if (fetchUrl.includes('docs.google.com/spreadsheets/d/') && !fetchUrl.includes('output=csv') && !fetchUrl.includes('out:csv')) {
+    if (
+      fetchUrl.includes('docs.google.com/spreadsheets/d/') &&
+      !fetchUrl.includes('output=csv') &&
+      !fetchUrl.includes('out:csv')
+    ) {
       const match = fetchUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
       if (match && match[1]) {
         fetchUrl = `https://docs.google.com/spreadsheets/d/${match[1]}/gviz/tq?tqx=out:csv`;
       }
     }
 
-    const res = await fetch(fetchUrl);
+    // ป้องกันการติด Cache ของเบราว์เซอร์ด้วยการใส่ Timestamp
+    const cacheBusterUrl = `${fetchUrl}${fetchUrl.includes('?') ? '&' : '?'}_t=${Date.now()}`;
+
+    const res = await fetch(cacheBusterUrl);
     if (!res.ok) {
       throw new Error(`ไม่สามารถดึงข้อมูลได้ (Status: ${res.status})`);
     }
@@ -44,21 +62,66 @@ const handleFetchCSV = async () => {
     const newDonations = parseCSVDonations(csvText);
 
     if (newDonations.length === 0) {
-      error.value = 'ดึงข้อมูลสำเร็จแต่ไม่พบรายการโดเนทในรูปแบบ CSV';
+      if (!isSilent) error.value = 'ดึงข้อมูลสำเร็จแต่ไม่พบรายการโดเนทในรูปแบบ CSV';
     } else {
-      successCount.value = newDonations.length;
+      if (!isSilent) successCount.value = newDonations.length;
       emit('importDonations', newDonations, sheetUrl.value);
-      setTimeout(() => {
-        emit('close');
-      }, 1500);
+
+      if (!isSilent) {
+        setTimeout(() => {
+          emit('close');
+        }, 1500);
+      }
     }
   } catch (err: any) {
     console.error(err);
-    error.value = err.message || 'เกิดข้อผิดพลาดในการเชื่อมต่อกับ Google Sheet';
+    if (!isSilent) {
+      error.value = err.message || 'เกิดข้อผิดพลาดในการเชื่อมต่อกับ Google Sheet';
+    }
   } finally {
-    isLoading.value = false;
+    if (!isSilent) {
+      isLoading.value = false;
+    }
   }
 };
+
+// ฟังก์ชันสำหรับจัดการ Interval
+const startAutoFetch = () => {
+  stopAutoFetch();
+  if (isAutoFetchEnabled.value) {
+    // 60,000 ms = 1 นาที
+    autoFetchInterval = window.setInterval(() => {
+      handleFetchCSV(true);
+    }, 3*60*1000);
+  }
+};
+
+const stopAutoFetch = () => {
+  if (autoFetchInterval !== null) {
+    clearInterval(autoFetchInterval);
+    autoFetchInterval = null;
+  }
+};
+
+// เคลียร์ Interval เมื่อ Component ถูกลบ
+onUnmounted(() => {
+  stopAutoFetch();
+});
+
+// เริ่มทำงาน Interval เมื่อเริ่มเปิด
+onMounted(() => {
+  handleFetchCSV(true);
+  startAutoFetch();
+});
+
+// สลับการทำงานถ้าผู้ใช้ปิด/เปิด Auto Fetch
+watch(isAutoFetchEnabled, (newVal) => {
+  if (newVal) {
+    startAutoFetch();
+  } else {
+    stopAutoFetch();
+  }
+});
 </script>
 
 <template>
