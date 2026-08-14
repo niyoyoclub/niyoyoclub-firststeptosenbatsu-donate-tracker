@@ -15,6 +15,7 @@ export const INITIAL_CAMPAIGN: CampaignData = {
   startToken: 2085,
   maxAddonToken: 6000,
   currentBonusToken: 0,
+  refreshEveryMinutes: 3,
 };
 
 export const INITIAL_MILESTONES: Milestone[] = [

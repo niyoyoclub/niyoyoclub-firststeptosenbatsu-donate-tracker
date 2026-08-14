@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { X, Copy, Check, QrCode, Heart, ShieldCheck, CreditCard, Upload, MessageCircle } from 'lucide-vue-next';
+import { X, Copy, Check, QrCode, Heart, ShieldCheck, CreditCard, Upload, MessageCircle, ExternalLink } from 'lucide-vue-next';
 import { CampaignData, Donation } from '../types';
 
 const props = defineProps<{

@@ -99,6 +99,14 @@ const scrollToSection = (id: string) => {
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+
+const googleSheetRef = ref(null);
+
+const refreshGoogleSheet = () => {
+  if (googleSheetRef.value) {
+    googleSheetRef.value.refresh();
+  }
+};
 </script>
 
 <template>
@@ -133,7 +141,11 @@ const scrollToTop = () => {
       />
 
       <!-- Leaderboard & Recent Donations -->
-      <DonationLeaderboard :donations="donations" :campaign="campaign" />
+      <DonationLeaderboard 
+        :donations="donations"
+        :campaign="campaign"
+        @refresh="refreshGoogleSheet" 
+      />
 
       <!-- Reward & Perk Calculator -->
       <!--
@@ -174,14 +186,13 @@ const scrollToTop = () => {
         <p class="text-slate-400">
           จัดทำโดยทีมงานแฟนคลับเพื่อส่งเสริมสนับสนุนนีญ่า | Clean & Minimal Design
         </p>
-
-        <!--
+        
         <button
           @click="handleResetData"
-          class="text-[11px] text-slate-400 hover:text-slate-600 underline cursor-pointer"
+          class="text-[11px] text-slate-900 hover:text-slate-600 underline cursor-pointer bg-red-200"
         >
-          รีเซ็ตข้อมูลตัวอย่าง
-        </button> -->
+          รีเซ็ตข้อมูล
+        </button>
       </div>
     </footer>
 
@@ -203,9 +214,11 @@ const scrollToTop = () => {
     <!-- Google Sheets Modal -->
     <GoogleSheetsModal
       :isOpen="isSheetOpen"
+      :campaign="campaign"
       :currentSheetUrl="campaign.sheetCsvUrl"
       @close="isSheetOpen = false"
       @importDonations="handleImportSheetDonations"
+      ref="googleSheetRef"
     />
 
     <!-- Scroll To Top Button -->

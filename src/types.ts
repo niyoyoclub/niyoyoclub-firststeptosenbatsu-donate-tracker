@@ -61,4 +61,5 @@ export interface CampaignData {
   startToken: number;
   maxAddonToken: number;
   currentBonusToken: number;
+  refreshEveryMinutes: number;
 }
