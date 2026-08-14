@@ -2,11 +2,12 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { X, Table, RefreshCw, Check, AlertCircle, HelpCircle } from 'lucide-vue-next';
 import { parseCSVDonations } from '../utils/storage';
-import { Donation } from '../types';
+import { Donation, CampaignData } from '../types';
 
 const props = defineProps<{
   isOpen: boolean;
   currentSheetUrl?: string;
+  campaign: CampaignData;
 }>();
 
 const emit = defineEmits<{
@@ -92,7 +93,7 @@ const startAutoFetch = () => {
     // 60,000 ms = 1 นาที
     autoFetchInterval = window.setInterval(() => {
       handleFetchCSV(true);
-    }, 3*60*1000);
+    },  props.campaign.refreshEveryMinutes * 60 * 1000);
   }
 };
 
@@ -121,6 +122,14 @@ watch(isAutoFetchEnabled, (newVal) => {
   } else {
     stopAutoFetch();
   }
+});
+
+const refresh = () => {
+  handleFetchCSV(true);
+};
+
+defineExpose({
+  refresh
 });
 </script>
 

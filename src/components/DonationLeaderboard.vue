@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { Award, Search, Sparkles, Trophy, Heart, Clock } from 'lucide-vue-next';
+import { Award, Search, Sparkles, Trophy, Heart, Clock, RefreshCw } from 'lucide-vue-next';
 import { Donation, CampaignData } from '../types';
 
 const props = defineProps<{
   campaign: CampaignData;
   donations: Donation[];
+}>();
+
+const emit = defineEmits<{
+  (e: 'refresh'): void;
 }>();
 
 const activeTab = ref<'recent' | 'top' | 'big'>('top');
@@ -30,6 +34,16 @@ const filteredDonations = computed(() => {
     );
   });
 });
+
+const isSyncing = ref(false);
+
+const triggerManualSync = () => {
+  isSyncing.value = true;
+  emit('refresh');
+  setTimeout(() => {
+    isSyncing.value = false;
+  }, 3000);  
+}
 </script>
 
 <template>
@@ -45,7 +59,7 @@ const filteredDonations = computed(() => {
           </h3>
         </div>
         <p class="text-xs text-slate-500 pl-9">
-          อัปเดตเรียลไทม์ ทุกๆ 5 นาที ตรวจสอบความถูกต้องและโปร่งใส
+          อัปเดตเรียลไทม์ ทุกๆ {{ props.campaign.refreshEveryMinutes }} นาที ตรวจสอบความถูกต้องและโปร่งใส
         </p>
       </div>
 
@@ -94,6 +108,14 @@ const filteredDonations = computed(() => {
             ]"
           >
             💎 Big Supporters
+          </button>
+          <button 
+            @click="triggerManualSync" 
+            :disabled="isSyncing"
+            class="py-1 px-3 bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white font-bold rounded-lg border border-[#1e293b] shadow-[1px_1px_0px_#1e293b] flex items-center gap-1 active:translate-y-0.5"
+          >
+            <RefreshCw class="w-3.5 h-3.5" :class="{ 'animate-spin': isSyncing }" />
+            <span>{{ isSyncing ? 'กำลังดึงข้อมูล...' : 'ดึงข้อมูลทันที' }}</span>
           </button>
         </div>
       </div>
