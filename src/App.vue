@@ -106,7 +106,7 @@ const scrollToTop = () => {
     <!-- Header -->
     <Header
       :campaign="campaign"
-      @openDonate="isDonateOpen = true"
+      @openDonate="isDonateOpen = false"
       @openChatOpen="isOpenChatOpen = true"
       @openSheetModal="isSheetOpen = true"
       @resetData="handleResetData"
@@ -120,7 +120,7 @@ const scrollToTop = () => {
         :milestones="milestones"
         :totalAmount="totalAmount"
         :totalDonors="totalDonors"
-        @openDonate="isDonateOpen = true"
+        @openDonate="isDonateOpen = false"
         @openChatOpen="isOpenChatOpen = true"
         @scrollToCalculator="scrollToSection('reward-calculator')"
         @scrollToWish="scrollToSection('wish-wall')"
