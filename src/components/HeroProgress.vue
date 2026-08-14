@@ -144,14 +144,27 @@ const setCurrentIndex = (index) => {
           {{ campaign.subtitle }} ในการเลือกตั้งทั้วไปครั้งที่ 6 (General Election 2026) #BNK48CGM48_GE2026 มาร่วมสร้างรอยยิ้มและนำพาน้องนีญ่าก้าวสู่ตำแหน่งที่น้องใฝ่ฝันด้วยกัน!
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
-          ทบ Token จากผู้สนับสนุน 3 กิจกรรม 191 x 5 = 955 | Niya Busking Fancam 75 x 10 = 150 | ดันคลิป Tiktok Niya มีรายการ 19 x 10 = 190 ผู้สนับสนุนทบให้อีก 190 = 380 รวม 
-          <span class="text-xs font-bold text-slate-800">{{ props.campaign.startToken.toLocaleString() }}</span> Tokens
+          <h6 class="font-bold">กิจกรรมที่ 1</h6>
+          บ้านใหม่น้องนีญ่า ทบ token ตามจำนวนสมาชิกใน open chat x 5 สิ้นสุดวันที่ 30 Jun 2026 23:59 น. มีจำนวนสมาชิก 191 คน ได้ 191 x 5 = 955 Tokens
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <h6 class="font-bold">กิจกรรมที่ 2</h6>
+          ส่งลิ้งค์แฟนแคมน้องนีญ่า จำนวนลิ้งค์ 75 ลิ้งค์ ทบลิ้งค์ละ 10 Tokens สิ้นสุด 31 Jul 26 20:00 ได้ 75 x 10 = 750 Tokens
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <h6 class="font-bold">กิจกรรมที่ 3</h6>
+          ดันคลิป Tiktok น้องนีญ่า จำนวนลิ้งค์ 19 รายการ ทบรายการละ 10 Tokens สิ้นสุด 10 Aug 26 18:00 ได้ 19 x 10 = 190 Tokens ผู้สนับสนุนทบให้อีก 190 Tokens = 380 Tokens
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <span class="font-bold">จากกิจกรรม 3 ผู้สนับสนุนทบ Token รวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">          
           และ ทุกๆ การซื้อ 5 Tokens ผู้สนับสนุนจะทบให้อีก 10 Tokens ทบสูงสุด 6,000 Tokens
         </p>
       </div>
 
       <!-- Column 2: Image Carousel Slider -->
-      <div class="relative w-full h-100 sm:h-100 overflow-hidden rounded-2xl shadow-md group">
+      <div class="relative w-full h-150 sm:h-150 overflow-hidden rounded-2xl shadow-md group">
         <!-- รูปภาพพร้อม Effect Fade Transition -->
         <transition-group name="fade" tag="div" class="w-full h-full relative">
           <div 
