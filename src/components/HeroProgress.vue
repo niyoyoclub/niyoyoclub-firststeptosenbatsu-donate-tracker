@@ -2,6 +2,8 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { Heart, Trophy, Users, Vote, Clock, Sparkles, ChevronRight } from 'lucide-vue-next';
 import { CampaignData, Milestone } from '../types';
+import img1 from '/assets/niya_profile.png';
+import img2 from '/assets/niya_profile_2.jpg';
 
 const props = defineProps<{
   campaign: CampaignData;
@@ -73,11 +75,43 @@ const updateTimer = () => {
 onMounted(() => {
   updateTimer();
   timerInterval = setInterval(updateTimer, 1000);
+  startSlide();
 });
 
 onUnmounted(() => {
   if (timerInterval) clearInterval(timerInterval);
+  stopSlide();
 });
+
+// 1. กำหนดรายการรูปภาพที่ต้องการนำมาแสดงสไลด์
+const images = ref([
+  img1,
+  img2
+])
+
+const currentIndex = ref(0)
+let timer = null
+
+// 2. ตั้งเวลาสลับรูปภาพ (หน่วยเป็นมิลลิวินาที เช่น 5000 = 5 วินาที)
+const SLIDE_INTERVAL = 5000
+
+const startSlide = () => {
+  if (images.value.length <= 1) return
+  timer = setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % images.value.length
+  }, SLIDE_INTERVAL)
+}
+
+const stopSlide = () => {
+  if (timer) clearInterval(timer)
+}
+
+const setCurrentIndex = (index) => {
+  currentIndex.value = index
+  // รีเซ็ต Timer เมื่อผู้ใช้คลิกเลือกรูปเอง
+  stopSlide()
+  startSlide()
+}
 </script>
 
 <template>
@@ -100,23 +134,53 @@ onUnmounted(() => {
       </div>
 
       <!-- Campaign Heading -->
-      <div class="mb-6">
-        <!-- Column 1 -->
-        <div>
-          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 font-heading tracking-tight mb-2">
-            {{ campaign.title }}
-          </h2>
-          <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
-            {{ campaign.subtitle }}  ในการเลือกตั้งทั้วไปครั้งที่ 6 (General Election 2026) #BNK48CGM48_GE2026 มาร่วมสร้างรอยยิ้มและนำพาน้องนีญ่าก้าวสู่ตำแหน่งที่น้องใฝ่ฝันด้วยกัน!
-          </p>
-          <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
-            ทบ Token จากผู้สนับสนุน 3 กิจกรรม 191 x 5 = 955 | Niya Busking Fancam 75 x 10 = 150 | ดันคลิป Tiktok Niya มีรายการ 19 x 10 = 190 ผู้สนับสนุนทบให้อีก 190 = 380 รวม <span class="text-xs font-bold text-slate-800">{{ props.campaign.startToken.toLocaleString() }}</span> Tokens
-            และ ทุกๆ การซื้อ 5 Tokens ผู้สนับสนุนจะทบให้อีก 10 Tokens ทบสูงสุด 6,000 Tokens
-          </p>
-        </div>
-        <!-- Column 2 -->
-        <div></div>
+      <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      <!-- Column 1: ข้อความรายละเอียด -->
+      <div class="space-y-3">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 font-heading tracking-tight">
+          {{ campaign.title }}
+        </h2>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          {{ campaign.subtitle }} ในการเลือกตั้งทั้วไปครั้งที่ 6 (General Election 2026) #BNK48CGM48_GE2026 มาร่วมสร้างรอยยิ้มและนำพาน้องนีญ่าก้าวสู่ตำแหน่งที่น้องใฝ่ฝันด้วยกัน!
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          ทบ Token จากผู้สนับสนุน 3 กิจกรรม 191 x 5 = 955 | Niya Busking Fancam 75 x 10 = 150 | ดันคลิป Tiktok Niya มีรายการ 19 x 10 = 190 ผู้สนับสนุนทบให้อีก 190 = 380 รวม 
+          <span class="text-xs font-bold text-slate-800">{{ props.campaign.startToken.toLocaleString() }}</span> Tokens
+          และ ทุกๆ การซื้อ 5 Tokens ผู้สนับสนุนจะทบให้อีก 10 Tokens ทบสูงสุด 6,000 Tokens
+        </p>
       </div>
+
+      <!-- Column 2: Image Carousel Slider -->
+      <div class="relative w-full h-100 sm:h-100 overflow-hidden rounded-2xl shadow-md group">
+        <!-- รูปภาพพร้อม Effect Fade Transition -->
+        <transition-group name="fade" tag="div" class="w-full h-full relative">
+          <div 
+            v-for="(img, index) in images" 
+            :key="img"
+            v-show="currentIndex === index"
+            class="absolute inset-0 w-full h-full"
+          >
+            <img 
+              :src="img" 
+              alt="Campaign Image" 
+              class="w-full h-full object-cover rounded-2xl"
+            />
+          </div>
+        </transition-group>
+
+        <!-- จุดบอกตำแหน่งรูปภาพ (Indicators) -->
+        <div v-if="images.length > 1" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+          <button
+            v-for="(_, index) in images"
+            :key="index"
+            @click="setCurrentIndex(index)"
+            class="w-2.5 h-2.5 rounded-full transition-all duration-300"
+            :class="currentIndex === index ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/80'"
+            :aria-label="`Go to slide ${index + 1}`"
+          ></button>
+        </div>
+      </div>
+    </div>
 
       <!-- Progress Bar Container -->
       <div class="bg-slate-50 border border-pink-100/60 rounded-2xl p-4 sm:p-5 mb-6">
@@ -304,3 +368,15 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.8s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
