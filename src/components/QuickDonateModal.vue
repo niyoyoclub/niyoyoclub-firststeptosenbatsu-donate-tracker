@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, computed} from 'vue';
-import { X, Copy, Check, QrCode, Heart, ShieldCheck, CreditCard, Upload, Loader2 } from 'lucide-vue-next';
+import { ref, computed, onMounted, watch } from 'vue';
+import { X, Copy, Check, QrCode, Heart, ShieldCheck, CreditCard, Upload, Loader2, RefreshCw } from 'lucide-vue-next';
 import { CampaignData, Donation } from '../types';
 
 const props = defineProps<{
@@ -18,7 +18,6 @@ const emit = defineEmits<{
 const GOOGLE_SHEET_URL = import.meta.env.VITE_GOOGLE_SPREADSHEET_URL || props.sheetUrl || '';
 const GOOGLE_DRIVE_URL = import.meta.env.VITE_GOOGLE_DRIVE_URL || '';
 
-
 const amount = ref<number>(68);
 const donorName = ref('');
 const note = ref('');
@@ -28,10 +27,34 @@ const isSubmitted = ref(false);
 const errorMessage = ref<string | null>(null);
 const copiedAccount = ref(false);
 const copiedPromptpay = ref(false);
-const slipFile = ref(null);
+const slipFile = ref<File | null>(null);
 const isUploading = ref(false);
 const responseMessage = ref('');
 const uploadedImageUrl = ref('');
+
+// --- ระบบตรวจสอบความเป็นมนุษย์ (Captcha & Honeypot) ---
+const honeypot = ref(''); // ดักจับ Bot
+const captchaNum1 = ref(0);
+const captchaNum2 = ref(0);
+const captchaInput = ref('');
+const captchaError = ref(false);
+
+const generateCaptcha = () => {
+  captchaNum1.value = Math.floor(Math.random() * 9) + 1;
+  captchaNum2.value = Math.floor(Math.random() * 9) + 1;
+  captchaInput.value = '';
+  captchaError.value = false;
+};
+
+// สุ่มโจทย์ใหม่ทุกครั้งที่ Modal เปิดขึ้นมา
+watch(() => props.isOpen, (newVal) => {
+  if (newVal) generateCaptcha();
+});
+
+onMounted(() => {
+  generateCaptcha();
+});
+// ----------------------------------------------------
 
 const presetAmounts = [50, 68, 100, 136, 204, 340, 500, 680, 1000];
 
@@ -72,7 +95,7 @@ const convertToBase64 = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
+    reader.onload = () => resolve(reader.result as string);
     reader.onerror = (error) => reject(error);
   });
 };
@@ -136,6 +159,15 @@ const uploadSlip = async () => {
 const handleSubmit = async () => {
   //console.log("handleSubmit() called");
 
+  // 2. ตรวจสอบผลลัพธ์ Math Captcha
+  const expectedAnswer = captchaNum1.value + captchaNum2.value;
+  if (parseInt(captchaInput.value, 10) !== expectedAnswer) {
+    captchaError.value = true;
+    errorMessage.value = 'คำตอบยืนยันตัวตนไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง';
+    generateCaptcha();
+    return;
+  }
+
   if (isSubmitting.value || !amount.value || amount.value <= 0) return;
 
   isSubmitting.value = true;
@@ -176,6 +208,7 @@ const handleSubmit = async () => {
       note.value = '';
       isAnonymous.value = false;
       slipFile.value = null;
+      generateCaptcha();
       emit('close');
     }, 1800);
   } catch (err) {
@@ -310,6 +343,12 @@ async function postDonationToGoogleSheet(url: string, donation: Donation): Promi
 
         <!-- Form -->
         <form @submit.prevent="handleSubmit" class="space-y-4">
+          <!-- Honeypot Field (Bot Trap) -->
+          <div class="hidden" aria-hidden="true">
+            <label for="website-check">Leave empty</label>
+            <input id="website-check" type="text" v-model="honeypot" tabindex="-1" autocomplete="off" />
+          </div>
+
           <div>
             <label class="block text-xs font-semibold text-slate-700 mb-2">
               เลือกจำนวนเงิน (บาท)
@@ -404,6 +443,34 @@ async function postDonationToGoogleSheet(url: string, donation: Donation): Promi
                 id="slip-upload-vue"
               />
               <label for="slip-upload-vue" class="absolute inset-0 cursor-pointer" />
+            </div>
+          </div>
+
+          <!-- Human Verification (Math Challenge) -->
+          <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200/70 space-y-2">
+            <label class="block text-xs font-semibold text-slate-700">
+              ยืนยันว่าคุณไม่ใช้บอท (Security Check)
+            </label>
+            <div class="flex items-center gap-2">
+              <div class="px-3 py-2 bg-white rounded-xl border border-slate-200 text-sm font-bold text-slate-700 tracking-wider">
+                {{ captchaNum1 }} + {{ captchaNum2 }} = ?
+              </div>
+              <input
+                type="number"
+                v-model="captchaInput"
+                placeholder="ตอบคำถาม..."
+                class="flex-1 px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-pink-400 text-sm font-semibold text-slate-800 bg-white"
+                :class="{ 'border-rose-400 ring-1 ring-rose-300': captchaError }"
+                required
+              />
+              <button
+                type="button"
+                @click="generateCaptcha"
+                class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-200 transition-colors"
+                title="เปลี่ยนโจทย์"
+              >
+                <RefreshCw class="w-4 h-4" />
+              </button>
             </div>
           </div>
 
