@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { X, Copy, Check, QrCode, Heart, ShieldCheck, CreditCard, Upload, Loader2, RefreshCw } from 'lucide-vue-next';
 import { CampaignData, Donation } from '../types';
+import { ProfanityFilter } from '../utils/profanityFilter';
 
 const props = defineProps<{
   isOpen: boolean;
@@ -158,6 +159,13 @@ const uploadSlip = async () => {
 
 const handleSubmit = async () => {
   //console.log("handleSubmit() called");
+
+  const filter = new ProfanityFilter();
+  // ตรวจสอบก่อนส่งข้อมูล
+  if (filter.hasProfanity(donorName.value) || filter.hasProfanity(note.value)) {
+    errorMessage.value = 'กรุณาใช้ข้อความที่สุภาพและไม่มีคำหยาบคาย';
+    return;
+  }
 
   // 2. ตรวจสอบผลลัพธ์ Math Captcha
   const expectedAnswer = captchaNum1.value + captchaNum2.value;
