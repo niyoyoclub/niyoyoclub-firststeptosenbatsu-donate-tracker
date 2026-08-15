@@ -7,7 +7,7 @@ const PORT = 3000;
 app.use(express.json());
 
 // API proxy endpoint for Google Sheets CSV fetching to bypass CORS
-app.get("/api/drives-proxy", async (req, res) => {
+app.post("/api/drives-proxy", async (req, res) => {
   try {
     const url =  process.env.VITE_GOOGLE_DRIVE_URL || import.meta.env.VITE_GOOGLE_DRIVE_URL || '';
     if (!url) {
