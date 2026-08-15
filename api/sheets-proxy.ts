@@ -29,8 +29,10 @@ app.get("/api/sheets-proxy", async (req, res) => {
       }
     }
 
+    console.log('fetchUrl:', fetchUrl);
     // ป้องกันการติด Cache ของเบราว์เซอร์ด้วยการใส่ Timestamp
     const cacheBusterUrl = `${fetchUrl}${fetchUrl.includes('?') ? '&' : '?'}_t=${Date.now()}`;
+    console.log('cacheBusterUrl:', cacheBusterUrl);
 
     const response = await fetch(cacheBusterUrl, {
       headers: {
