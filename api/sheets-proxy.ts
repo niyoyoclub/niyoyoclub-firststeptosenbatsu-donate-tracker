@@ -72,14 +72,18 @@ export default app;
 // internal function
 function removeSlipUrlColumn(csvContent: string): string {
   console.log('removeSlipUrlColumn(string) called');
+  console.log('csvContent:', csvContent);
 
   const lines = csvContent.trim().split('\n');
+  console.log('lines:', lines);
   if (lines.length === 0) return '';
 
   // 1. ระบุ index ของคอลัมน์ slipUrl จาก Header
   const headers = lines[0].split(',');
+  console.log('headers:', headers);
   const slipUrlIndex = headers.indexOf('slipUrl');
 
+  console.log('slipUrlIndex:', slipUrlIndex);
   if (slipUrlIndex === -1) {
     return csvContent; // ไม่พบคอลัมน์ slipUrl คืนค่าเดิม
   }
