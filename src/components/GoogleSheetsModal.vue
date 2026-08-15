@@ -42,6 +42,8 @@ const handleFetchCSV = async (isSilent = false) => {
   try {
     const proxyUrl = '/api/sheets-proxy';
     const res = await fetch(proxyUrl);
+    console.log("res:", res);
+
     if (!res.ok) {
       throw new Error(`ไม่สามารถดึงข้อมูลได้ (Status: ${res.status})`);
     }
