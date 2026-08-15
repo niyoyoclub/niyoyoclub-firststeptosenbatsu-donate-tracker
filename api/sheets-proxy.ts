@@ -9,7 +9,7 @@ app.use(express.json());
 // API proxy endpoint for Google Sheets CSV fetching to bypass CORS
 app.get("/api/sheets-proxy", async (req, res) => {
   try {
-    const url =  import.meta.env.VITE_GOOGLE_GETSHEET_URL || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQjjo3Gd1VwUWxVHYEy01Rar9ueGqpxeiQtpRR-Q9U1IxD5ew15gf0YQ0KPtyGAbj8XAKO8JXLm_RjF/pub?gid=0&single=true&output=csv';
+    const url =  process.env.VITE_GOOGLE_GETSHEET_URL || import.meta.env.VITE_GOOGLE_GETSHEET_URL || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQjjo3Gd1VwUWxVHYEy01Rar9ueGqpxeiQtpRR-Q9U1IxD5ew15gf0YQ0KPtyGAbj8XAKO8JXLm_RjF/pub?gid=0&single=true&output=csv';
 
     if (!url) {
       return res.status(400).json({ error: "Missing 'url' parameter" });
