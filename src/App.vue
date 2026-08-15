@@ -101,6 +101,7 @@ const scrollToTop = () => {
 };
 
 const googleSheetRef = ref(null);
+const lastGoogleSheetSync = ref(new Date());
 
 const refreshGoogleSheet = () => {
   if (googleSheetRef.value) {
@@ -145,6 +146,7 @@ const refreshGoogleSheet = () => {
         :donations="donations"
         :campaign="campaign"
         @refresh="refreshGoogleSheet" 
+        :lastGoogleSheetSync="lastGoogleSheetSync"
       />
 
       <!-- Reward & Perk Calculator -->
@@ -216,6 +218,7 @@ const refreshGoogleSheet = () => {
       :isOpen="isSheetOpen"
       :campaign="campaign"
       :currentSheetUrl="campaign.sheetCsvUrl"
+      :lastGoogleSheetSync="lastGoogleSheetSync"
       @close="isSheetOpen = false"
       @importDonations="handleImportSheetDonations"
       ref="googleSheetRef"

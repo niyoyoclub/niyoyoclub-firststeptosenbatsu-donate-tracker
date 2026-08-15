@@ -8,6 +8,7 @@ const props = defineProps<{
   isOpen: boolean;
   currentSheetUrl?: string;
   campaign: CampaignData;
+  lastGoogleSheetSync?: Date;
 }>();
 
 const emit = defineEmits<{
@@ -83,6 +84,7 @@ const handleFetchCSV = async (isSilent = false) => {
     if (!isSilent) {
       isLoading.value = false;
     }
+    props.lastGoogleSheetSync = new Date();
   }
 };
 

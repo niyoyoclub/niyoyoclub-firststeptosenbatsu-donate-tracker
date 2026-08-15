@@ -6,6 +6,7 @@ import { Donation, CampaignData } from '../types';
 const props = defineProps<{
   campaign: CampaignData;
   donations: Donation[];
+  lastGoogleSheetSync?: Date;
 }>();
 
 const emit = defineEmits<{
@@ -59,7 +60,8 @@ const triggerManualSync = () => {
           </h3>
         </div>
         <p class="text-xs text-slate-500 pl-9">
-          อัปเดตเรียลไทม์ ทุกๆ {{ props.campaign.refreshEveryMinutes }} นาที ตรวจสอบความถูกต้องและโปร่งใส
+          อัปเดตเรียลไทม์ ทุกๆ {{ props.campaign.refreshEveryMinutes }} นาที
+          ตรวจสอบความถูกต้องและโปร่งใส ดึงข้อมูลล่าสุดเมื่อ <span class="font-semibold text-slate-800">{{ lastGoogleSheetSync?.toLocaleString("th-TH", { timeZone: "Asia/Bangkok" }) }}</span>
         </p>
       </div>
 
