@@ -9,12 +9,13 @@ app.use(express.json());
 // API proxy endpoint for Google Sheets CSV fetching to bypass CORS
 app.get("/api/sheets-proxy", async (req, res) => {
   try {
-    const url = req.query.url as string;
+    const url =  import.meta.env.VITE_GOOGLE_GETSHEET_URL || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQjjo3Gd1VwUWxVHYEy01Rar9ueGqpxeiQtpRR-Q9U1IxD5ew15gf0YQ0KPtyGAbj8XAKO8JXLm_RjF/pub?gid=0&single=true&output=csv';
+
     if (!url) {
       return res.status(400).json({ error: "Missing 'url' parameter" });
     }
 
-    let fetchUrl = url;
+    let fetchUrl = url.trim();
     // Convert standard sheet URL to CSV export if needed
     if (
       url.includes("docs.google.com/spreadsheets/d/") &&
@@ -28,7 +29,10 @@ app.get("/api/sheets-proxy", async (req, res) => {
       }
     }
 
-    const response = await fetch(fetchUrl, {
+    // ป้องกันการติด Cache ของเบราว์เซอร์ด้วยการใส่ Timestamp
+    const cacheBusterUrl = `${fetchUrl}${fetchUrl.includes('?') ? '&' : '?'}_t=${Date.now()}`;
+
+    const response = await fetch(cacheBusterUrl, {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
@@ -51,6 +55,12 @@ app.get("/api/sheets-proxy", async (req, res) => {
       .status(500)
       .json({ error: err.message || "Failed to fetch Google Sheet data" });
   }
+});
+
+app.post("/api/sheets-proxy", async (req, res) => {
+  console.log("POST /api/sheets-proxy called");
+
+  console.log("POST /api/sheets-proxy end");
 });
 
 export default app;

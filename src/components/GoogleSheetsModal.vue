@@ -40,22 +40,8 @@ const handleFetchCSV = async (isSilent = false) => {
   }
 
   try {
-    let fetchUrl = sheetUrl.value.trim();
-    if (
-      fetchUrl.includes('docs.google.com/spreadsheets/d/') &&
-      !fetchUrl.includes('output=csv') &&
-      !fetchUrl.includes('out:csv')
-    ) {
-      const match = fetchUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
-      if (match && match[1]) {
-        fetchUrl = `https://docs.google.com/spreadsheets/d/${match[1]}/gviz/tq?tqx=out:csv`;
-      }
-    }
-
-    // ป้องกันการติด Cache ของเบราว์เซอร์ด้วยการใส่ Timestamp
-    const cacheBusterUrl = `${fetchUrl}${fetchUrl.includes('?') ? '&' : '?'}_t=${Date.now()}`;
-
-    const res = await fetch(cacheBusterUrl);
+    const proxyUrl = '/api/sheets-proxy';
+    const res = await fetch(proxyUrl);
     if (!res.ok) {
       throw new Error(`ไม่สามารถดึงข้อมูลได้ (Status: ${res.status})`);
     }
