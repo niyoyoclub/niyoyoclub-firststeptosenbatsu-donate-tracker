@@ -74,7 +74,7 @@ function removeSlipUrlColumn(csvContent: string): string {
   console.log('removeSlipUrlColumn(string) called');
   console.log('csvContent:', csvContent);
 
-  const lines = csvContent.trim().split('\n');
+  const lines = csvContent.trim().replaceAll('\r', '').split('\n');
   console.log('lines:', lines);
   if (lines.length === 0) return '';
 
