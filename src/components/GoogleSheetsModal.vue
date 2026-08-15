@@ -8,12 +8,12 @@ const props = defineProps<{
   isOpen: boolean;
   currentSheetUrl?: string;
   campaign: CampaignData;
-  lastGoogleSheetSync?: Date;
 }>();
 
 const emit = defineEmits<{
   (e: 'close'): void;
-  (e: 'importDonations', donations: Donation[], sheetUrl: string): void;
+  (e: 'importDonations', donations: Donation[], sheetUrl: string): void;  
+  (e: 'callbackLastSync'): void;
 }>();
 
 const sheetUrl = ref(
@@ -84,7 +84,7 @@ const handleFetchCSV = async (isSilent = false) => {
     if (!isSilent) {
       isLoading.value = false;
     }
-    props.lastGoogleSheetSync = new Date();
+    emit('callbackLastSync');
   }
 };
 
@@ -127,7 +127,9 @@ watch(isAutoFetchEnabled, (newVal) => {
 });
 
 const refresh = () => {
+  stopAutoFetch();
   handleFetchCSV(true);
+  startAutoFetch();
 };
 
 defineExpose({

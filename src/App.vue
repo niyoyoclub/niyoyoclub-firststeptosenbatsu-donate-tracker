@@ -217,10 +217,10 @@ const refreshGoogleSheet = () => {
     <GoogleSheetsModal
       :isOpen="isSheetOpen"
       :campaign="campaign"
-      :currentSheetUrl="campaign.sheetCsvUrl"
-      :lastGoogleSheetSync="lastGoogleSheetSync"
+      :currentSheetUrl="campaign.sheetCsvUrl"      
       @close="isSheetOpen = false"
       @importDonations="handleImportSheetDonations"
+      @callbackLastSync="lastGoogleSheetSync = new Date()";
       ref="googleSheetRef"
     />
 

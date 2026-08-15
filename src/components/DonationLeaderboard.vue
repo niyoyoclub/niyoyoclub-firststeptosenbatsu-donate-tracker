@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { Award, Search, Sparkles, Trophy, Heart, Clock, RefreshCw } from 'lucide-vue-next';
+import { Award, Search, Sparkles, Trophy, Heart, Clock, RefreshCw, Check, X } from 'lucide-vue-next';
 import { Donation, CampaignData } from '../types';
 
 const props = defineProps<{
@@ -163,6 +163,12 @@ const triggerManualSync = () => {
               </span>
               <span v-else class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-600 border border-slate-200">
                 <Heart class="w-3 h-3 text-pink-400" /> Supporter
+              </span>
+              <span v-if="item.verified" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-blue-100 text-slate-600 border border-slate-200">
+                <Check class="w-3 h-3 text-pink-400" /> ยืนยัน
+              </span>
+              <span v-else class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-red-100 text-white-600 border border-slate-200">
+                <X class="w-3 h-3 text-pink-400" /> ยังไม่ได้ยืนยัน
               </span>
             </div>
 
