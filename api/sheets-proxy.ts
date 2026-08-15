@@ -47,7 +47,9 @@ app.get("/api/sheets-proxy", async (req, res) => {
         .json({ error: `Failed to fetch sheet: ${response.statusText}` });
     }
 
-    const csvData = await response.text();
+    const rawData = await response.text();
+    const csvData = removeSlipUrlColumn(rawData);
+
     res.setHeader("Content-Type", "text/csv; charset=utf-8");
     res.setHeader("Access-Control-Allow-Origin", "*");
     return res.send(csvData);
@@ -66,3 +68,26 @@ app.post("/api/sheets-proxy", async (req, res) => {
 });
 
 export default app;
+
+// internal function
+function removeSlipUrlColumn(csvContent: string): string {
+  const lines = csvContent.trim().split('\n');
+  if (lines.length === 0) return '';
+
+  // 1. ระบุ index ของคอลัมน์ slipUrl จาก Header
+  const headers = lines[0].split(',');
+  const slipUrlIndex = headers.indexOf('slipUrl');
+
+  if (slipUrlIndex === -1) {
+    return csvContent; // ไม่พบคอลัมน์ slipUrl คืนค่าเดิม
+  }
+
+  // 2. ลบคอลัมน์ตาม index ในทุกแถว
+  const processedLines = lines.map((line) => {
+    const columns = line.split(',');
+    columns.splice(slipUrlIndex, 1);
+    return columns.join(',');
+  });
+
+  return processedLines.join('\n');
+}

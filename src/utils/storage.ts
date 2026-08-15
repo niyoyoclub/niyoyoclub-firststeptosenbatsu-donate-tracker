@@ -81,7 +81,7 @@ export function parseCSVDonations(csvText: string): Donation[] {
       const note = row[6] ? row[6].trim() : '';
       const rawVerified = row[7] ? row[7].trim() : '' ;
       const verified = rawVerified.toLowerCase() === 'true';
-      const isAnonymous = row[8] ? row[8].trim().toLowerCase() === 'true' : false;     
+      const isAnonymous = row[9] ? row[9].trim().toLowerCase() === 'true' : false;
 
       if (amount > 0) {
         let tier: 'tier-normal' | 'tier-silver' | 'tier-gold' | 'tier-diamond' = 'tier-normal';
