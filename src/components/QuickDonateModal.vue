@@ -126,13 +126,11 @@ const uploadSlip = async () => {
     //console.log("  payload:", payload);
 
     // ยิง API ไปที่ Google Apps Script
-    const response = await fetch(GOOGLE_DRIVE_URL, {
+    const response = await fetch('/api/drive-proxy', {
       method: 'POST',
-      redirect: 'follow',
       headers: {
-        'Content-Type': 'text/plain', // ใช้ text/plain เพื่อป้องกันปัญหา CORS
-      },
-      mode: 'cors',   // เปิดโหมดข้ามโดเมน
+        'Content-Type': 'application/json',
+      },      
       body: JSON.stringify(payload)
     });
 
@@ -203,7 +201,7 @@ const handleSubmit = async () => {
 
   try {
     // 1. ส่งข้อมูลขึ้น Google Sheet
-    await postDonationToGoogleSheet(GOOGLE_SHEET_URL, newDonation);
+    await postDonationToGoogleSheet('/api/sheet-proxy', newDonation);
 
     // 2. อัปเดต State ฝั่ง Local/Parent
     emit('addDonation', newDonation);
@@ -249,13 +247,11 @@ async function postDonationToGoogleSheet(url: string, donation: Donation): Promi
     const payload = JSON.stringify(donation);
 
     const response = await fetch(url, {
-      method: 'POST',
-      redirect: 'follow', // จำเป็นต้องใส่เพื่อให้ fetch ตามการ redirect ของ Google Apps Script ไปได้ถูกต้อง
+      method: 'POST',      
       headers: {
-        'Content-Type': 'text/plain;charset=utf-8' // แนะนำให้ใช้ text/plain เพื่อหลีกเลี่ยงปัญหา CORS ใน Apps Script
+        'Content-Type': 'application/json;charset=utf-8'
       },
-      body: payload,
-      mode: 'cors'   // เปิดโหมดข้ามโดเมน
+      body: payload,      
     });
 
     //console.log("  response:", response);

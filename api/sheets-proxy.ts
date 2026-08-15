@@ -9,7 +9,7 @@ app.use(express.json());
 // API proxy endpoint for Google Sheets CSV fetching to bypass CORS
 app.get("/api/sheets-proxy", async (req, res) => {
   try {
-    const url =  process.env.VITE_GOOGLE_GETSHEET_URL || import.meta.env.VITE_GOOGLE_GETSHEET_URL || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQjjo3Gd1VwUWxVHYEy01Rar9ueGqpxeiQtpRR-Q9U1IxD5ew15gf0YQ0KPtyGAbj8XAKO8JXLm_RjF/pub?gid=0&single=true&output=csv';
+    const url =  process.env.VITE_GOOGLE_GETSHEET_URL || import.meta.env.VITE_GOOGLE_GETSHEET_URL || '';
 
     if (!url) {
       return res.status(400).json({ error: "Missing 'url' parameter" });
@@ -63,43 +63,77 @@ app.get("/api/sheets-proxy", async (req, res) => {
 
 app.post("/api/sheets-proxy", async (req, res) => {
   console.log("POST /api/sheets-proxy called");
+  try {
+    const url = process.env.VITE_GOOGLE_SPREADSHEET_URL || import.meta.env.VITE_GOOGLE_SPREADSHEET_URL || '';
 
-  console.log("POST /api/sheets-proxy end");
+    if (!url) {
+      return res.status(400).json({ error: "Missing 'url' parameter" });
+    }
+
+    console.log('req:', req);
+    const payload = req.body;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      redirect: 'follow', // จำเป็นต้องใส่เพื่อให้ fetch ตามการ redirect ของ Google Apps Script ไปได้ถูกต้อง
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8' // แนะนำให้ใช้ text/plain เพื่อหลีกเลี่ยงปัญหา CORS ใน Apps Script
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      },
+      body: payload,
+      mode: 'cors'   // เปิดโหมดข้ามโดเมน
+    });
+
+    if (!response.ok) {
+      return res
+        .status(response.status)
+        .json({ error: `Failed to fetch sheet: ${response.statusText}` });
+    }
+
+    res.setHeader("Content-Type", "text/plain");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    return res.send(true);
+  } catch (err: any) {
+    console.error("Sheets proxy error:", err);
+    return res
+      .status(500)
+      .json({ error: err.message || "Failed to fetch Google Sheet data" });
+  }  
 });
 
 export default app;
 
 // internal function
 function removeSlipUrlColumn(csvContent: string): string {
-  console.log('removeSlipUrlColumn(string) called');
-  console.log('csvContent:', csvContent);
+  //console.log('removeSlipUrlColumn(string) called');
+  //console.log('csvContent:', csvContent);
 
   const lines = csvContent.trim().replaceAll('\r', '').split('\n');
-  console.log('lines:', lines);
+  //console.log('lines:', lines);
   if (lines.length === 0) return '';
 
   // 1. ระบุ index ของคอลัมน์ slipUrl จาก Header
   const headers = lines[0].split(',');
-  console.log('headers:', headers);
+  //console.log('headers:', headers);
   const slipUrlIndex = headers.indexOf('slipUrl');
 
-  console.log('slipUrlIndex:', slipUrlIndex);
+  //console.log('slipUrlIndex:', slipUrlIndex);
   if (slipUrlIndex === -1) {
     return csvContent; // ไม่พบคอลัมน์ slipUrl คืนค่าเดิม
   }
 
   // 2. ลบคอลัมน์ตาม index ในทุกแถว
   const processedLines = lines.map((line) => {
-    console.log('line:', line);
+    //console.log('line:', line);
 
     const columns = line.split(',');
-    columns.splice(slipUrlIndex, 1);
+    //columns.splice(slipUrlIndex, 1);
     var newLine = columns.join(',');
     
-    console.log('newLine:', newLine);
+    //console.log('newLine:', newLine);
     return newLine;
   });
 
-  console.log('removeSlipUrlColumn(string) end');
+  //console.log('removeSlipUrlColumn(string) end');
   return processedLines.join('\n');
 }

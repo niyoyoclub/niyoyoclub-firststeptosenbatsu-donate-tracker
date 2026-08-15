@@ -7,32 +7,24 @@ const PORT = 3000;
 app.use(express.json());
 
 // API proxy endpoint for Google Sheets CSV fetching to bypass CORS
-app.get("/api/sheets-proxy", async (req, res) => {
+app.get("/api/drives-proxy", async (req, res) => {
   try {
-    const url = req.query.url as string;
+    const url =  process.env.VITE_GOOGLE_DRIVE_URL || import.meta.env.VITE_GOOGLE_DRIVE_URL || '';
     if (!url) {
       return res.status(400).json({ error: "Missing 'url' parameter" });
     }
 
-    let fetchUrl = url;
-    // Convert standard sheet URL to CSV export if needed
-    if (
-      url.includes("docs.google.com/spreadsheets/d/") &&
-      !url.includes("output=csv") &&
-      !url.includes("out:csv")
-    ) {
-      const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
-      if (match && match[1]) {
-        const sheetId = match[1];
-        fetchUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
-      }
-    }
-
-    const response = await fetch(fetchUrl, {
+    
+    // ยิง API ไปที่ Google Apps Script
+    const response = await fetch(GOOGLE_DRIVE_URL, {
+      method: 'POST',
+      redirect: 'follow',
       headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        'Content-Type': 'text/plain', // ใช้ text/plain เพื่อป้องกันปัญหา CORS
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
       },
+      mode: 'cors',   // เปิดโหมดข้ามโดเมน
+      body: JSON.stringify(payload)
     });
 
     if (!response.ok) {
@@ -41,10 +33,11 @@ app.get("/api/sheets-proxy", async (req, res) => {
         .json({ error: `Failed to fetch sheet: ${response.statusText}` });
     }
 
-    const csvData = await response.text();
-    res.setHeader("Content-Type", "text/csv; charset=utf-8");
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    return res.send(csvData);
+    const result = await response.json();
+
+    res.setHeader("Content-Type", "application/json; charset=utf-8");
+    //res.setHeader("Access-Control-Allow-Origin", "*");
+    return res.send(result);
   } catch (err: any) {
     console.error("Sheets proxy error:", err);
     return res
