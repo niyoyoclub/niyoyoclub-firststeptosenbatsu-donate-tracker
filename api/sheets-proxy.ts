@@ -29,10 +29,10 @@ app.get("/api/sheets-proxy", async (req, res) => {
       }
     }
 
-    console.log('fetchUrl:', fetchUrl);
+    //console.log('fetchUrl:', fetchUrl);
     // ป้องกันการติด Cache ของเบราว์เซอร์ด้วยการใส่ Timestamp
     const cacheBusterUrl = `${fetchUrl}${fetchUrl.includes('?') ? '&' : '?'}_t=${Date.now()}`;
-    console.log('cacheBusterUrl:', cacheBusterUrl);
+    //console.log('cacheBusterUrl:', cacheBusterUrl);
 
     const response = await fetch(cacheBusterUrl, {
       headers: {
@@ -71,6 +71,8 @@ export default app;
 
 // internal function
 function removeSlipUrlColumn(csvContent: string): string {
+  console.log('removeSlipUrlColumn(string) called');
+
   const lines = csvContent.trim().split('\n');
   if (lines.length === 0) return '';
 
@@ -84,10 +86,16 @@ function removeSlipUrlColumn(csvContent: string): string {
 
   // 2. ลบคอลัมน์ตาม index ในทุกแถว
   const processedLines = lines.map((line) => {
+    console.log('line:', line);
+
     const columns = line.split(',');
     columns.splice(slipUrlIndex, 1);
-    return columns.join(',');
+    var newLine = columns.join(',');
+    
+    console.log('newLine:', newLine);
+    return newLine;
   });
 
+  console.log('removeSlipUrlColumn(string) end');
   return processedLines.join('\n');
 }
