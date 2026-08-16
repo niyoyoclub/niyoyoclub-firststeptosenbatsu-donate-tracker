@@ -69,9 +69,18 @@ app.post("/api/sheets-proxy", async (req, res) => {
       return res.status(400).json({ error: "Missing 'url' parameter" });
     }
 
-    console.log('req:', req);
-    const payload = JSON.stringify(req.body);
-    console.log('payload:', payload);
+    //console.log('req:', req);
+    const data = req.body;
+
+    const donationPayload = JSON.stringify(data.donationPayload);
+    const imagePayload = JSON.stringify(data.imagePayload);
+    console.log('donationPayload:', donationPayload);
+    console.log('imagePayload:', imagePayload);
+    const slipUrl = await uploadSlip(imagePayload);
+    console.log('slipUrl:', slipUrl);
+    donationPayload.slipUrl = slipUrl;
+    console.log('donationPayload:', donationPayload);
+
     const response = await fetch(url, {
       method: 'POST',
       redirect: 'follow', // จำเป็นต้องใส่เพื่อให้ fetch ตามการ redirect ของ Google Apps Script ไปได้ถูกต้อง
@@ -79,7 +88,7 @@ app.post("/api/sheets-proxy", async (req, res) => {
         'Content-Type': 'text/plain;charset=utf-8' // แนะนำให้ใช้ text/plain เพื่อหลีกเลี่ยงปัญหา CORS ใน Apps Script
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
       },
-      body: payload,
+      body: donationPayload,
       mode: 'cors'   // เปิดโหมดข้ามโดเมน
     });
 
@@ -138,3 +147,49 @@ function removeSlipUrlColumn(csvContent: string): string {
   //console.log('removeSlipUrlColumn(string) end');
   return processedLines.join('\n');
 }
+
+// ฟังก์ชันหลักในการส่งข้อมูลไป Google Drive
+const uploadSlip = async (payload:any) => {
+  //console.log("uploadSlip() called");  
+  var slipUrl = '';
+  
+
+  try {
+    const url = process.env.GOOGLE_DRIVE_URL || import.meta.env.GOOGLE_DRIVE_URL || '';
+
+  if (!url) {
+    return slipUrl;
+  }
+    //console.log("  payload:", payload);
+
+    // ยิง API ไปที่ Google Apps Script
+    const response = await fetch(url, {
+      method: 'POST',
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'text/plain', // ใช้ text/plain เพื่อป้องกันปัญหา CORS
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      },
+      mode: 'cors',   // เปิดโหมดข้ามโดเมน
+      body: JSON.stringify(payload)
+    });
+
+    //console.log("  response:", response);
+
+    const result = await response.json();
+
+    if (result.status === 'success') {
+      // 'อัปโหลดสลิปเรียบร้อยแล้ว!';
+      slipUrl = result.url; // นำ URL ที่ได้กลับมาเก็บเพื่อแสดงผลตรวจสอบ
+    } else {
+      console.error('เกิดข้อผิดพลาดจากเซิร์ฟเวอร์: ' + result.message);
+    }
+  } catch (error) {    
+    console.error('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ หรือไฟล์มีขนาดใหญ่เกินไป', error);
+  } finally {
+    
+  }
+
+  //console.log("uploadSlip() end");
+  return slipUrl
+};

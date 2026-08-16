@@ -4,14 +4,14 @@ import path from "path";
 const app = express();
 
 // เพิ่ม limit เป็นขนาดที่ต้องการ เช่น 2mb หรือ 10mb
-app.use(express.json({ limit: '2mb' }));
-app.use(express.urlencoded({ limit: '2mb', extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // API proxy endpoint for Google Sheets CSV fetching to bypass CORS
 app.post("/api/drives-proxy", async (req, res) => {
 
   console.log('POST /api/drives-proxy called');
-  console.log('req:', req);
+  //console.log('req:', req);
 
   try {
     const url =  process.env.GOOGLE_DRIVE_URL || import.meta.env.GOOGLE_DRIVE_URL || '';

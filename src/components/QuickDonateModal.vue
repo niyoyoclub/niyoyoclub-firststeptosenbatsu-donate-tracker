@@ -177,6 +177,10 @@ const handleSubmit = async () => {
   }
 
   if (isSubmitting.value || !amount.value || amount.value <= 0) return;
+  if (slipFile.value) {
+    errorMessage.value = 'กรุณาแนบสลิปการโอน';
+    return;
+  }
 
   isSubmitting.value = true;
   errorMessage.value = null;
@@ -187,7 +191,19 @@ const handleSubmit = async () => {
   else if (amount.value >= 500) tier = 'tier-silver';
 
   // upload slip to google drive
-  const slipUrl = await uploadSlip();
+  //const slipUrl = await uploadSlip();
+  // แปลงรูปภาพเป็น Base64 string
+  const base64String = await convertToBase64(slipFile.value);
+
+  // เตรียม Payload ข้อมูลที่จะส่งไป
+  const imgPayload: ImagePayload = {
+    fileName: `Slip_${Date.now()}_${slipFile.value.name}`,
+    fileMimeType: slipFile.value.type,
+    fileBase64: base64String,
+    // คุณสามารถเพิ่มข้อมูลอื่นๆ เช่น ชื่อลูกค้า หรือ ยอดเงิน เข้าไปตรงนี้ได้ครับ
+  };
+
+  //console.log("  payload:", payload);
 
   const newDonation: Donation = {
     id: `don-${Date.now()}`,
@@ -198,14 +214,19 @@ const handleSubmit = async () => {
     isAnonymous: isAnonymous.value,
     tier,
     verified: false,
-    slipUrl: slipUrl,
+    slipUrl: '',
   };
 
   console.log('newDonation:', newDonation);
 
   try {
+
+    const sheetPayload: DonationSheetPayload {
+      donationPayload: newDonation,
+      imagePayload: imgPayload,
+    };
     // 1. ส่งข้อมูลขึ้น Google Sheet
-    await postDonationToGoogleSheet('/api/sheets-proxy', newDonation);
+    await postDonationToGoogleSheet('/api/sheets-proxy', sheetPayload);
 
     // 2. อัปเดต State ฝั่ง Local/Parent
     emit('addDonation', newDonation);
@@ -234,7 +255,7 @@ const handleSubmit = async () => {
  * ฟังก์ชันส่งข้อมูลไปยัง Google Apps Script Web App
  * ใช้ Content-Type เป็น text/plain เพื่อเลี่ยง CORS Preflight Request
  */
-async function postDonationToGoogleSheet(url: string, donation: Donation): Promise<boolean> {
+async function postDonationToGoogleSheet(url: string, donation: DonationSheetPayload): Promise<boolean> {
   //console.log("postDonationToGoogleSheet() called");
   //console.log("  url:", url);
   //console.log("  donation:", donation);

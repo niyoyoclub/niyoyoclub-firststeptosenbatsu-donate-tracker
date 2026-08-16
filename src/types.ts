@@ -18,6 +18,17 @@ export interface CreateDonationDto extends Omit<Donation, 'id' | 'timestamp'> {
   slipFileName?: string;
 }
 
+export interface ImagePayload {
+  fileName: string;
+  fileMimeType: string;
+  fileBase64: string;
+}
+
+export interface DonationSheetPayload {
+  donationPayload: Donation;
+  imagePayload: ImagePayload;
+}
+
 export interface Milestone {
   id: string;
   amount: number;
