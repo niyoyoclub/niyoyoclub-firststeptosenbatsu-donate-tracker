@@ -63,7 +63,7 @@ app.get("/api/sheets-proxy", async (req, res) => {
 });
 
 app.post("/api/sheets-proxy", async (req, res) => {
-  console.log("POST /api/sheets-proxy called");
+  //console.log("POST /api/sheets-proxy called");
   try {
     const url = process.env.GOOGLE_SPREADSHEET_URL || import.meta.env.GOOGLE_SPREADSHEET_URL || '';
 
@@ -76,11 +76,11 @@ app.post("/api/sheets-proxy", async (req, res) => {
     
     //console.log('data.imagePayload:', data.imagePayload);
     const slipUrl = await uploadSlip(data.imagePayload);
-    console.log('slipUrl:', slipUrl);
+    //console.log('slipUrl:', slipUrl);
 
     data.donationPayload.slipUrl = slipUrl;
     const donationPayload = JSON.stringify(data.donationPayload);    
-    console.log('donationPayload:', donationPayload);
+    //console.log('donationPayload:', donationPayload);
 
     const response = await fetch(url, {
       method: 'POST',
@@ -93,7 +93,7 @@ app.post("/api/sheets-proxy", async (req, res) => {
       mode: 'cors'   // เปิดโหมดข้ามโดเมน
     });
 
-    console.log('response:', response);
+    //console.log('response:', response);
 
     if (!response.ok) {
       return res
@@ -151,9 +151,8 @@ function removeSlipUrlColumn(csvContent: string): string {
 
 // ฟังก์ชันหลักในการส่งข้อมูลไป Google Drive
 const uploadSlip = async (payload:any) => {
-  console.log("uploadSlip() called");  
+  //console.log("uploadSlip() called");  
   let slipUrl = '';
-  
 
   try {
     const url = process.env.GOOGLE_DRIVE_URL || import.meta.env.GOOGLE_DRIVE_URL || '';
@@ -161,7 +160,7 @@ const uploadSlip = async (payload:any) => {
     if (!url) {
       return slipUrl;
     }
-    console.log("  payload:", payload);
+    //console.log("  payload:", payload);
 
     // ยิง API ไปที่ Google Apps Script
     const response = await fetch(url, {
@@ -175,11 +174,11 @@ const uploadSlip = async (payload:any) => {
       body: JSON.stringify(payload)
     });
 
-    console.log("  response:", response);
+    //console.log("  response:", response);
 
     const result = await response.json();
 
-    console.log("  result:", result);
+    //console.log("  result:", result);
 
     if (result.status === 'success') {
       // 'อัปโหลดสลิปเรียบร้อยแล้ว!';
@@ -193,6 +192,6 @@ const uploadSlip = async (payload:any) => {
     
   }
 
-  console.log("uploadSlip() end");
+  //console.log("uploadSlip() end");
   return slipUrl
 };

@@ -12,12 +12,6 @@ export interface Donation {
   slipUrl?: string;
 }
 
-// Request Payload จาก Vue UI (รวมไฟล์รูป Base64)
-export interface CreateDonationDto extends Omit<Donation, 'id' | 'timestamp'> {
-  slipImageBase64?: string; // string รูปภาพ Base64 เช่น "data:image/jpeg;base64,/9j/4AAQSkZJRg..."
-  slipFileName?: string;
-}
-
 export interface ImagePayload {
   fileName: string;
   fileMimeType: string;

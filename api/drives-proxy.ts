@@ -10,7 +10,7 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 // API proxy endpoint for Google Sheets CSV fetching to bypass CORS
 app.post("/api/drives-proxy", async (req, res) => {
 
-  console.log('POST /api/drives-proxy called');
+  //console.log('POST /api/drives-proxy called');
   //console.log('req:', req);
 
   try {
@@ -20,7 +20,7 @@ app.post("/api/drives-proxy", async (req, res) => {
     }
 
     const payload = JSON.stringify(req.body);
-    console.log('payload:', payload);
+    //console.log('payload:', payload);
     
     // ยิง API ไปที่ Google Apps Script
     const response = await fetch(url, {
@@ -34,7 +34,7 @@ app.post("/api/drives-proxy", async (req, res) => {
       body: JSON.stringify(payload)
     });
 
-    console.log('response:', response);
+    //console.log('response:', response);
 
     if (!response.ok) {
       return res
