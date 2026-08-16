@@ -19,7 +19,7 @@ app.post("/api/drives-proxy", async (req, res) => {
 
     
     // ยิง API ไปที่ Google Apps Script
-    const response = await fetch(GOOGLE_DRIVE_URL, {
+    const response = await fetch(url, {
       method: 'POST',
       redirect: 'follow',
       headers: {
@@ -33,7 +33,7 @@ app.post("/api/drives-proxy", async (req, res) => {
     if (!response.ok) {
       return res
         .status(response.status)
-        .json({ error: `Failed to fetch sheet: ${response.statusText}` });
+        .json({ error: `Failed to fetch google drive: ${response.statusText}` });
     }
 
     const result = await response.json();
@@ -45,7 +45,7 @@ app.post("/api/drives-proxy", async (req, res) => {
     console.error("Sheets proxy error:", err);
     return res
       .status(500)
-      .json({ error: err.message || "Failed to fetch Google Sheet data" });
+      .json({ error: err.message || "Failed to fetch Google Drive data" });
   }
 });
 
