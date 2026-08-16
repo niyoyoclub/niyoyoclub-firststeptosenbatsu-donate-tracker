@@ -3,7 +3,7 @@ import path from "path";
 
 const app = express();
 
-//app.use(express.json());
+app.use(express.json());
 
 // API proxy endpoint for Google Sheets CSV fetching to bypass CORS
 app.post("/api/drives-proxy", async (req, res) => {
@@ -17,7 +17,7 @@ app.post("/api/drives-proxy", async (req, res) => {
       return res.status(400).json({ error: "Missing 'url' parameter" });
     }
 
-    const payload = req.body;
+    const payload = JSON.stringify(req.body);
     console.log('payload:', payload);
     
     // ยิง API ไปที่ Google Apps Script

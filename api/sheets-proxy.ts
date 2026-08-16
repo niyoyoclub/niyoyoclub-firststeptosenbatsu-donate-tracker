@@ -2,7 +2,6 @@ import express from "express";
 import path from "path";
 
 const app = express();
-const PORT = 3000;
 
 app.use(express.json());
 
@@ -71,7 +70,7 @@ app.post("/api/sheets-proxy", async (req, res) => {
     }
 
     console.log('req:', req);
-    const payload = req.body;
+    const payload = JSON.stringify(req.body);
     console.log('payload:', payload);
     const response = await fetch(url, {
       method: 'POST',

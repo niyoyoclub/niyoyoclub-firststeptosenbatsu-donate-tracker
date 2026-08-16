@@ -110,6 +110,7 @@ const uploadSlip = async () => {
   isUploading.value = true;
   responseMessage.value = '';
   uploadedImageUrl.value = '';
+  let result = '';
 
   try {
     // แปลงรูปภาพเป็น Base64 string
@@ -135,13 +136,14 @@ const uploadSlip = async () => {
 
     //console.log("  response:", response);
 
-    const result = await response.json();
+    const resultResp = await response.json();
 
-    if (result.status === 'success') {
+    if (resultResp.status === 'success') {
       responseMessage.value = 'อัปโหลดสลิปเรียบร้อยแล้ว!';
-      uploadedImageUrl.value = result.url; // นำ URL ที่ได้กลับมาเก็บเพื่อแสดงผลตรวจสอบ
+      result = resultResp.url; // นำ URL ที่ได้กลับมาเก็บเพื่อแสดงผลตรวจสอบ
+      uploadedImageUrl.value = result;
     } else {
-      responseMessage.value = 'เกิดข้อผิดพลาดจากเซิร์ฟเวอร์: ' + result.message;
+      responseMessage.value = 'เกิดข้อผิดพลาดจากเซิร์ฟเวอร์: ' + resultResp.message;
     }
 
   } catch (error) {
@@ -152,6 +154,7 @@ const uploadSlip = async () => {
   }
 
   //console.log("uploadSlip() end");
+  return uploadedImageUrl.value;
 };
 
 const handleSubmit = async () => {
@@ -184,7 +187,7 @@ const handleSubmit = async () => {
   else if (amount.value >= 500) tier = 'tier-silver';
 
   // upload slip to google drive
-  await uploadSlip();
+  const slipUrl = await uploadSlip();
 
   const newDonation: Donation = {
     id: `don-${Date.now()}`,
@@ -195,8 +198,10 @@ const handleSubmit = async () => {
     isAnonymous: isAnonymous.value,
     tier,
     verified: false,
-    slipUrl: uploadedImageUrl.value,
+    slipUrl: slipUrl,
   };
+
+  console.log('newDonation:', newDonation);
 
   try {
     // 1. ส่งข้อมูลขึ้น Google Sheet
