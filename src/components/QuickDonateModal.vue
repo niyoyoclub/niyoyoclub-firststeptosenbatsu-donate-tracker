@@ -124,9 +124,8 @@ const uploadSlip = async () => {
     };
 
     //console.log("  payload:", payload);
-
-    // ยิง API ไปที่ Google Apps Script
-    const response = await fetch('/api/drive-proxy', {
+    
+    const response = await fetch('/api/drives-proxy', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -201,7 +200,7 @@ const handleSubmit = async () => {
 
   try {
     // 1. ส่งข้อมูลขึ้น Google Sheet
-    await postDonationToGoogleSheet('/api/sheet-proxy', newDonation);
+    await postDonationToGoogleSheet('/api/sheets-proxy', newDonation);
 
     // 2. อัปเดต State ฝั่ง Local/Parent
     emit('addDonation', newDonation);
