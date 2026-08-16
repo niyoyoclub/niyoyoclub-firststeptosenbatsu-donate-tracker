@@ -85,7 +85,7 @@ app.post("/api/sheets-proxy", async (req, res) => {
       method: 'POST',
       redirect: 'follow', // จำเป็นต้องใส่เพื่อให้ fetch ตามการ redirect ของ Google Apps Script ไปได้ถูกต้อง
       headers: {
-        'Content-Type': 'text/plain;charset=utf-8' // แนะนำให้ใช้ text/plain เพื่อหลีกเลี่ยงปัญหา CORS ใน Apps Script
+        'Content-Type': 'text/plain;charset=utf-8', // แนะนำให้ใช้ text/plain เพื่อหลีกเลี่ยงปัญหา CORS ใน Apps Script
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
       },
       body: donationPayload,

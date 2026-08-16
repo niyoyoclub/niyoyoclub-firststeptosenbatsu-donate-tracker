@@ -177,7 +177,7 @@ const handleSubmit = async () => {
   }
 
   if (isSubmitting.value || !amount.value || amount.value <= 0) return;
-  if (slipFile.value) {
+  if (slipFile.value === null) {
     errorMessage.value = 'กรุณาแนบสลิปการโอน';
     return;
   }
@@ -203,11 +203,21 @@ const handleSubmit = async () => {
     // คุณสามารถเพิ่มข้อมูลอื่นๆ เช่น ชื่อลูกค้า หรือ ยอดเงิน เข้าไปตรงนี้ได้ครับ
   };
 
-  //console.log("  payload:", payload);
+  const supportName = isAnonymous.value 
+    ? 'ผู้ไม่ประสงค์ออกนาม' 
+    : (donorName.value.trim() || 'แฟนคลับผู้ใจดี');
+
+  //console.log(`  supportName: '${supportName}'`);
+
+  if (!supportName) {
+    errorMessage.value = 'กรุณาแจ้งชื่อผู้ร่วมโดเนท หรือ เลือกไม่ประสงค์ออกนาม';
+    return;
+  }
+  
 
   const newDonation: Donation = {
     id: `don-${Date.now()}`,
-    donorName: isAnonymous.value ? 'ผู้ไม่ประสงค์ออกนาม' : (donorName.value.trim() || 'แฟนคลับผู้ใจดี'),
+    donorName: supportName,
     amount: Number(amount.value),
     timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16),
     note: note.value.trim() || undefined,
