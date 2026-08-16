@@ -227,7 +227,7 @@ const handleSubmit = async () => {
     slipUrl: '',
   };
 
-  console.log('newDonation:', newDonation);
+  //console.log('newDonation:', newDonation);
 
   try {
 

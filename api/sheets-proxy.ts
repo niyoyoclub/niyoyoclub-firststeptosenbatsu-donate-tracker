@@ -75,7 +75,7 @@ app.post("/api/sheets-proxy", async (req, res) => {
     const data = req.body;
 
     const imagePayload = JSON.stringify(data.imagePayload);
-    console.log('imagePayload:', imagePayload);
+    //console.log('imagePayload:', imagePayload);
     const slipUrl = await uploadSlip(imagePayload);
     console.log('slipUrl:', slipUrl);
 
@@ -179,6 +179,8 @@ const uploadSlip = async (payload:any) => {
     console.log("  response:", response);
 
     const result = await response.json();
+
+    console.log("  result:", result);
 
     if (result.status === 'success') {
       // 'อัปโหลดสลิปเรียบร้อยแล้ว!';
