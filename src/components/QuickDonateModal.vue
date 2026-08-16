@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
 import { X, Copy, Check, QrCode, Heart, ShieldCheck, CreditCard, Upload, Loader2, RefreshCw } from 'lucide-vue-next';
-import { CampaignData, Donation } from '../types';
+import { CampaignData, Donation, DonationSheetPayload, ImagePayload } from '../types';
 import { ProfanityFilter } from '../utils/profanityFilter';
 
 const props = defineProps<{
@@ -221,7 +221,7 @@ const handleSubmit = async () => {
 
   try {
 
-    const sheetPayload: DonationSheetPayload {
+    const sheetPayload: DonationSheetPayload = {
       donationPayload: newDonation,
       imagePayload: imgPayload,
     };
