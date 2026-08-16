@@ -12,11 +12,13 @@ app.post("/api/drives-proxy", async (req, res) => {
   console.log('req:', req);
 
   try {
-    const url =  process.env.VITE_GOOGLE_DRIVE_URL || import.meta.env.VITE_GOOGLE_DRIVE_URL || '';
+    const url =  process.env.GOOGLE_DRIVE_URL || import.meta.env.GOOGLE_DRIVE_URL || '';
     if (!url) {
       return res.status(400).json({ error: "Missing 'url' parameter" });
     }
 
+    const payload = req.body;
+    console.log('payload:', payload);
     
     // ยิง API ไปที่ Google Apps Script
     const response = await fetch(url, {
@@ -29,6 +31,8 @@ app.post("/api/drives-proxy", async (req, res) => {
       mode: 'cors',   // เปิดโหมดข้ามโดเมน
       body: JSON.stringify(payload)
     });
+
+    console.log('response:', response);
 
     if (!response.ok) {
       return res

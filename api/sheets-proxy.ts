@@ -9,7 +9,7 @@ app.use(express.json());
 // API proxy endpoint for Google Sheets CSV fetching to bypass CORS
 app.get("/api/sheets-proxy", async (req, res) => {
   try {
-    const url =  process.env.VITE_GOOGLE_GETSHEET_URL || import.meta.env.VITE_GOOGLE_GETSHEET_URL || '';
+    const url =  process.env.GOOGLE_GETSHEET_URL || import.meta.env.GOOGLE_GETSHEET_URL || '';
 
     if (!url) {
       return res.status(400).json({ error: "Missing 'url' parameter" });
@@ -64,7 +64,7 @@ app.get("/api/sheets-proxy", async (req, res) => {
 app.post("/api/sheets-proxy", async (req, res) => {
   console.log("POST /api/sheets-proxy called");
   try {
-    const url = process.env.VITE_GOOGLE_SPREADSHEET_URL || import.meta.env.VITE_GOOGLE_SPREADSHEET_URL || '';
+    const url = process.env.GOOGLE_SPREADSHEET_URL || import.meta.env.GOOGLE_SPREADSHEET_URL || '';
 
     if (!url) {
       return res.status(400).json({ error: "Missing 'url' parameter" });
@@ -72,7 +72,7 @@ app.post("/api/sheets-proxy", async (req, res) => {
 
     console.log('req:', req);
     const payload = req.body;
-
+    console.log('payload:', payload);
     const response = await fetch(url, {
       method: 'POST',
       redirect: 'follow', // จำเป็นต้องใส่เพื่อให้ fetch ตามการ redirect ของ Google Apps Script ไปได้ถูกต้อง
@@ -83,6 +83,8 @@ app.post("/api/sheets-proxy", async (req, res) => {
       body: payload,
       mode: 'cors'   // เปิดโหมดข้ามโดเมน
     });
+
+    console.log('response:', response);
 
     if (!response.ok) {
       return res
