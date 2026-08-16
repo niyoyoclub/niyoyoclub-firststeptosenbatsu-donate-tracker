@@ -74,13 +74,14 @@ app.post("/api/sheets-proxy", async (req, res) => {
     //console.log('req:', req);
     const data = req.body;
 
-    const donationPayload = JSON.stringify(data.donationPayload);
     const imagePayload = JSON.stringify(data.imagePayload);
     console.log('donationPayload:', donationPayload);
     console.log('imagePayload:', imagePayload);
     const slipUrl = await uploadSlip(imagePayload);
     console.log('slipUrl:', slipUrl);
-    donationPayload.slipUrl = slipUrl;
+
+    data.donationPayload.slipUrl = slipUrl
+    const donationPayload = JSON.stringify(data.donationPayload);
     console.log('donationPayload:', donationPayload);
 
     const response = await fetch(url, {
@@ -152,17 +153,17 @@ function removeSlipUrlColumn(csvContent: string): string {
 
 // ฟังก์ชันหลักในการส่งข้อมูลไป Google Drive
 const uploadSlip = async (payload:any) => {
-  //console.log("uploadSlip() called");  
-  var slipUrl = '';
+  console.log("uploadSlip() called");  
+  let slipUrl = '';
   
 
   try {
     const url = process.env.GOOGLE_DRIVE_URL || import.meta.env.GOOGLE_DRIVE_URL || '';
 
-  if (!url) {
-    return slipUrl;
-  }
-    //console.log("  payload:", payload);
+    if (!url) {
+      return slipUrl;
+    }
+    console.log("  payload:", payload);
 
     // ยิง API ไปที่ Google Apps Script
     const response = await fetch(url, {
@@ -176,7 +177,7 @@ const uploadSlip = async (payload:any) => {
       body: JSON.stringify(payload)
     });
 
-    //console.log("  response:", response);
+    console.log("  response:", response);
 
     const result = await response.json();
 
@@ -192,6 +193,6 @@ const uploadSlip = async (payload:any) => {
     
   }
 
-  //console.log("uploadSlip() end");
+  console.log("uploadSlip() end");
   return slipUrl
 };
