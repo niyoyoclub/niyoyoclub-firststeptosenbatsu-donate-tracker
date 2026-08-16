@@ -3,7 +3,9 @@ import path from "path";
 
 const app = express();
 
-app.use(express.json());
+// เพิ่ม limit เป็นขนาดที่ต้องการ เช่น 2mb หรือ 10mb
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // API proxy endpoint for Google Sheets CSV fetching to bypass CORS
 app.get("/api/sheets-proxy", async (req, res) => {
