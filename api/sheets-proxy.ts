@@ -73,10 +73,9 @@ app.post("/api/sheets-proxy", async (req, res) => {
 
     //console.log('req:', req);
     const data = req.body;
-
-    const imagePayload = JSON.stringify(data.imagePayload);
-    //console.log('imagePayload:', imagePayload);
-    const slipUrl = await uploadSlip(imagePayload);
+    
+    //console.log('data.imagePayload:', data.imagePayload);
+    const slipUrl = await uploadSlip(data.imagePayload);
     console.log('slipUrl:', slipUrl);
 
     data.donationPayload.slipUrl = slipUrl;
