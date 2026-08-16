@@ -72,11 +72,16 @@ export function parseCSVDonations(csvText: string): Donation[] {
     const row = lines[i].split(',');
     //console.log('row=', row);
     if (row && row.length >= 2) {
-      const name = row[2] ? row[2].trim() : 'Donation';
-      const rawAmount = row[3] ? row[3].replace(/[^0-9.]/g, '') : '0';
-      const amount = parseFloat(rawAmount) || 0;
-      const note = row[6] ? row[6].trim() : '';
       const time = row[1] ? row[1].trim() : new Date().toISOString().split('T')[0];
+      const name = row[2] ? row[2].trim() : 'Donation';
+      const rawAmount = row[3] ? row[3].replace(/[^0-9.]/g, '') : '0';      
+      const amount = parseFloat(rawAmount) || 0;
+      const paymentChannel = row[4] ? row[4].trim() : '';
+      const slipRef = row[5] ? row[5].trim() : '';      
+      const note = row[6] ? row[6].trim() : '';
+      const rawVerified = row[7] ? row[7].trim() : '' ;
+      const verified = rawVerified.toLowerCase() === 'true';
+      const isAnonymous = row[9] ? row[9].trim().toLowerCase() === 'true' : false;
 
       if (amount > 0) {
         let tier: 'tier-normal' | 'tier-silver' | 'tier-gold' | 'tier-diamond' = 'tier-normal';
@@ -90,8 +95,11 @@ export function parseCSVDonations(csvText: string): Donation[] {
           amount,
           timestamp: time,
           note,
-          verified: true,
-          tier
+          verified,
+          tier,
+          isAnonymous,
+          paymentChannel,
+          slipRef
         });
       }
     }

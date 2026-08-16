@@ -6,9 +6,21 @@ export interface Donation {
   paymentChannel: string;
   slipRef: string;
   note?: string;
-  verified?: boolean;  
-  tier: number;
+  verified?: boolean;
+  tier?: 'tier-normal' | 'tier-silver' | 'tier-gold' | 'tier-diamond';
   isAnonymous?: boolean;
+  slipUrl?: string;
+}
+
+export interface ImagePayload {
+  fileName: string;
+  fileMimeType: string;
+  fileBase64: string;
+}
+
+export interface DonationSheetPayload {
+  donationPayload: Donation;
+  imagePayload: ImagePayload;
 }
 
 export interface Milestone {

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { Award, Search, Sparkles, Trophy, Heart, Clock, RefreshCw } from 'lucide-vue-next';
+import { Award, Search, Sparkles, Trophy, Heart, Clock, RefreshCw, Check, X } from 'lucide-vue-next';
 import { Donation, CampaignData } from '../types';
 
 const props = defineProps<{
   campaign: CampaignData;
   donations: Donation[];
+  lastGoogleSheetSync?: Date;
 }>();
 
 const emit = defineEmits<{
@@ -59,7 +60,8 @@ const triggerManualSync = () => {
           </h3>
         </div>
         <p class="text-xs text-slate-500 pl-9">
-          อัปเดตเรียลไทม์ ทุกๆ {{ props.campaign.refreshEveryMinutes }} นาที ตรวจสอบความถูกต้องและโปร่งใส
+          อัปเดตเรียลไทม์ ทุกๆ {{ props.campaign.refreshEveryMinutes }} นาที
+          ตรวจสอบความถูกต้องและโปร่งใส ดึงข้อมูลล่าสุดเมื่อ <span class="font-semibold text-slate-800">{{ lastGoogleSheetSync?.toLocaleString("th-TH", { timeZone: "Asia/Bangkok" }) }}</span>
         </p>
       </div>
 
@@ -112,7 +114,7 @@ const triggerManualSync = () => {
           <button 
             @click="triggerManualSync" 
             :disabled="isSyncing"
-            class="py-1 px-3 bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white font-bold rounded-lg border border-[#1e293b] shadow-[1px_1px_0px_#1e293b] flex items-center gap-1 active:translate-y-0.5"
+            class="py-1 px-3 bg-blue-400 hover:bg-blue-500 disabled:opacity-50 text-white font-bold rounded-lg border border-[#1e293b] shadow-[1px_1px_0px_#1e293b] flex items-center gap-1 active:translate-y-0.5"
           >
             <RefreshCw class="w-3.5 h-3.5" :class="{ 'animate-spin': isSyncing }" />
             <span>{{ isSyncing ? 'กำลังดึงข้อมูล...' : 'ดึงข้อมูลทันที' }}</span>
@@ -161,6 +163,12 @@ const triggerManualSync = () => {
               </span>
               <span v-else class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-600 border border-slate-200">
                 <Heart class="w-3 h-3 text-pink-400" /> Supporter
+              </span>
+              <span v-if="item.verified" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-blue-100 text-slate-600 border border-slate-200">
+                <Check class="w-3 h-3 text-pink-400" /> ยืนยัน
+              </span>
+              <span v-else class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-red-100 text-white-600 border border-slate-200">
+                <X class="w-3 h-3 text-pink-400" /> ยังไม่ได้ยืนยัน
               </span>
             </div>
 

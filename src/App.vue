@@ -101,6 +101,7 @@ const scrollToTop = () => {
 };
 
 const googleSheetRef = ref(null);
+const lastGoogleSheetSync = ref(new Date());
 
 const refreshGoogleSheet = () => {
   if (googleSheetRef.value) {
@@ -114,7 +115,7 @@ const refreshGoogleSheet = () => {
     <!-- Header -->
     <Header
       :campaign="campaign"
-      @openDonate="isDonateOpen = false"
+      @openDonate="isDonateOpen = true"
       @openChatOpen="isOpenChatOpen = true"
       @openSheetModal="isSheetOpen = true"
       @resetData="handleResetData"
@@ -128,7 +129,7 @@ const refreshGoogleSheet = () => {
         :milestones="milestones"
         :totalAmount="totalAmount"
         :totalDonors="totalDonors"
-        @openDonate="isDonateOpen = false"
+        @openDonate="isDonateOpen = true"
         @openChatOpen="isOpenChatOpen = true"
         @scrollToCalculator="scrollToSection('reward-calculator')"
         @scrollToWish="scrollToSection('wish-wall')"
@@ -145,6 +146,7 @@ const refreshGoogleSheet = () => {
         :donations="donations"
         :campaign="campaign"
         @refresh="refreshGoogleSheet" 
+        :lastGoogleSheetSync="lastGoogleSheetSync"
       />
 
       <!-- Reward & Perk Calculator -->
@@ -215,9 +217,10 @@ const refreshGoogleSheet = () => {
     <GoogleSheetsModal
       :isOpen="isSheetOpen"
       :campaign="campaign"
-      :currentSheetUrl="campaign.sheetCsvUrl"
+      :currentSheetUrl="campaign.sheetCsvUrl"      
       @close="isSheetOpen = false"
       @importDonations="handleImportSheetDonations"
+      @callbackLastSync="lastGoogleSheetSync = new Date()";
       ref="googleSheetRef"
     />
 

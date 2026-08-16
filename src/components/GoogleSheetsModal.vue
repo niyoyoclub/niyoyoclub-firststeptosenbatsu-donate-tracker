@@ -12,7 +12,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'close'): void;
-  (e: 'importDonations', donations: Donation[], sheetUrl: string): void;
+  (e: 'importDonations', donations: Donation[], sheetUrl: string): void;  
+  (e: 'callbackLastSync'): void;
 }>();
 
 const sheetUrl = ref(
@@ -39,22 +40,10 @@ const handleFetchCSV = async (isSilent = false) => {
   }
 
   try {
-    let fetchUrl = sheetUrl.value.trim();
-    if (
-      fetchUrl.includes('docs.google.com/spreadsheets/d/') &&
-      !fetchUrl.includes('output=csv') &&
-      !fetchUrl.includes('out:csv')
-    ) {
-      const match = fetchUrl.match(/\/d\/([a-zA-Z0-9-_]+)/);
-      if (match && match[1]) {
-        fetchUrl = `https://docs.google.com/spreadsheets/d/${match[1]}/gviz/tq?tqx=out:csv`;
-      }
-    }
+    const proxyUrl = '/api/sheets-proxy';
+    const res = await fetch(proxyUrl);
+    //console.log("res:", res);
 
-    // ป้องกันการติด Cache ของเบราว์เซอร์ด้วยการใส่ Timestamp
-    const cacheBusterUrl = `${fetchUrl}${fetchUrl.includes('?') ? '&' : '?'}_t=${Date.now()}`;
-
-    const res = await fetch(cacheBusterUrl);
     if (!res.ok) {
       throw new Error(`ไม่สามารถดึงข้อมูลได้ (Status: ${res.status})`);
     }
@@ -83,6 +72,7 @@ const handleFetchCSV = async (isSilent = false) => {
     if (!isSilent) {
       isLoading.value = false;
     }
+    emit('callbackLastSync');
   }
 };
 
@@ -125,7 +115,9 @@ watch(isAutoFetchEnabled, (newVal) => {
 });
 
 const refresh = () => {
+  stopAutoFetch();
   handleFetchCSV(true);
+  startAutoFetch();
 };
 
 defineExpose({
