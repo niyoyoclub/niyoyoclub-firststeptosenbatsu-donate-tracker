@@ -214,12 +214,14 @@ const handleSubmit = async () => {
     return;
   }
   
+  const now = new Date();
+  const rd = now.setHours(now.getHours() + 7);
 
   const newDonation: Donation = {
     id: `don-${Date.now()}`,
     donorName: supportName,
     amount: Number(amount.value),
-    timestamp: new Date().toISOString().replace('T', ' ').substring(0, 16),
+    timestamp: now.toISOString().replace('T', ' ').substring(0, 19),
     note: note.value.trim() || undefined,
     isAnonymous: isAnonymous.value,
     tier,
