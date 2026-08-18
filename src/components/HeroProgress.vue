@@ -57,19 +57,30 @@ const gTotalVotes = computed(() =>
 );
 
 const timeLeft = ref({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+const timeVoteLeft = ref({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 let timerInterval: any = null;
 
 const updateTimer = () => {
   const now = new Date().getTime();
-  const target = new Date(props.campaign.deadline).getTime();
-  const diff = Math.max(0, target - now);
+  let target = new Date(props.campaign.deadline).getTime();
+  let diff = Math.max(0, target - now);
 
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
   timeLeft.value = { days, hours, minutes, seconds };
+
+  target = new Date(props.campaign.endVote).getTime();
+  diff = Math.max(0, target - now);
+
+  days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  timeVoteLeft.value = { days, hours, minutes, seconds };
 };
 
 onMounted(() => {
@@ -127,9 +138,21 @@ const setCurrentIndex = (index) => {
           <span>โครงการระดมทุนเลือกตั้งเพื่อ {{ campaign.candidateName }}</span>
         </div>
 
-        <div class="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-50 px-3 py-1 rounded-full border border-slate-100">
+        <div v-if="timeLeft.seconds > 0" class="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-50 px-3 py-1 rounded-full border border-slate-100">
           <Clock class="w-3.5 h-3.5 text-slate-400" />
           <span>เริ่มโหวตในอีก {{ timeLeft.days }} วัน {{ timeLeft.hours }} ชม. {{ timeLeft.minutes }} นาที {{ timeLeft.seconds }} วินาที</span>
+        </div>
+        <div v-else class="flex items-center gap-1.5 text-xs text-slate-500 bg-yellow-50 px-3 py-1 rounded-full border border-slate-100">
+          <Clock class="w-3.5 h-3.5 text-slate-400" />
+          <span>เริ่มโหวตแล้ว</span>
+        </div>
+        <div v-if="timeVoteLeft.seconds > 0" class="flex items-center gap-1.5 text-xs text-slate-500 bg-red-50 px-3 py-1 rounded-full border border-slate-100">
+          <Clock class="w-3.5 h-3.5 text-slate-400" />          
+          <span>ปิดการโหวตในอีก {{ timeVoteLeft.days }} วัน {{ timeVoteLeft.hours }} ชม. {{ timeVoteLeft.minutes }} นาที {{ timeVoteLeft.seconds }} วินาที</span>
+        </div>
+        <div v-else class="flex items-center gap-1.5 text-xs text-slate-500 bg-red-200 px-3 py-1 rounded-full border border-slate-100">
+          <Clock class="w-3.5 h-3.5 text-slate-400" />
+          <span>ปิดโหวตแล้ว</span>
         </div>
       </div>
 

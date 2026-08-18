@@ -65,6 +65,7 @@ export interface CampaignData {
   targetGoal: number;
   votePrice: number; // e.g. 68 THB per vote
   deadline: string; // ISO string
+  endVote: string; // ISO string
   promptPayNumber: string;
   bankAccountName: string;
   bankName: string;
