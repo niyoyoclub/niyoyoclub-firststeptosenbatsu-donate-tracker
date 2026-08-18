@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, onUnmounted } from 'vue';
-import { Award, Search, Sparkles, Trophy, Heart, Clock, RefreshCw, CheckCircle2, AlertCircle } from 'lucide-vue-next';
+import { ref, computed, watch, onUnmounted } from 'vue';
+import { 
+  Award, Search, Sparkles, Trophy, Heart, Clock, 
+  RefreshCw, CheckCircle2, AlertCircle, ChevronLeft, ChevronRight 
+} from 'lucide-vue-next';
 import { Donation, CampaignData } from '../types';
 
 const props = defineProps<{
@@ -17,6 +20,10 @@ const activeTab = ref<'recent' | 'top' | 'big'>('recent');
 const searchQuery = ref('');
 const isSyncing = ref(false);
 let syncTimer: ReturnType<typeof setTimeout> | null = null;
+
+// --- Pagination State ---
+const currentPage = ref(1);
+const itemsPerPage = 5;
 
 // Helper ป้องกัน Date parse พัง
 const parseTimestamp = (ts: string | number | Date): number => {
@@ -43,6 +50,27 @@ const filteredDonations = computed(() => {
     );
   });
 });
+
+// --- Pagination Computed ---
+const totalPages = computed(() => {
+  return Math.ceil(filteredDonations.value.length / itemsPerPage) || 1;
+});
+
+const paginatedDonations = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return filteredDonations.value.slice(start, start + itemsPerPage);
+});
+
+// รีเซ็ตหน้าเป็นหน้า 1 เมื่อค้นหาหรือสลับแท็บ
+watch([searchQuery, activeTab], () => {
+  currentPage.value = 1;
+});
+
+const goToPage = (page: number) => {
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page;
+  }
+};
 
 const triggerManualSync = () => {
   if (isSyncing.value) return;
@@ -145,17 +173,18 @@ onUnmounted(() => {
 
       <div
         v-else
-        v-for="(item, idx) in filteredDonations"
+        v-for="(item, idx) in paginatedDonations"
         :key="item.id"
         class="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-2xl bg-slate-50/60 hover:bg-pink-50/30 border border-slate-100 hover:border-pink-200/60 transition-all"
       >
         <div class="flex items-start gap-3">
           <div class="w-8 h-8 rounded-xl bg-white border border-slate-200/80 flex items-center justify-center shrink-0 font-bold text-xs text-slate-700 shadow-2xs">
-            <template v-if="activeTab === 'top' || activeTab === 'big'">
-              {{ idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${idx + 1}` }}
+            <!-- คำนวณ Index จริงตามหน้าปัจจุบัน -->
+            <template v-if="(activeTab === 'top' || activeTab === 'big') && (currentPage === 1 && idx < 3)">
+              {{ idx === 0 ? '🥇' : idx === 1 ? '🥈' : '🥉' }}
             </template>
             <template v-else>
-              #{{ idx + 1 }}
+              #{{ (currentPage - 1) * itemsPerPage + idx + 1 }}
             </template>
           </div>
 
@@ -179,7 +208,7 @@ onUnmounted(() => {
                 <Heart class="w-3 h-3 text-pink-400" /> Supporter
               </span>
 
-              <!-- Verification Badges (แก้ไขสีและ Class ให้ถูกต้อง) -->
+              <!-- Verification Badges -->
               <span v-if="item.verified" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
                 <CheckCircle2 class="w-3 h-3 text-emerald-500" /> ยืนยันแล้ว
               </span>
@@ -208,6 +237,58 @@ onUnmounted(() => {
             ({{ Math.floor(item.amount / props.campaign.votePrice) }} Tokens)
           </span>
         </div>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div v-if="filteredDonations.length > itemsPerPage" class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 mt-4 border-t border-slate-100">
+      <div class="text-xs text-slate-500">
+        แสดง <span class="font-semibold text-slate-700">{{ (currentPage - 1) * itemsPerPage + 1 }}-{{ Math.min(currentPage * itemsPerPage, filteredDonations.length) }}</span> จากทั้งหมด <span class="font-semibold text-slate-700">{{ filteredDonations.length }}</span> รายการ
+      </div>
+
+      <div class="flex items-center gap-1.5">
+        <button
+          @click="goToPage(currentPage - 1)"
+          :disabled="currentPage === 1"
+          class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 disabled:opacity-40 disabled:hover:bg-transparent disabled:cursor-not-allowed transition-all cursor-pointer"
+          title="หน้าก่อนหน้า"
+        >
+          <ChevronLeft class="w-4 h-4" />
+        </button>
+
+        <!-- เลขหน้า -->
+        <div class="flex items-center gap-1">
+          <template v-for="page in totalPages" :key="page">
+            <!-- แสดงปุ่มเฉพาะหน้าใกล้เคียงเพื่อไม่ให้ล้นกรณีมีหลายสิบหน้า -->
+            <button
+              v-if="page === 1 || page === totalPages || (page >= currentPage - 1 && page <= currentPage + 1)"
+              @click="goToPage(page)"
+              class="w-8 h-8 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center justify-center"
+              :class="[
+                currentPage === page
+                  ? 'bg-pink-500 text-white shadow-2xs'
+                  : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+              ]"
+            >
+              {{ page }}
+            </button>
+            <span
+              v-else-if="page === currentPage - 2 || page === currentPage + 2"
+              class="text-slate-400 text-xs px-1"
+            >
+              ...
+            </span>
+          </template>
+        </div>
+
+        <button
+          @click="goToPage(currentPage + 1)"
+          :disabled="currentPage === totalPages"
+          class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 disabled:opacity-40 disabled:hover:bg-transparent disabled:cursor-not-allowed transition-all cursor-pointer"
+          title="หน้าถัดไป"
+        >
+          <ChevronRight class="w-4 h-4" />
+        </button>
       </div>
     </div>
   </div>
