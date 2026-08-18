@@ -1,8 +1,7 @@
 <template>
   <div class="bg-white rounded-3xl p-6 sm:p-8 soft-pink-card">
+    <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-      
-      <!-- Leaderboard Header -->
       <div>
         <div class="flex items-center gap-2 mb-1">
           <span class="p-2 rounded-xl bg-pink-50 text-pink-500">
@@ -13,88 +12,92 @@
           </h3>
         </div>
         <p class="text-xs text-slate-500 pl-9">
-          แสดง Top Supports
+          แสดงรายชื่อผู้สนับสนุนยอดรวมสูงสุด 10 อันดับ
         </p>
       </div>
+    </div>
 
-      <!-- Top 3 Podium Cards -->
-      <div v-if="topSupporters.length >= 3" class="grid grid-cols-3 gap-2 sm:gap-4 mb-6 items-end">
-        
-        <!-- 2nd Place -->
-        <div class="bg-slate-50 border-2 border-[#1e293b] rounded-2xl p-2.5 sm:p-4 text-center shadow-[3px_3px_0px_#1e293b] relative order-1">
-          <div class="w-7 h-7 sm:w-9 sm:h-9 bg-slate-300 text-slate-900 border border-[#1e293b] rounded-full font-black text-xs sm:text-sm flex items-center justify-center mx-auto mb-1.5 shadow-sm">
-            🥈 2
-          </div>
-          <div class="text-xs sm:text-sm font-extrabold text-[#1e293b] truncate" :title="topSupporters[1].supporterName">
-            {{ topSupporters[1].supporterName }}
-          </div>
-          <div class="text-xs sm:text-base font-extrabold text-emerald-600 font-mono mt-1">
-            ฿{{ formatMoney(topSupporters[1].totalDonated) }}
-          </div>
+    <!-- Top 3 Podium Cards -->
+    <div v-if="topSupporters.length >= 3" class="grid grid-cols-3 gap-2.5 sm:gap-4 mb-6 items-end">
+      
+      <!-- 2nd Place -->
+      <div class="bg-slate-50/80 hover:bg-pink-50/30 border border-slate-200/80 rounded-2xl p-3 sm:p-4 text-center transition-all order-1">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white border border-slate-200 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center mx-auto mb-2 shadow-2xs">
+          🥈
         </div>
-
-        <!-- 1st Place (Gold) -->
-        <div class="bg-amber-100 border-3 border-[#1e293b] rounded-2xl p-3 sm:p-5 text-center shadow-[4px_4px_0px_#1e293b] relative order-2 -translate-y-2">
-          <div class="w-9 h-9 sm:w-11 sm:h-11 bg-amber-400 text-amber-950 border-2 border-[#1e293b] rounded-full font-black text-sm sm:text-base flex items-center justify-center mx-auto mb-2 shadow-md animate-bounce">
-            🥇 1
-          </div>
-          <div class="text-sm sm:text-base font-black text-[#1e293b] truncate" :title="topSupporters[0].supporterName">
-            {{ topSupporters[0].supporterName }}
-          </div>
-          <div class="text-sm sm:text-xl font-black text-emerald-700 font-mono mt-1">
-            ฿{{ formatMoney(topSupporters[0].totalDonated) }}
-          </div>
-          <div class="text-[10px] text-amber-900 font-bold uppercase mt-0.5">TOP SUPPORTER</div>
+        <div class="text-xs sm:text-sm font-bold text-slate-800 font-heading truncate" :title="topSupporters[1].supporterName">
+          {{ topSupporters[1].supporterName }}
         </div>
-
-        <!-- 3rd Place -->
-        <div class="bg-amber-50/80 border-2 border-[#1e293b] rounded-2xl p-2.5 sm:p-4 text-center shadow-[3px_3px_0px_#1e293b] relative order-3">
-          <div class="w-7 h-7 sm:w-9 sm:h-9 bg-amber-700 text-amber-100 border border-[#1e293b] rounded-full font-black text-xs sm:text-sm flex items-center justify-center mx-auto mb-1.5 shadow-sm">
-            🥉 3
-          </div>
-          <div class="text-xs sm:text-sm font-extrabold text-[#1e293b] truncate" :title="topSupporters[2].supporterName">
-            {{ topSupporters[2].supporterName }}
-          </div>
-          <div class="text-xs sm:text-base font-extrabold text-emerald-600 font-mono mt-1">
-            ฿{{ formatMoney(topSupporters[2].totalDonated) }}
-          </div>
+        <div class="text-xs sm:text-sm font-bold text-pink-600 font-mono mt-0.5">
+          ฿{{ formatMoney(topSupporters[1].totalDonated) }}
         </div>
-
+        <div class="text-[10px] text-slate-400 mt-0.5 font-medium">อันดับ 2</div>
       </div>
 
-      <!-- Rest of Top Supporters List -->
-      <div class="divide-y divide-slate-200">
-        <div 
-          v-for="item in topSupporters.slice(3, 10)" 
-          :key="item.rank"
-          class="py-2.5 px-3 flex items-center justify-between hover:bg-slate-50 transition-colors rounded-xl"
-        >
-          <div class="flex items-center gap-3">
-            <span class="w-6 h-6 rounded-full bg-slate-100 border border-slate-300 font-bold text-xs text-slate-700 flex items-center justify-center font-mono">
-              {{ item.rank }}
-            </span>
+      <!-- 1st Place (Highlight) -->
+      <div class="bg-pink-50/70 border-2 border-pink-200/80 rounded-2xl p-4 sm:p-5 text-center shadow-xs relative order-2 -translate-y-2">
+        <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-pink-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-2xs">
+          TOP SUPPORTER
+        </span>
+        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white border border-pink-200 rounded-xl font-bold text-base sm:text-lg flex items-center justify-center mx-auto mb-2 shadow-xs">
+          🥇
+        </div>
+        <div class="text-sm sm:text-base font-bold text-slate-900 font-heading truncate" :title="topSupporters[0].supporterName">
+          {{ topSupporters[0].supporterName }}
+        </div>
+        <div class="text-sm sm:text-lg font-bold text-pink-600 font-mono mt-0.5">
+          ฿{{ formatMoney(topSupporters[0].totalDonated) }}
+        </div>
+        <div class="text-[10px] text-pink-600/80 font-semibold mt-0.5">อันดับ 1</div>
+      </div>
 
-            <div>
-              <div class="text-xs sm:text-sm font-extrabold text-[#1e293b]">
-                {{ item.supporterName }}
-              </div>
-              <div class="text-[10px] text-slate-400">
-                สมทบ {{ item.transactionCount }} ครั้ง • ล่าสุด {{ item.lastDonated }}
-              </div>
-            </div>
+      <!-- 3rd Place -->
+      <div class="bg-slate-50/80 hover:bg-pink-50/30 border border-slate-200/80 rounded-2xl p-3 sm:p-4 text-center transition-all order-3">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white border border-slate-200 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center mx-auto mb-2 shadow-2xs">
+          🥉
+        </div>
+        <div class="text-xs sm:text-sm font-bold text-slate-800 font-heading truncate" :title="topSupporters[2].supporterName">
+          {{ topSupporters[2].supporterName }}
+        </div>
+        <div class="text-xs sm:text-sm font-bold text-pink-600 font-mono mt-0.5">
+          ฿{{ formatMoney(topSupporters[2].totalDonated) }}
+        </div>
+        <div class="text-[10px] text-slate-400 mt-0.5 font-medium">อันดับ 3</div>
+      </div>
+
+    </div>
+
+    <!-- Rest of Top Supporters List (Rank 4-10) -->
+    <div class="space-y-2">
+      <div 
+        v-for="item in topSupporters.slice(3, 10)" 
+        :key="item.rank"
+        class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50/60 hover:bg-pink-50/40 border border-slate-100 hover:border-pink-200/80 transition-all"
+      >
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-white border border-slate-200/80 flex items-center justify-center shrink-0 font-bold text-xs text-slate-600 shadow-2xs">
+            #{{ item.rank }}
           </div>
 
-          <div class="text-right">
-            <div class="text-xs sm:text-sm font-extrabold text-emerald-600 font-mono">
-              ฿{{ formatMoney(item.totalDonated) }}
+          <div>
+            <div class="text-xs sm:text-sm font-bold text-slate-800 font-heading">
+              {{ item.supporterName }}
             </div>
-            <div class="text-[10px] text-slate-500 font-mono">
-              {{ getPercentOfTotal(item.totalDonated) }}% จากยอดรวม
+            <div class="text-[11px] text-slate-400 mt-0.5">
+              สมทบ {{ item.transactionCount }} ครั้ง • ล่าสุด {{ item.lastDonated }}
             </div>
           </div>
         </div>
-      </div>
 
+        <div class="text-right shrink-0">
+          <div class="text-xs sm:text-sm font-bold text-pink-600 font-mono">
+            ฿{{ formatMoney(item.totalDonated) }}
+          </div>
+          <div class="text-[10px] text-slate-400 font-medium mt-0.5">
+            {{ getPercentOfTotal(item.totalDonated) }}% จากยอดรวม
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

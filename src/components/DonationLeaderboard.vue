@@ -13,7 +13,7 @@ const emit = defineEmits<{
   (e: 'refresh'): void;
 }>();
 
-const activeTab = ref<'recent' | 'top' | 'big'>('top');
+const activeTab = ref<'recent' | 'top' | 'big'>('recent');
 const searchQuery = ref('');
 
 const sortedDonations = computed(() => {
@@ -26,7 +26,7 @@ const sortedDonations = computed(() => {
 
 const filteredDonations = computed(() => {
   return sortedDonations.value.filter((don) => {
-    if (activeTab.value === 'big' && don.amount < 2000) return false;
+    if (activeTab.value === 'big' && don.amount < 500) return false;
     if (!searchQuery.value.trim()) return true;
     const q = searchQuery.value.toLowerCase();
     return (
@@ -60,8 +60,9 @@ const triggerManualSync = () => {
           </h3>
         </div>
         <p class="text-xs text-slate-500 pl-9">
+          แสดงรายการโดเนท แยกตามยอดที่แจ้งผ่านระบบ
           อัปเดตเรียลไทม์ ทุกๆ {{ props.campaign.refreshEveryMinutes }} นาที
-          ตรวจสอบความถูกต้องและโปร่งใส ดึงข้อมูลล่าสุดเมื่อ <span class="font-semibold text-slate-800">{{ lastGoogleSheetSync?.toLocaleString("th-TH", { timeZone: "Asia/Bangkok" }) }}</span>
+          สามารถตรวจสอบความถูกต้องและโปร่งใส ( ดึงข้อมูลล่าสุดเมื่อ <span class="font-semibold text-slate-800">{{ lastGoogleSheetSync?.toLocaleString("th-TH", { timeZone: "Asia/Bangkok" }) }}</span> )
         </p>
       </div>
 
@@ -79,17 +80,6 @@ const triggerManualSync = () => {
 
         <div class="flex bg-slate-100 p-1 rounded-xl">
           <button
-            @click="activeTab = 'top'"
-            class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer"
-            :class="[
-              activeTab === 'top'
-                ? 'bg-white text-pink-600 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
-            ]"
-          >
-            🔥 อันดับสูงสุด
-          </button>
-          <button
             @click="activeTab = 'recent'"
             class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer"
             :class="[
@@ -99,6 +89,17 @@ const triggerManualSync = () => {
             ]"
           >
             🕒 ล่าสุด
+          </button>
+          <button
+            @click="activeTab = 'top'"
+            class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer"
+            :class="[
+              activeTab === 'top'
+                ? 'bg-white text-pink-600 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            ]"
+          >
+            🔥 อันดับสูงสุด
           </button>
           <button
             @click="activeTab = 'big'"
