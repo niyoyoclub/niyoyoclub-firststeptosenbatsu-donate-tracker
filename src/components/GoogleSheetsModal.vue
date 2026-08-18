@@ -52,7 +52,8 @@ const handleFetchCSV = async (isSilent = false) => {
     
     console.log("csvText:", csvText);
     if (csvText.startsWith('import')) {
-      csvText= `id,timestamp,donorName,amount,paymentChannel,slipRef,note,verified,tier,isAnonymous,slipUrl
+        csvText='';
+/*      csvText= `id,timestamp,donorName,amount,paymentChannel,slipRef,note,verified,tier,isAnonymous,slipUrl
 TX-000001,2026-08-12 22:11:00,@nwjii79,340,KBANK,016224221155BTF02154,กระดาน 0,TRUE,tier-normal,FALSE,
 TX-000002,2026-08-13 06:41:08,@BermbY,204,BAY,KSA00000000803060880,กระดาน 0,TRUE,tier-normal,FALSE,
 TX-000003,2026-08-13 08:14:00,@OoShiAaYoy่a,204,BBL,2026081308144624005178808,กระดาน 0,TRUE,tier-normal,FALSE,
@@ -69,6 +70,7 @@ TX-000010,2026-08-18 09:16:00,unknow,10,unknow,unknow,กระดาน 0,TRUE,
 don-1787025472616,2026-08-18 10:57:00,@James,2000,KTB,Ab215ba34eebd4918,กระดาน 1 #ทีมโตเป็นสาว,TRUE,tier-gold,FALSE,https://drive.google.com/uc?id=1xUyIuLQb7up5WZfXefp5jcsyZbsTAO7-&export=download
 don-1787026588733,2026-08-18 11:16:00,@OoShiAaYoy่a,200,BBL,2026081811131123003352608,กระดาน 1 #ทีมยังเป็นเด็ก,TRUE,tier-normal,FALSE,https://drive.google.com/uc?id=1LOmh2B0rYcNDFVsjj5J4-iQ_PP7amJId&export=download
 don-1787051106418,2026-08-18 18:05:00,@nwjii79,100,KBANK,016230175318BTF06857,กระดาน 1 #ทีมยังเป็นเด็ก,TRUE,tier-normal,FALSE,https://drive.google.com/uc?id=1jscNbIGeFVGjPRLx7Ei9wZZJdL-kJvMB&export=download`;
+*/
     }
     const newDonations = parseCSVDonations(csvText);
 
