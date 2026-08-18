@@ -10,6 +10,7 @@ import TransparencyBoard from './components/TransparencyBoard.vue';
 import QuickDonateModal from './components/QuickDonateModal.vue';
 import QuickJoinOpenChatModal from './components/QuickJoinOpenChatModal.vue';
 import GoogleSheetsModal from './components/GoogleSheetsModal.vue';
+import TopSupportersLeaderboard from './components/TopSupportersLeaderboard.vue';
 
 import { CampaignData, Donation, Milestone, RewardTier, WishMessage, ExpenseCategory } from './types';
 import {
@@ -139,6 +140,12 @@ const refreshGoogleSheet = () => {
       <MilestonesTimeline
         :milestones="milestones"
         :currentTotal="totalAmount"
+      />
+
+      <!-- Top Supporters Leaderboard -->
+      <TopSupportersLeaderboard
+        :donations="donations"
+        :totalAmount="totalAmount"
       />
 
       <!-- Leaderboard & Recent Donations -->
