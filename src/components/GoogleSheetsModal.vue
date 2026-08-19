@@ -50,7 +50,7 @@ const handleFetchCSV = async (isSilent = false) => {
 
     let csvText = await res.text();
     
-    console.log("csvText:", csvText);
+    //console.log("csvText:", csvText);
     if (csvText.startsWith('import')) {
         csvText='';
 /*      csvText= `id,timestamp,donorName,amount,paymentChannel,slipRef,note,verified,tier,isAnonymous,slipUrl
