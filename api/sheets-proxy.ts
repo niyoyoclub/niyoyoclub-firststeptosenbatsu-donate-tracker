@@ -86,7 +86,7 @@ function removeSlipUrlColumn(csvContent: string): string {
     //console.log('line:', line);
 
     const columns = line.split(',');
-    //columns.splice(slipUrlIndex, 1);
+    columns.splice(slipUrlIndex, 1);
     var newLine = columns.join(',');
     
     //console.log('newLine:', newLine);
