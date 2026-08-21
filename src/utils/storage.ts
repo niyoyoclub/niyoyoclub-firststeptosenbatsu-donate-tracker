@@ -85,7 +85,7 @@ export function parseCSVDonations(csvText: string): Donation[] {
 
       if (amount > 0) {
         let tier: 'tier-normal' | 'tier-silver' | 'tier-gold' | 'tier-diamond' = 'tier-normal';
-        if (amount >= 10000) tier = 'tier-diamond';
+        if (amount >= 5000) tier = 'tier-diamond';
         else if (amount >= 2000) tier = 'tier-gold';
         else if (amount >= 500) tier = 'tier-silver';
 
