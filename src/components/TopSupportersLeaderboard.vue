@@ -34,7 +34,7 @@
         <div class="text-xs sm:text-sm font-bold text-pink-600 font-mono mt-0.5">
           ฿{{ formatMoney(topSupporters[1].totalDonated) }}
         </div>
-        <div class="text-[10px] text-slate-400 mt-0.5 font-medium">อันดับ 2 ( {{ getPercentOfTotal(topSupporters[1].totalDonated) }}% )</div>
+        <div class="text-[10px] text-slate-400 mt-0.5 font-medium">อันดับ 2 ( {{ getPercentOfTotal(topSupporters[1].totalDonated) }}% • {{ topSupporters[1].transactionCount }} ครั้ง )</div>
       </div>
 
       <!-- 1st Place (Highlight) -->
@@ -54,7 +54,7 @@
         <div class="text-sm sm:text-lg font-bold text-pink-600 font-mono mt-0.5">
           ฿{{ formatMoney(topSupporters[0].totalDonated) }}
         </div>
-        <div class="text-[10px] text-pink-600/80 font-semibold mt-0.5">อันดับ 1 ( {{ getPercentOfTotal(topSupporters[0].totalDonated) }}% )</div>
+        <div class="text-[10px] text-pink-600/80 font-semibold mt-0.5">อันดับ 1 ( {{ getPercentOfTotal(topSupporters[0].totalDonated) }}% • {{ topSupporters[0].transactionCount }} ครั้ง )</div>
       </div>
 
       <!-- 3rd Place -->
@@ -71,7 +71,7 @@
         <div class="text-xs sm:text-sm font-bold text-pink-600 font-mono mt-0.5">
           ฿{{ formatMoney(topSupporters[2].totalDonated) }}
         </div>
-        <div class="text-[10px] text-slate-400 mt-0.5 font-medium">อันดับ 3 ( {{ getPercentOfTotal(topSupporters[2].totalDonated) }}% )</div>        
+        <div class="text-[10px] text-slate-400 mt-0.5 font-medium">อันดับ 3 ( {{ getPercentOfTotal(topSupporters[2].totalDonated) }}% • {{ topSupporters[2].transactionCount }} ครั้ง )</div>        
       </div>
 
     </div>
