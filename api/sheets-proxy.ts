@@ -116,36 +116,36 @@ export default app;
 
 // internal function
 function removeSlipUrlColumn(csvContent: string): string {
-  //console.log('removeSlipUrlColumn(string) called');
-  //console.log('csvContent:', csvContent);
+  console.log('removeSlipUrlColumn(string) called');
+  console.log('csvContent:', csvContent);
 
   const lines = csvContent.trim().replaceAll('\r', '').split('\n');
-  //console.log('lines:', lines);
+  console.log('lines:', lines);
   if (lines.length === 0) return '';
 
   // 1. ระบุ index ของคอลัมน์ slipUrl จาก Header
   const headers = lines[0].split(',');
-  //console.log('headers:', headers);
+  console.log('headers:', headers);
   const slipUrlIndex = headers.indexOf('slipUrl');
 
-  //console.log('slipUrlIndex:', slipUrlIndex);
+  console.log('slipUrlIndex:', slipUrlIndex);
   if (slipUrlIndex === -1) {
     return csvContent; // ไม่พบคอลัมน์ slipUrl คืนค่าเดิม
   }
 
   // 2. ลบคอลัมน์ตาม index ในทุกแถว
   const processedLines = lines.map((line) => {
-    //console.log('line:', line);
+    console.log('line:', line);
 
     const columns = line.split(',');
-    //columns.splice(slipUrlIndex, 1);
+    columns.splice(slipUrlIndex, 1);
     var newLine = columns.join(',');
     
-    //console.log('newLine:', newLine);
+    console.log('newLine:', newLine);
     return newLine;
   });
 
-  //console.log('removeSlipUrlColumn(string) end');
+  console.log('removeSlipUrlColumn(string) end');
   return processedLines.join('\n');
 }
 
