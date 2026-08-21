@@ -195,17 +195,17 @@ onUnmounted(() => {
               </span>
 
               <!-- Tier Badges -->
-              <span v-if="item.amount >= 5000" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pink-100 text-pink-700 border border-pink-200">
-                <Sparkles class="w-3 h-3 text-pink-500" /> Diamond Supporters
+              <span v-if="item.amount >= 5000" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700 border border-purple-200">
+                <Sparkles class="w-3 h-3 text-purple-500" /> Diamond Fan
               </span>
-              <span v-else-if="item.amount >= 2000" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700 border border-purple-200">
-                <Trophy class="w-3 h-3 text-purple-500" /> Gold Fan
+              <span v-else-if="item.amount >= 2000" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-yellow-100 text-yellow-700 border border-yellow-200">
+                <Trophy class="w-3 h-3 text-yellow-500" /> Gold Fan
               </span>
-              <span v-else-if="item.amount >= 500" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-blue-100 text-blue-700 border border-blue-200">
-                <Award class="w-3 h-3 text-blue-500" /> Silver Fan
+              <span v-else-if="item.amount >= 500" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-green-100 text-green-700 border border-green-200">
+                <Award class="w-3 h-3 text-green-500" /> Silver Fan
               </span>
               <span v-else class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-600 border border-slate-200">
-                <Heart class="w-3 h-3 text-pink-400" /> Supporter
+                <Heart class="w-3 h-3 text-pink-400" /> Fan
               </span>
 
               <!-- Verification Badges -->
