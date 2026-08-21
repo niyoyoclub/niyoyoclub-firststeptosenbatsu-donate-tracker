@@ -64,7 +64,7 @@ app.get("/api/sheets-proxy", async (req, res) => {
 
 // internal function
 function removeSlipUrlColumn(csvContent: string): string {
-  console.log('removeSlipUrlColumn(string) called');
+  //console.log('removeSlipUrlColumn(string) called');
   //console.log('csvContent:', csvContent);
 
   const lines = csvContent.trim().replaceAll('\r', '').split('\n');
@@ -76,7 +76,7 @@ function removeSlipUrlColumn(csvContent: string): string {
   //console.log('headers:', headers);
   const slipUrlIndex = headers.indexOf('slipUrl');
 
-  console.log('slipUrlIndex:', slipUrlIndex);
+  //console.log('slipUrlIndex:', slipUrlIndex);
   if (slipUrlIndex === -1) {
     return csvContent; // ไม่พบคอลัมน์ slipUrl คืนค่าเดิม
   }
@@ -93,8 +93,8 @@ function removeSlipUrlColumn(csvContent: string): string {
     return newLine;
   });
 
-  console.log('processedLines:', processedLines);
-  console.log('removeSlipUrlColumn(string) end');
+  //console.log('processedLines:', processedLines);
+  //console.log('removeSlipUrlColumn(string) end');
   return processedLines.join('\n');
 }
 
