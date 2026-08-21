@@ -28,6 +28,9 @@
         <div class="text-xs sm:text-sm font-bold text-slate-800 font-heading truncate" :title="topSupporters[1].supporterName">
           {{ topSupporters[1].supporterName }}
         </div>
+        <div class="text-sm sm:text-base font-bold text-slate-900 font-heading truncate">
+          <TierBadges :totalAmount="topSupporters[1].totalDonated" />
+        </div>
         <div class="text-xs sm:text-sm font-bold text-pink-600 font-mono mt-0.5">
           ฿{{ formatMoney(topSupporters[1].totalDonated) }}
         </div>
@@ -45,6 +48,9 @@
         <div class="text-sm sm:text-base font-bold text-slate-900 font-heading truncate" :title="topSupporters[0].supporterName">
           {{ topSupporters[0].supporterName }}
         </div>
+        <div class="text-sm sm:text-base font-bold text-slate-900 font-heading truncate">
+          <TierBadges :totalAmount="topSupporters[0].totalDonated" />
+        </div>
         <div class="text-sm sm:text-lg font-bold text-pink-600 font-mono mt-0.5">
           ฿{{ formatMoney(topSupporters[0].totalDonated) }}
         </div>
@@ -58,6 +64,9 @@
         </div>
         <div class="text-xs sm:text-sm font-bold text-slate-800 font-heading truncate" :title="topSupporters[2].supporterName">
           {{ topSupporters[2].supporterName }}
+        </div>
+        <div class="text-sm sm:text-base font-bold text-slate-900 font-heading truncate">
+          <TierBadges :totalAmount="topSupporters[2].totalDonated" />
         </div>
         <div class="text-xs sm:text-sm font-bold text-pink-600 font-mono mt-0.5">
           ฿{{ formatMoney(topSupporters[2].totalDonated) }}
@@ -81,7 +90,7 @@
 
           <div>
             <div class="text-xs sm:text-sm font-bold text-slate-800 font-heading">
-              {{ item.supporterName }}
+              {{ item.supporterName }} <TierBadges :totalAmount="item.totalDonated" />
             </div>
             <div class="text-[11px] text-slate-400 mt-0.5">
               สมทบ {{ item.transactionCount }} ครั้ง • ล่าสุด {{ item.lastDonated }}
@@ -89,7 +98,7 @@
           </div>
         </div>
 
-        <div class="text-right shrink-0">
+        <div class="text-right shrink-0">          
           <div class="text-xs sm:text-sm font-bold text-pink-600 font-mono">
             ฿{{ formatMoney(item.totalDonated) }}
           </div>
@@ -106,6 +115,7 @@
 import { ref, computed } from 'vue';
 import { Trophy } from 'lucide-vue-next';
 import { Donation } from '../types';
+import TierBadges from "./TierBadges.vue";
 
 const props = defineProps<{  
   donations: Donation[];  
