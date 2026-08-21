@@ -62,6 +62,89 @@ app.get("/api/sheets-proxy", async (req, res) => {
   }
 });
 
+// internal function
+function removeSlipUrlColumn(csvContent: string): string {
+  console.log('removeSlipUrlColumn(string) called');
+  //console.log('csvContent:', csvContent);
+
+  const lines = csvContent.trim().replaceAll('\r', '').split('\n');
+  //console.log('lines:', lines);
+  if (lines.length === 0) return '';
+
+  // 1. ระบุ index ของคอลัมน์ slipUrl จาก Header
+  const headers = lines[0].split(',');
+  //console.log('headers:', headers);
+  const slipUrlIndex = headers.indexOf('slipUrl');
+
+  console.log('slipUrlIndex:', slipUrlIndex);
+  if (slipUrlIndex === -1) {
+    return csvContent; // ไม่พบคอลัมน์ slipUrl คืนค่าเดิม
+  }
+
+  // 2. ลบคอลัมน์ตาม index ในทุกแถว
+  const processedLines = lines.map((line) => {
+    //console.log('line:', line);
+
+    const columns = line.split(',');
+    //columns.splice(slipUrlIndex, 1);
+    var newLine = columns.join(',');
+    
+    //console.log('newLine:', newLine);
+    return newLine;
+  });
+
+  console.log('processedLines:', processedLines);
+  console.log('removeSlipUrlColumn(string) end');
+  return processedLines.join('\n');
+}
+
+// ฟังก์ชันหลักในการส่งข้อมูลไป Google Drive
+const uploadSlip = async (payload:any) => {
+  //console.log("uploadSlip() called");  
+  let slipUrl = '';
+
+  try {
+    const url = process.env.GOOGLE_DRIVE_URL || import.meta.env.GOOGLE_DRIVE_URL || '';
+
+    if (!url) {
+      return slipUrl;
+    }
+    //console.log("  payload:", payload);
+
+    // ยิง API ไปที่ Google Apps Script
+    const response = await fetch(url, {
+      method: 'POST',
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'text/plain', // ใช้ text/plain เพื่อป้องกันปัญหา CORS
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      },
+      mode: 'cors',   // เปิดโหมดข้ามโดเมน
+      body: JSON.stringify(payload)
+    });
+
+    //console.log("  response:", response);
+
+    const result = await response.json();
+
+    //console.log("  result:", result);
+
+    if (result.status === 'success') {
+      // 'อัปโหลดสลิปเรียบร้อยแล้ว!';
+      slipUrl = result.url; // นำ URL ที่ได้กลับมาเก็บเพื่อแสดงผลตรวจสอบ
+    } else {
+      console.error('เกิดข้อผิดพลาดจากเซิร์ฟเวอร์: ' + result.message);
+    }
+  } catch (error) {    
+    console.error('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ หรือไฟล์มีขนาดใหญ่เกินไป', error);
+  } finally {
+    
+  }
+
+  //console.log("uploadSlip() end");
+  return slipUrl
+};
+
 app.post("/api/sheets-proxy", async (req, res) => {
   //console.log("POST /api/sheets-proxy called");
   try {
@@ -113,85 +196,3 @@ app.post("/api/sheets-proxy", async (req, res) => {
 });
 
 export default app;
-
-// internal function
-function removeSlipUrlColumn(csvContent: string): string {
-  console.log('removeSlipUrlColumn(string) called');
-  console.log('csvContent:', csvContent);
-
-  const lines = csvContent.trim().replaceAll('\r', '').split('\n');
-  console.log('lines:', lines);
-  if (lines.length === 0) return '';
-
-  // 1. ระบุ index ของคอลัมน์ slipUrl จาก Header
-  const headers = lines[0].split(',');
-  console.log('headers:', headers);
-  const slipUrlIndex = headers.indexOf('slipUrl');
-
-  console.log('slipUrlIndex:', slipUrlIndex);
-  if (slipUrlIndex === -1) {
-    return csvContent; // ไม่พบคอลัมน์ slipUrl คืนค่าเดิม
-  }
-
-  // 2. ลบคอลัมน์ตาม index ในทุกแถว
-  const processedLines = lines.map((line) => {
-    console.log('line:', line);
-
-    const columns = line.split(',');
-    columns.splice(slipUrlIndex, 1);
-    var newLine = columns.join(',');
-    
-    console.log('newLine:', newLine);
-    return newLine;
-  });
-
-  console.log('removeSlipUrlColumn(string) end');
-  return processedLines.join('\n');
-}
-
-// ฟังก์ชันหลักในการส่งข้อมูลไป Google Drive
-const uploadSlip = async (payload:any) => {
-  //console.log("uploadSlip() called");  
-  let slipUrl = '';
-
-  try {
-    const url = process.env.GOOGLE_DRIVE_URL || import.meta.env.GOOGLE_DRIVE_URL || '';
-
-    if (!url) {
-      return slipUrl;
-    }
-    //console.log("  payload:", payload);
-
-    // ยิง API ไปที่ Google Apps Script
-    const response = await fetch(url, {
-      method: 'POST',
-      redirect: 'follow',
-      headers: {
-        'Content-Type': 'text/plain', // ใช้ text/plain เพื่อป้องกันปัญหา CORS
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-      },
-      mode: 'cors',   // เปิดโหมดข้ามโดเมน
-      body: JSON.stringify(payload)
-    });
-
-    //console.log("  response:", response);
-
-    const result = await response.json();
-
-    //console.log("  result:", result);
-
-    if (result.status === 'success') {
-      // 'อัปโหลดสลิปเรียบร้อยแล้ว!';
-      slipUrl = result.url; // นำ URL ที่ได้กลับมาเก็บเพื่อแสดงผลตรวจสอบ
-    } else {
-      console.error('เกิดข้อผิดพลาดจากเซิร์ฟเวอร์: ' + result.message);
-    }
-  } catch (error) {    
-    console.error('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ หรือไฟล์มีขนาดใหญ่เกินไป', error);
-  } finally {
-    
-  }
-
-  //console.log("uploadSlip() end");
-  return slipUrl
-};

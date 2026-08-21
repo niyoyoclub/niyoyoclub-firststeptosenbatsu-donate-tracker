@@ -195,7 +195,7 @@ onUnmounted(() => {
               </span>
 
               <!-- Tier Badges -->
-              <span v-if="item.amount >= 10000" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pink-100 text-pink-700 border border-pink-200">
+              <span v-if="item.amount >= 5000" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pink-100 text-pink-700 border border-pink-200">
                 <Sparkles class="w-3 h-3 text-pink-500" /> Diamond Supporters
               </span>
               <span v-else-if="item.amount >= 2000" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700 border border-purple-200">
