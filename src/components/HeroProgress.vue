@@ -179,7 +179,11 @@ const setCurrentIndex = (index) => {
           ดันคลิป Tiktok น้องนีญ่า จำนวนลิ้งค์ 19 รายการ ทบรายการละ 10 Tokens สิ้นสุด 10 Aug 26 18:00 ได้ 19 x 10 = 190 Tokens ผู้สนับสนุนทบให้อีก 190 Tokens = 380 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
-          <span class="font-bold">จากกิจกรรม 3 ผู้สนับสนุนทบ Token รวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
+          <span class="font-bold">กิจกรรมที่ 4</span>
+          เพจป่าป๊าของเจนหก กิจกรรม FANBASE CHALLENGE GE6: ศึกล่า Token รวมพลังเพื่อคนที่รัก! อันดับที่ 4 ได้รางวัล 100 Tokens
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">          
           และ ทุกๆ การซื้อ 5 Tokens ผู้สนับสนุนจะทบให้อีก 10 Tokens ทบสูงสุด 6,000 Tokens
