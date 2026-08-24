@@ -13,7 +13,7 @@ export const INITIAL_CAMPAIGN: CampaignData = {
   bankName: "ธนาคารกสิกรไทย (KBank)",
   bankAccountNumber: "236-1-62262-9",
   sheetCsvUrl: "",
-  startToken: 2085,
+  startToken: 2185,
   maxAddonToken: 6000,
   currentBonusToken: 0,
   refreshEveryMinutes: 3,
