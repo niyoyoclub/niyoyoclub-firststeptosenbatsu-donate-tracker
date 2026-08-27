@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Heart, Sparkles, Table, Share2 } from 'lucide-vue-next';
+import { Heart, Sparkles, Table, Share2, Compass } from 'lucide-vue-next';
 import { CampaignData } from '../types';
 
 const props = defineProps<{
   campaign: CampaignData;
+  activeTab: 'campaign' | 'tanabata';
+  tanabataWishCount?: number;
 }>();
 
 const emit = defineEmits<{
@@ -12,6 +14,7 @@ const emit = defineEmits<{
   (e: 'openSheetModal'): void;
   (e: 'resetData'): void;
   (e: 'openChatOpen'): void;
+  (e: 'changeTab', tab: 'campaign' | 'tanabata'): void;
 }>();
 
 const copied = ref(false);
@@ -54,6 +57,36 @@ const handleShare = () => {
           </div>
           <p class="text-xs text-slate-500 line-clamp-1">{{ campaign.subtitle }}</p>
         </div>
+      </div>
+
+      <!-- Center Navigation Tabs (Switch between Main Campaign and Tanabata Festival) -->
+      <div class="flex items-center p-1 rounded-2xl bg-slate-100/80 border border-slate-200/70 shadow-inner w-full sm:w-auto justify-center">
+        <button
+          @click="emit('changeTab', 'campaign')"
+          class="flex-1 sm:flex-initial px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+          :class="[
+            activeTab === 'campaign'
+              ? 'bg-white text-pink-600 shadow-sm'
+              : 'text-slate-600 hover:text-slate-900'
+          ]"
+        >
+          <Heart class="w-3.5 h-3.5" :class="activeTab === 'campaign' ? 'fill-pink-500 text-pink-500' : ''" />
+          <span>โครงการโดเนท</span>
+        </button>
+
+        <button
+          @click="emit('changeTab', 'tanabata')"
+          class="flex-1 sm:flex-initial px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer relative"
+          :class="[
+            activeTab === 'tanabata'
+              ? 'bg-gradient-to-r from-indigo-900 to-purple-900 text-pink-300 shadow-sm border border-purple-700/50'
+              : 'text-slate-600 hover:text-slate-900'
+          ]"
+        >
+          <span class="text-sm">🎋</span>
+          <span>ลานอธิษฐานทานาบาตะ</span>
+          <span v-if="tanabataWishCount" class="w-2 h-2 rounded-full bg-pink-400 animate-pulse" />
+        </button>
       </div>
 
       <!-- Right Actions -->
