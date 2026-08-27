@@ -61,11 +61,14 @@ export function saveWishes(wishes: WishMessage[]) {
 }
 
 export function getTanabataWishes(): TanabataWish[] {
+  console.log('getTanabataWishes() called')
+
   try {
     
     fetchTanabataCSV().then((datas : TanabataWish[]) => {
       console.log('datas: ', datas);
 
+      console.log('getTanabataWishes() end')
       return JSON.parse(datas);
     });
     
@@ -75,6 +78,8 @@ export function getTanabataWishes(): TanabataWish[] {
   } catch (e) {
     console.error("Failed to parse tanabata wishes", e);
   }
+
+  console.log('getTanabataWishes() end default')
   return INITIAL_TANABATA_WISHES;
 }
 
@@ -190,6 +195,8 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
 }
 
 export async function fetchTanabataCSV(): TanabataWish[] {
+  console.log('fetchTanabataCSV() called');
+
   let results:TanabataWish[] = null;
 
   try {
@@ -220,5 +227,6 @@ export async function fetchTanabataCSV(): TanabataWish[] {
     
   }
 
+  console.log('fetchTanabataCSV() end');
   return results;
 }
