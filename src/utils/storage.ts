@@ -62,9 +62,16 @@ export function saveWishes(wishes: WishMessage[]) {
 
 export function getTanabataWishes(): TanabataWish[] {
   try {
+    
+    fetchTanabataCSV().then((datas : TanabataWish[]) => {
+      console.log('datas: ', datas);
+
+      return JSON.parse(datas);
+    });
+    
     // parseCSVTanabataWishes
-    const saved = localStorage.getItem(TANABATA_KEY);
-    if (saved) return JSON.parse(saved);
+    //const saved = localStorage.getItem(TANABATA_KEY);
+    //if (saved) return JSON.parse(saved);
   } catch (e) {
     console.error("Failed to parse tanabata wishes", e);
   }
@@ -177,6 +184,40 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
         });
       }
     }
+  }
+
+  return results;
+}
+
+export async function fetchTanabataCSV(): TanabataWish[] {
+  let results:TanabataWish[] = null;
+
+  try {
+    const proxyUrl = '/api/tanabatas-proxy';
+    const res = await fetch(proxyUrl);
+    console.log("res:", res);
+
+    if (!res.ok) {
+      throw new Error(`ไม่สามารถดึงข้อมูลได้ (Status: ${res.status})`);
+    }
+
+    let csvText = await res.text();
+    
+    console.log("csvText:", csvText);
+    if (csvText.startsWith('import')) {
+      csvText='';
+      /*
+      */
+    }
+    results = parseCSVTanabataWishes(csvText);
+
+    if (results.length === 0) {
+      console.error('ดึงข้อมูลสำเร็จแต่ไม่พบรายการโดเนทในรูปแบบ CSV');
+    } 
+  } catch (err: any) {
+    console.error('เกิดข้อผิดพลาดในการเชื่อมต่อกับ Google Sheet', err);    
+  } finally {
+    
   }
 
   return results;
