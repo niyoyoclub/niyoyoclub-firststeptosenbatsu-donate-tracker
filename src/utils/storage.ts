@@ -200,7 +200,7 @@ export async function fetchTanabataCSV(): TanabataWish[] {
   let results:TanabataWish[] = null;
 
   try {
-    const proxyUrl = '/api/tanabatas-proxy';
+    const proxyUrl = '/api/tanabata-proxy';
     const res = await fetch(proxyUrl);
     console.log("res:", res);
 
