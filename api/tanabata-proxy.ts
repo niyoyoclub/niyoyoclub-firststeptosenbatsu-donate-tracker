@@ -10,7 +10,7 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 // API proxy endpoint for Google Sheets CSV fetching to bypass CORS
 app.get("/api/tanabata-proxy", async (req, res) => {
   console.log('/api/tanabata-proxy called');
-  
+
   try {
     const url =  process.env.GOOGLE_GETSHEET_TANABATA_URL || import.meta.env.GOOGLE_GETSHEET_TANABATA_URL || '';
 
@@ -50,8 +50,7 @@ app.get("/api/tanabata-proxy", async (req, res) => {
         .json({ error: `Failed to fetch sheet: ${response.statusText}` });
     }
 
-    const rawData = await response.text();
-    const csvData = removeSlipUrlColumn(rawData);
+    const csvData = await response.text();
 
     res.setHeader("Content-Type", "text/csv; charset=utf-8");
     res.setHeader("Access-Control-Allow-Origin", "*");
