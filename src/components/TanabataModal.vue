@@ -186,7 +186,7 @@ const getColorDetails = (color: string) => {
           <div class="text-right">
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/80 text-pink-600 text-xs font-bold shadow-2xs">
               <Heart class="w-3.5 h-3.5 fill-pink-500 text-pink-500" />
-              <span>{{ wish.blessings }} ร่วมส่งพร</span>
+              <span>{{ wish.blessings }} พร</span>
             </span>
           </div>
         </div>

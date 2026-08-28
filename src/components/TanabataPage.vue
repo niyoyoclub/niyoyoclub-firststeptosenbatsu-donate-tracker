@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { Sparkles, Heart, Plus, Search, Filter, Wind, Bell, Clock, User, Compass } from 'lucide-vue-next';
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { Sparkles, Heart, Plus, Search, Filter, Wind, Bell, Clock, User, Compass, RefreshCcw } from 'lucide-vue-next';
 import { TanabataWish, CampaignData, TanzakuColor } from '../types';
 import TanabataBambooTree from './TanabataBambooTree.vue';
 import TanabataModal from './TanabataModal.vue';
@@ -15,6 +15,7 @@ const emit = defineEmits<{
   (e: 'addWish', wish: TanabataWish): void;
   (e: 'blessWish', id: string): void;
   (e: 'navigateToDonation'): void;
+  (e: 'refresh'): void;
 }>();
 
 const selectedWish = ref<TanabataWish | null>(null);
@@ -25,9 +26,20 @@ const searchQuery = ref('');
 const selectedCategory = ref('All');
 const selectedColorFilter = ref<'All' | TanzakuColor>('All');
 
+// ตัวแปรสำหรับ Auto Fetch
+const isAutoFetchEnabled = ref(true);
+let autoFetchInterval: number | null = null;
+const isLoading = ref(false);
+
 const openInspect = (wish: TanabataWish) => {
+  //console.log('openInspect(TanabataWish) called');
+
+  //console.log('wish: ', wish);
+
   selectedWish.value = wish;
   isInspectOpen.value = true;
+
+  //console.log('openInspect(TanabataWish) end');
 };
 
 const handleAddWish = (newWish: TanabataWish) => {
@@ -60,6 +72,59 @@ const colorMeanings = [
   { color: 'green', name: 'สีเขียว (Bamboo)', meaning: 'สุขภาพร่างกายแข็งแรง และการเติบโต', bg: 'bg-emerald-100 border-emerald-300 text-emerald-800' },
   { color: 'purple', name: 'สีม่วง (Twilight)', meaning: 'ความสง่างาม จิตใจแน่วแน่ และความหวัง', bg: 'bg-purple-100 border-purple-300 text-purple-800' }
 ];
+
+const handleRefresh = () => {
+  //console.log('handleRefresh() called');
+
+  try {
+    isLoading.value = true;
+    emit('refresh');
+  } catch (err: any) {
+    console.error(err);
+  } finally {
+    isLoading.value = false;
+  }
+
+  //console.log('handleRefresh() end');
+};
+
+// ฟังก์ชันสำหรับจัดการ Interval
+const startAutoFetch = () => {
+  stopAutoFetch();
+  if (isAutoFetchEnabled.value) {
+    // 60,000 ms = 1 นาที
+    autoFetchInterval = window.setInterval(() => {
+      handleRefresh();
+    },  props.campaign.refreshEveryMinutes * 60 * 1000);
+  }
+};
+
+const stopAutoFetch = () => {
+  if (autoFetchInterval !== null) {
+    clearInterval(autoFetchInterval);
+    autoFetchInterval = null;
+  }
+};
+
+// เคลียร์ Interval เมื่อ Component ถูกลบ
+onUnmounted(() => {
+  stopAutoFetch();
+});
+
+// เริ่มทำงาน Interval เมื่อเริ่มเปิด
+onMounted(() => {
+  handleRefresh();
+  startAutoFetch();
+});
+
+// สลับการทำงานถ้าผู้ใช้ปิด/เปิด Auto Fetch
+watch(isAutoFetchEnabled, (newVal) => {
+  if (newVal) {
+    startAutoFetch();
+  } else {
+    stopAutoFetch();
+  }
+});
 </script>
 
 <template>
@@ -82,7 +147,7 @@ const colorMeanings = [
 
         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6 font-normal">
           เทศกาลแห่งดวงดาวโอริฮิเมะและฮิโกโบชิ ร่วมผูกกระดาษทังซาขุ (Tanzaku) บนกิ่งไผ่
-          ส่งแรงใจและความปรารถนาให้ลอยไปตามสายลม พานีย่าก้าวสู่ Senbatsu อย่างงดงาม ✨
+          ส่งแรงใจและความปรารถนาให้ลอยไปตามสายลม พานีญ่าก้าวสู่ Senbatsu อย่างงดงาม ✨
         </p>
 
         <div class="flex flex-wrap items-center gap-3">
@@ -95,6 +160,14 @@ const colorMeanings = [
             <span>เขียนกระดาษคำอธิษฐานใหม่</span>
           </button>
           -->
+
+          <button
+            @click="handleRefresh"
+            class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-400 to-purple-500 text-white font-bold text-xs sm:text-sm shadow-lg hover:shadow-pink-500/25 hover:opacity-95 transition-all flex items-center gap-2 cursor-pointer"
+          >
+            <RefreshCcw class="w-4 h-4" />
+            <span> {{ isLoading ? 'กำลังดึงข้อมูล...' : 'ดึงข้อมูล' }}</span>
+          </button>
 
           <button
             @click="emit('navigateToDonation')"
@@ -223,7 +296,7 @@ const colorMeanings = [
           <div class="mt-4 pt-3 border-t border-slate-900/5 flex items-center justify-between">
             <div class="flex items-center gap-2">
               <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-[10px] font-bold text-slate-700 shadow-2xs border border-slate-200/60">
-                {{ w.author.charAt(0) }}
+                {{ w.author }}
               </div>
               <span class="text-xs font-bold text-slate-800 font-heading">
                 {{ w.author }}

@@ -38,10 +38,10 @@ const categoryOptions = [
 ];
 
 const presetTemplates = [
-  'ขอให้นีย่าได้ติด Senbatsu สมดั่งความตั้งใจและส่องประกายสว่างไสวที่สุด! 🌟',
-  'ขอให้นีย่ามีรอยยิ้มในทุกๆ วัน ทานข้าวอร่อย สุขภาพแข็งแรงเสมอ 💖',
-  'ขอให้ความพยายามทั้งหมดของนีย่าผลิดอกออกผลสวยงาม พวกเราจะคอยซัพพอร์ตเสมอ! 🎋',
-  'ขอให้ยอดโดเนททะลุเป้าหมาย พานีย่าไปสู่จุดที่ฝันไว้ด้วยกัน ✨'
+  'ขอให้นีญ่าได้ติด Senbatsu สมดั่งความตั้งใจและส่องประกายสว่างไสวที่สุด! 🌟',
+  'ขอให้นีญ่ามีรอยยิ้มในทุกๆ วัน ทานข้าวอร่อย สุขภาพแข็งแรงเสมอ 💖',
+  'ขอให้ความพยายามทั้งหมดของนีญ่าผลิดอกออกผลสวยงาม พวกเราจะคอยซัพพอร์ตเสมอ! 🎋',
+  'ขอให้ยอดโดเนททะลุเป้าหมาย พานีญ่าไปสู่จุดที่ฝันไว้ด้วยกัน ✨'
 ];
 
 const handleUsePreset = (template: string) => {
@@ -115,7 +115,7 @@ const handleSubmit = () => {
           ผูกคำอธิษฐานขึ้นต้นไผ่เรียบร้อยแล้ว! 🎋
         </h3>
         <p class="text-sm text-slate-600">
-          คำอธิษฐานของคุณกำลังโบกสะบัดไปตามสายลมเพื่อส่งพลังใจให้นีย่า ✨
+          คำอธิษฐานของคุณกำลังโบกสะบัดไปตามสายลมเพื่อส่งพลังใจให้นีญ่า ✨
         </p>
       </div>
 
@@ -131,7 +131,7 @@ const handleSubmit = () => {
           </h3>
         </div>
         <p class="text-xs text-slate-500 mb-5 pl-9">
-          เขียนความปรารถนาและส่งกำลังใจให้นีย่า เพื่อแขวนไว้บนกิ่งไผ่ทานาบาตะ
+          เขียนความปรารถนาและส่งกำลังใจให้นีญ่า เพื่อแขวนไว้บนกิ่งไผ่ทานาบาตะ
         </p>
 
         <form @submit.prevent="handleSubmit" class="space-y-4">
@@ -192,7 +192,7 @@ const handleSubmit = () => {
           <div>
             <div class="flex items-center justify-between mb-1">
               <label class="block text-xs font-semibold text-slate-700">
-                2. คำอธิษฐานของคุณถึงนีย่า (Wish Message) *
+                2. คำอธิษฐานของคุณถึงนีญ่า (Wish Message) *
               </label>
               <span class="text-[11px] text-slate-400">
                 {{ wishText.length }} / 300
@@ -203,7 +203,7 @@ const handleSubmit = () => {
               rows="3"
               maxlength="300"
               v-model="wishText"
-              placeholder="พิมพ์คำอวยพรหรือความในใจที่คุณอยากส่งถึงดวงดาวเพื่อให้นีย่า..."
+              placeholder="พิมพ์คำอวยพรหรือความในใจที่คุณอยากส่งถึงดวงดาวเพื่อให้นีญ่า..."
               class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-pink-400 text-xs sm:text-sm text-slate-800 bg-slate-50/50 resize-none leading-relaxed"
             />
           </div>

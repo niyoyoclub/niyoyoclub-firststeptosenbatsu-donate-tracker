@@ -30,7 +30,8 @@ import {
   getWishes,
   saveWishes,
   getTanabataWishes,
-  saveTanabataWishes
+  saveTanabataWishes,
+  fetchTanabataCSV
 } from './utils/storage';
 import { ArrowUp } from 'lucide-vue-next';
 
@@ -134,6 +135,20 @@ const refreshGoogleSheet = () => {
     googleSheetRef.value.refresh();
   }
 };
+
+const refreshTanabata = async () => {
+  //console.log('refreshTanabata() called');
+
+  //fetchTanabataCSV().then( (datas:TanabataWish[]) => {
+    //console.log('datas: ', datas);
+    //tanabataWishes.value = datas;      
+  //});  
+
+  const datas = await fetchTanabataCSV();
+  tanabataWishes.value = datas
+
+  //console.log('refreshTanabata() end');
+}
 </script>
 
 <template>
@@ -157,6 +172,7 @@ const refreshGoogleSheet = () => {
         v-if="activeTab === 'tanabata'"
         :campaign="campaign"
         :wishes="tanabataWishes"
+        @refresh="refreshTanabata"
         @addWish="handleAddTanabataWish"
         @blessWish="handleBlessTanabataWish"
         @navigateToDonation="activeTab = 'campaign'"
@@ -251,7 +267,7 @@ const refreshGoogleSheet = () => {
             class="text-xs hover:text-purple-600 font-medium"
             :class="activeTab === 'tanabata' ? 'text-purple-600 font-bold' : 'text-slate-500'"
           >
-            🎋 ลานอธิษฐานทานาบาตะ
+            🎋 ทานาบาตะ
           </button>
         </div>
 

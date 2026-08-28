@@ -61,25 +61,16 @@ export function saveWishes(wishes: WishMessage[]) {
 }
 
 export function getTanabataWishes(): TanabataWish[] {
-  console.log('getTanabataWishes() called')
+  //console.log('getTanabataWishes() called')
 
-  try {
-    
-    fetchTanabataCSV().then((datas : TanabataWish[]) => {
-      console.log('datas: ', datas);
-
-      console.log('getTanabataWishes() end')
-      return JSON.parse(datas);
-    });
-    
-    // parseCSVTanabataWishes
-    //const saved = localStorage.getItem(TANABATA_KEY);
-    //if (saved) return JSON.parse(saved);
+  try {    
+    const saved = localStorage.getItem(TANABATA_KEY);
+    if (saved) return JSON.parse(saved);
   } catch (e) {
     console.error("Failed to parse tanabata wishes", e);
   }
 
-  console.log('getTanabataWishes() end default')
+  //console.log('getTanabataWishes() end default')
   return INITIAL_TANABATA_WISHES;
 }
 
@@ -154,7 +145,7 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
     //console.log('row=', row);
     if (row && row.length >= 2) {
       const id = row[0] ? row[0].trim() : `tb-${i}-${Date.now()}`;
-      const auther = row[1] ? row[1].trim() : 'Donation';
+      const author = row[1] ? row[1].trim() : 'Donation';
       const wish = row[2] ? row[2].trim() : '';
       const time = row[3] ? row[3].trim() : new Date().toISOString().split('T')[0];
       const color =  row[4] ? row[4].trim() : 'pink';
@@ -177,7 +168,7 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
 
         results.push({
           id,
-          auther,
+          author,
           wish,
           timestamp: time,
           color,
@@ -195,14 +186,14 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
 }
 
 export async function fetchTanabataCSV(): TanabataWish[] {
-  console.log('fetchTanabataCSV() called');
+  //console.log('fetchTanabataCSV() called');
 
   let results:TanabataWish[] = null;
 
   try {
     const proxyUrl = '/api/tanabata-proxy';
     const res = await fetch(proxyUrl);
-    console.log("res:", res);
+    //console.log("res:", res);
 
     if (!res.ok) {
       throw new Error(`ไม่สามารถดึงข้อมูลได้ (Status: ${res.status})`);
@@ -210,13 +201,20 @@ export async function fetchTanabataCSV(): TanabataWish[] {
 
     let csvText = await res.text();
     
-    console.log("csvText:", csvText);
+    //console.log("csvText:", csvText);
+    
     if (csvText.startsWith('import')) {
       csvText='';
-      /*
-      */
+/*      
+      csvText = `id,author,wish,timestamp,color,category,branchIndex,hangPositionPercent,blessings,pattern
+tb-00001,test1,test test test test test test test test test test test,2026-08-27 22:50:00,pink,ความฝัน & เซ็มบัตสึ 🌟,0,25,100,cherry
+tb-00002,test2,test test test test test test test test test test test,2026-08-28 14:18:00,blue,ความฝัน & เซ็มบัตสึ 🌟,1,25,80,bambo`;
+*/
     }
+
     results = parseCSVTanabataWishes(csvText);
+
+    //console.log('results: ', results);
 
     if (results.length === 0) {
       console.error('ดึงข้อมูลสำเร็จแต่ไม่พบรายการโดเนทในรูปแบบ CSV');
@@ -227,6 +225,6 @@ export async function fetchTanabataCSV(): TanabataWish[] {
     
   }
 
-  console.log('fetchTanabataCSV() end');
+  //console.log('fetchTanabataCSV() end');
   return results;
 }

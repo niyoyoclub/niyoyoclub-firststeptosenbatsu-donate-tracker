@@ -71,7 +71,7 @@ const handleShare = () => {
           ]"
         >
           <Heart class="w-3.5 h-3.5" :class="activeTab === 'campaign' ? 'fill-pink-500 text-pink-500' : ''" />
-          <span>โครงการโดเนท</span>
+          <span>หน้าโดเนท</span>
         </button>
 
         <button
@@ -84,7 +84,7 @@ const handleShare = () => {
           ]"
         >
           <span class="text-sm">🎋</span>
-          <span>ลานอธิษฐานทานาบาตะ</span>
+          <span>ทานาบาตะ</span>
           <span v-if="tanabataWishCount" class="w-2 h-2 rounded-full bg-pink-400 animate-pulse" />
         </button>
       </div>
