@@ -161,11 +161,11 @@ const getSwayClass = (idx: number) => {
       />
 
       <!-- Altair & Vega (Orihime & Hikoboshi) Feature Stars -->
-      <div class="absolute top-12 left-16 flex items-center gap-2 opacity-80 animate-float-gentle">
+      <div class="absolute top-24 left-16 flex items-center gap-2 opacity-80 animate-float-gentle">
         <div class="w-3.5 h-3.5 bg-sky-200 rounded-full blur-[1px] shadow-[0_0_12px_#38bdf8]" />
         <span class="text-[10px] text-sky-200/80 font-serif tracking-widest hidden sm:inline">織姫 (Vega)</span>
       </div>
-      <div class="absolute top-20 right-20 flex items-center gap-2 opacity-80 animate-float-gentle" style="animation-delay: 1.5s;">
+      <div class="absolute top-32 right-20 flex items-center gap-2 opacity-80 animate-float-gentle" style="animation-delay: 1.5s;">
         <span class="text-[10px] text-amber-200/80 font-serif tracking-widest hidden sm:inline">彦星 (Altair)</span>
         <div class="w-3.5 h-3.5 bg-amber-200 rounded-full blur-[1px] shadow-[0_0_12px_#f59e0b]" />
       </div>
