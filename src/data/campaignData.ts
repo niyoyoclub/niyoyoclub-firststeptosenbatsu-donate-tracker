@@ -1,4 +1,4 @@
-import { CampaignData, Donation, Milestone, RewardTier, WishMessage, ExpenseCategory } from '../types';
+import { CampaignData, Donation, Milestone, RewardTier, WishMessage, ExpenseCategory, TanabataWish } from '../types';
 
 export const INITIAL_CAMPAIGN: CampaignData = {
   title: "#NiyaFirstStepToSenbatsu 🌸",
@@ -228,5 +228,86 @@ export const INITIAL_EXPENSES: ExpenseCategory[] = [
   { category: "สื่อโฆษณา PR & ป้าย LED Siam", percentage: 15, allocatedAmount: 75000, color: "bg-purple-500" },
   { category: "จัดงานคัพสลีฟ & Cafe Event", percentage: 10, allocatedAmount: 50000, color: "bg-sky-400" },
   { category: "ผลิต Goods & ค่าจัดส่งของรางวัล", percentage: 5, allocatedAmount: 25000, color: "bg-amber-400" }
+];
+*/
+
+export const INITIAL_TANABATA_WISHES: TanabataWish[] = [];
+/*
+export const INITIAL_TANABATA_WISHES: TanabataWish[] = [
+  {
+    id: "tb-1",
+    author: "น้องส้มส้ม 🍊",
+    wish: "ขอให้นีญ่าติด Senbatsu 1 ใน 16 คนในงาน General Election ครั้งนี้ให้ได้นะคะ! รอยยิ้มของนีญ่าเปล่งประกายที่สุดในหัวใจแฟนคลับทุกคนเลย ✨",
+    timestamp: "2026-07-07 19:45",
+    color: "pink",
+    category: "ความฝัน & เซ็มบัตสึ 🌟",
+    branchIndex: 0,
+    hangPositionPercent: 25,
+    blessings: 10,
+    pattern: "cherry"
+  }
+];
+*/
+/*  
+  {
+    id: "tb-2",
+    author: "Niya_Oshi_Always",
+    wish: "ขอให้นีญ่ามีสุขภาพร่างกายแข็งแรง ทานข้าวเยอะๆ พักผ่อนให้เพียงพอ ไม่เจ็บไม่ป่วย ร่าเริงสดใสตลอดทั้งปี 💖",
+    timestamp: "2026-07-07 20:12",
+    color: "green",
+    category: "สุขภาพ & ความแข็งแรง 🌿",
+    branchIndex: 1,
+    hangPositionPercent: 65,
+    blessings: 49,
+    pattern: "bamboo"
+  },
+  {
+    id: "tb-3",
+    author: "P'Korn BKK",
+    wish: "ขอให้ความพยายามและการซ้อมอย่างหนักของนีญ่าส่งผลให้ยืนอยู่แถวหน้าบนเวทีใหญ่ เป็นกำลังใจให้เสมอ!",
+    timestamp: "2026-07-07 21:05",
+    color: "yellow",
+    category: "ความฝัน & เซ็มบัตสึ 🌟",
+    branchIndex: 2,
+    hangPositionPercent: 35,
+    blessings: 53,
+    pattern: "stars"
+  },
+  {
+    id: "tb-4",
+    author: "สายลมทานาบาตะ 🎋",
+    wish: "ขอให้ทางช้างเผือกนำพาคำอธิษฐานของพวกเราทุกคนให้กลายเป็นจริง พานีญ่าไปสู่ดาวดวงที่เจิดจรัสที่สุด!",
+    timestamp: "2026-07-07 21:30",
+    color: "blue",
+    category: "คำอธิษฐานถึงดวงดาว 🌌",
+    branchIndex: 3,
+    hangPositionPercent: 75,
+    blessings: 38,
+    pattern: "stars"
+  },
+  {
+    id: "tb-5",
+    author: "แมวน้อยของนีญ่า",
+    wish: "ไม่ว่าจะเกิดอะไรขึ้น แฟนคลับจะคอยอยู่เคียงข้างและซัพพอร์ตนีญ่าตลอดไป มีความสุขในทุกๆ วันนะคนเก่ง 🌸",
+    timestamp: "2026-07-07 22:18",
+    color: "purple",
+    category: "ความสุข & ความรัก 💗",
+    branchIndex: 4,
+    hangPositionPercent: 40,
+    blessings: 72,
+    pattern: "cherry"
+  },
+  {
+    id: "tb-6",
+    author: "กัปตันทีมซัพพอร์ต",
+    wish: "ขอให้ยอดโดเนททะลุเป้า 500,000 บาท ขึ้นป้ายสยามและบิลบอร์ดทั่วกรุงอย่างงดงาม นีญ่าไฟต์โตะ! 🚀",
+    timestamp: "2026-07-07 22:45",
+    color: "red",
+    category: "เป้าหมายโครงการ 🎯",
+    branchIndex: 5,
+    hangPositionPercent: 60,
+    blessings: 57,
+    pattern: "plain"
+  }
 ];
 */

@@ -11,6 +11,7 @@ import QuickDonateModal from './components/QuickDonateModal.vue';
 import QuickJoinOpenChatModal from './components/QuickJoinOpenChatModal.vue';
 import GoogleSheetsModal from './components/GoogleSheetsModal.vue';
 import TopSupportersLeaderboard from './components/TopSupportersLeaderboard.vue';
+import TanabataPage from './components/TanabataPage.vue';
 
 import { CampaignData, Donation, Milestone, RewardTier, WishMessage, ExpenseCategory } from './types';
 import {
@@ -21,16 +22,28 @@ import {
   INITIAL_WISHES,
   INITIAL_EXPENSES
 } from './data/campaignData';
-import { getCampaign, saveCampaign, getDonations, saveDonations, getWishes, saveWishes } from './utils/storage';
+import {
+  getCampaign,
+  saveCampaign,
+  getDonations,
+  saveDonations,
+  getWishes,
+  saveWishes,
+  getTanabataWishes,
+  saveTanabataWishes,
+  fetchTanabataCSV
+} from './utils/storage';
 import { ArrowUp } from 'lucide-vue-next';
 
 const campaign = ref<CampaignData>(getCampaign());
 const donations = ref<Donation[]>(getDonations());
 const wishes = ref<WishMessage[]>(getWishes());
+const tanabataWishes = ref<TanabataWish[]>(getTanabataWishes());
 const milestones = ref<Milestone[]>(INITIAL_MILESTONES);
 const rewardTiers = ref<RewardTier[]>(INITIAL_REWARD_TIERS);
 const expenses = ref<ExpenseCategory[]>(INITIAL_EXPENSES);
 
+const activeTab = ref<'campaign' | 'tanabata'>('campaign');
 const isDonateOpen = ref(false);
 const isSheetOpen = ref(false);
 const showScrollTop = ref(false);
@@ -47,6 +60,7 @@ const totalDonors = computed(() =>
 watch(campaign, (newVal) => saveCampaign(newVal), { deep: true });
 watch(donations, (newVal) => saveDonations(newVal), { deep: true });
 watch(wishes, (newVal) => saveWishes(newVal), { deep: true });
+watch(tanabataWishes, (newVal) => saveTanabataWishes(newVal), { deep: true });
 
 const handleScroll = () => {
   showScrollTop.value = window.scrollY > 400;
@@ -76,6 +90,17 @@ const handleLikeWish = (id: string) => {
   }
 };
 
+const handleAddTanabataWish = (newWish: TanabataWish) => {
+  tanabataWishes.value.unshift(newWish);
+};
+
+const handleBlessTanabataWish = (id: string) => {
+  const target = tanabataWishes.value.find((w) => w.id === id);
+  if (target) {
+    target.blessings += 1;
+  }
+};
+
 const handleImportSheetDonations = (importedDonations: Donation[], sheetUrl: string) => {
   donations.value = importedDonations;
   campaign.value.sheetCsvUrl = sheetUrl;
@@ -87,6 +112,7 @@ const handleResetData = () => {
     campaign.value = INITIAL_CAMPAIGN;
     donations.value = INITIAL_DONATIONS;
     wishes.value = INITIAL_WISHES;
+    tanabataWishes.value = INITIAL_TANABATA_WISHES;
   }
 };
 
@@ -109,6 +135,20 @@ const refreshGoogleSheet = () => {
     googleSheetRef.value.refresh();
   }
 };
+
+const refreshTanabata = async () => {
+  //console.log('refreshTanabata() called');
+
+  //fetchTanabataCSV().then( (datas:TanabataWish[]) => {
+    //console.log('datas: ', datas);
+    //tanabataWishes.value = datas;      
+  //});  
+
+  const datas = await fetchTanabataCSV();
+  tanabataWishes.value = datas
+
+  //console.log('refreshTanabata() end');
+}
 </script>
 
 <template>
@@ -116,6 +156,9 @@ const refreshGoogleSheet = () => {
     <!-- Header -->
     <Header
       :campaign="campaign"
+      :activeTab="activeTab"
+      :tanabataWishCount="tanabataWishes.length"
+      @changeTab="(tab) => activeTab = tab"
       @openDonate="isDonateOpen = true"
       @openChatOpen="isOpenChatOpen = true"
       @openSheetModal="isSheetOpen = true"
@@ -124,60 +167,74 @@ const refreshGoogleSheet = () => {
 
     <!-- Main Container -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10 flex-1 space-y-8 sm:space-y-10">
-      <!-- Hero Banner & Goal Tracker -->
-      <HeroProgress
+      <!-- Tanabata Festival Page View -->
+      <TanabataPage
+        v-if="activeTab === 'tanabata'"
         :campaign="campaign"
-        :milestones="milestones"
-        :totalAmount="totalAmount"
-        :totalDonors="totalDonors"
-        @openDonate="isDonateOpen = true"
-        @openChatOpen="isOpenChatOpen = true"
-        @scrollToCalculator="scrollToSection('reward-calculator')"
-        @scrollToWish="scrollToSection('wish-wall')"
+        :wishes="tanabataWishes"
+        @refresh="refreshTanabata"
+        @addWish="handleAddTanabataWish"
+        @blessWish="handleBlessTanabataWish"
+        @navigateToDonation="activeTab = 'campaign'"
       />
 
-      <!-- Milestones Timeline -->
-      <MilestonesTimeline
-        :milestones="milestones"
-        :currentTotal="totalAmount"
-      />
+      <!-- Main Campain Tracker Page View -->
+      <div v-else class="space-y-8 sm:space-y-10">
+        <!-- Hero Banner & Goal Tracker -->
+        <HeroProgress
+          :campaign="campaign"
+          :milestones="milestones"
+          :totalAmount="totalAmount"
+          :totalDonors="totalDonors"
+          @openDonate="isDonateOpen = true"
+          @openChatOpen="isOpenChatOpen = true"
+          @scrollToCalculator="scrollToSection('reward-calculator')"
+          @scrollToWish="scrollToSection('wish-wall')"
+        />
 
-      <!-- Top Supporters Leaderboard -->
-      <TopSupportersLeaderboard
-        :donations="donations"
-        :totalAmount="totalAmount"
-      />
+        <!-- Milestones Timeline -->
+        <MilestonesTimeline
+          :milestones="milestones"
+          :currentTotal="totalAmount"
+        />
 
-      <!-- Leaderboard & Recent Donations -->
-      <DonationLeaderboard 
-        :donations="donations"
-        :campaign="campaign"
-        @refresh="refreshGoogleSheet" 
-        :lastGoogleSheetSync="lastGoogleSheetSync"
-      />
+        <!-- Top Supporters Leaderboard -->
+        <TopSupportersLeaderboard
+          :donations="donations"
+          :totalAmount="totalAmount"
+        />
 
-      <!-- Reward & Perk Calculator -->
-      <!--
-      <RewardCalculator
-        :rewardTiers="rewardTiers"
-        @openDonateWithAmount="(amt) => { isDonateOpen = true; }"
-      />
-      -->
+        <!-- Leaderboard & Recent Donations -->
+        <DonationLeaderboard 
+          :donations="donations"
+          :campaign="campaign"
+          @refresh="refreshGoogleSheet" 
+          :lastGoogleSheetSync="lastGoogleSheetSync"
+        />
 
-      <!-- Wish & Message Wall -->
-      <!--
-      <WishWall
-        :wishes="wishes"
-        @addWish="handleAddWish"
-        @likeWish="handleLikeWish"
-      />
-      -->
+        <!-- Reward & Perk Calculator -->
+        <!--
+        <RewardCalculator
+          :rewardTiers="rewardTiers"
+          @openDonateWithAmount="(amt) => { isDonateOpen = true; }"
+        />
+        -->
 
-      <!-- Financial Transparency -->
-      <TransparencyBoard
-        :expenses="expenses"
-        :totalAmount="totalAmount"
-      />
+        <!-- Wish & Message Wall -->
+        <!--
+        <WishWall
+          :wishes="wishes"
+          @addWish="handleAddWish"
+          @likeWish="handleLikeWish"
+        />
+        -->
+
+        <!-- Financial Transparency -->
+        <TransparencyBoard
+          :expenses="expenses"
+          :totalAmount="totalAmount"
+        />
+      </div>
     </main>
 
     <!-- Footer -->
@@ -196,6 +253,24 @@ const refreshGoogleSheet = () => {
           จัดทำโดยทีมงานแฟนคลับเพื่อส่งเสริมสนับสนุนนีญ่า | Clean & Minimal Design
         </p>
         
+        <div class="flex items-center gap-3">
+          <button
+            @click="activeTab = 'campaign'"
+            class="text-xs hover:text-pink-600 font-medium"
+            :class="activeTab === 'campaign' ? 'text-pink-600 font-bold' : 'text-slate-500'"
+          >
+            หน้าโดเนท
+          </button>
+          <span>•</span>
+          <button
+            @click="activeTab = 'tanabata'"
+            class="text-xs hover:text-purple-600 font-medium"
+            :class="activeTab === 'tanabata' ? 'text-purple-600 font-bold' : 'text-slate-500'"
+          >
+            🎋 ทานาบาตะ
+          </button>
+        </div>
+
         <button
           @click="handleResetData"
           class="text-[11px] text-slate-900 hover:text-slate-600 underline cursor-pointer bg-red-200"

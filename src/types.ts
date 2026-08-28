@@ -76,3 +76,18 @@ export interface CampaignData {
   currentBonusToken: number;
   refreshEveryMinutes: number;
 }
+
+export type TanzakuColor = 'pink' | 'blue' | 'yellow' | 'green' | 'purple' | 'red';
+
+export interface TanabataWish {
+  id: string;
+  author: string;
+  wish: string;
+  timestamp: string; // e.g. '2026-07-07 19:30'
+  color: TanzakuColor;
+  category: string; // e.g. 'Senbatsu Dream', 'Health & Happiness', 'Daily Cheer'
+  branchIndex: number; // 0 to 5 for bamboo branch position
+  hangPositionPercent: number; // 10 to 90% along branch
+  blessings: number; // likes / prayers จำนวนยอดเงินโดเนท
+  pattern?: 'stars' | 'cherry' | 'bamboo' | 'plain';
+}

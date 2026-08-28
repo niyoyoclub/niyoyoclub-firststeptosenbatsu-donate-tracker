@@ -1,9 +1,10 @@
-import { CampaignData, Donation, WishMessage, Milestone } from '../types';
-import { INITIAL_CAMPAIGN, INITIAL_DONATIONS, INITIAL_WISHES, INITIAL_MILESTONES } from '../data/campaignData';
+import { CampaignData, Donation, WishMessage, Milestone, TanabataWish } from '../types';
+import { INITIAL_CAMPAIGN, INITIAL_DONATIONS, INITIAL_WISHES, INITIAL_MILESTONES, INITIAL_TANABATA_WISHES } from '../data/campaignData';
 
 const CAMPAIGN_KEY = 'niya_campaign_data_v1.2';
 const DONATIONS_KEY = 'niya_donations_data_v1';
 const WISHES_KEY = 'niya_wishes_data_v1';
+const TANABATA_KEY = 'niya_tanabata_wishes_v1';
 
 export function getCampaign(): CampaignData {
   try {
@@ -59,6 +60,28 @@ export function saveWishes(wishes: WishMessage[]) {
   }
 }
 
+export function getTanabataWishes(): TanabataWish[] {
+  //console.log('getTanabataWishes() called')
+
+  try {    
+    const saved = localStorage.getItem(TANABATA_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch (e) {
+    console.error("Failed to parse tanabata wishes", e);
+  }
+
+  //console.log('getTanabataWishes() end default')
+  return INITIAL_TANABATA_WISHES;
+}
+
+export function saveTanabataWishes(wishes: TanabataWish[]) {
+  try {
+    localStorage.setItem(TANABATA_KEY, JSON.stringify(wishes));
+  } catch (e) {
+    console.error("Failed to save tanabata wishes", e);
+  }
+}
+
 // Parse Google Sheets CSV format if user attaches a sheet link
 export function parseCSVDonations(csvText: string): Donation[] {
   const lines = csvText.split(/\r?\n/).filter(line => line.trim().length > 0);
@@ -106,4 +129,102 @@ export function parseCSVDonations(csvText: string): Donation[] {
   }
 
   return donations;
+}
+
+// Parse Google Sheets CSV format if user attaches a sheet link
+export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
+  const lines = csvText.split(/\r?\n/).filter(line => line.trim().length > 0);
+  if (lines.length <= 1) return [];
+
+  const results: TanabataWish[] = [];
+  // Skip header line
+  for (let i = 1; i < lines.length; i++) {
+    // Basic CSV splitting handling quotes
+    //console.log('line=', lines[i]);
+    const row = lines[i].split(',');
+    //console.log('row=', row);
+    if (row && row.length >= 2) {
+      const id = row[0] ? row[0].trim() : `tb-${i}-${Date.now()}`;
+      const author = row[1] ? row[1].trim() : 'Donation';
+      const wish = row[2] ? row[2].trim() : '';
+      const time = row[3] ? row[3].trim() : new Date().toISOString().split('T')[0];
+      const color =  row[4] ? row[4].trim() : 'pink';
+      const category = row[5] ? row[5].trim() : '';
+      const rawBranchIndex = row[6] ? row[6].replace(/[^0-9.]/g, '') : '5';
+      const branchIndex = parseInt(rawBranchIndex);
+      const rawHangPositionPercent = row[7] ? row[7].replace(/[^0-9.]/g, '') : '0';
+      const hangPositionPercent = parseInt(rawHangPositionPercent);
+      const rawBlessings = row[8] ? row[8].replace(/[^0-9.]/g, '') : '0';
+      const blessings = parseInt(rawBlessings);
+      const pattern =  row[9] ? row[9].trim() : 'cherry';
+
+      if (blessings > 0) {
+        let idx = 5;
+        if (blessings >= 100) idx = 0;
+        else if (blessings >= 80) idx = 1;
+        else if (blessings >= 60) idx = 2;
+        else if (blessings >= 40) idx = 3;
+        else if (blessings >= 20) idx = 4;
+
+        results.push({
+          id,
+          author,
+          wish,
+          timestamp: time,
+          color,
+          category,
+          branchIndex: idx,
+          hangPositionPercent,
+          blessings,
+          pattern
+        });
+      }
+    }
+  }
+
+  return results;
+}
+
+export async function fetchTanabataCSV(): TanabataWish[] {
+  //console.log('fetchTanabataCSV() called');
+
+  let results:TanabataWish[] = null;
+
+  try {
+    const proxyUrl = '/api/tanabata-proxy';
+    const res = await fetch(proxyUrl);
+    //console.log("res:", res);
+
+    if (!res.ok) {
+      throw new Error(`ไม่สามารถดึงข้อมูลได้ (Status: ${res.status})`);
+    }
+
+    let csvText = await res.text();
+    
+    //console.log("csvText:", csvText);
+    
+    if (csvText.startsWith('import')) {
+      csvText='';
+/*      
+      csvText = `id,author,wish,timestamp,color,category,branchIndex,hangPositionPercent,blessings,pattern
+tb-00001,test1,test test test test test test test test test test test,2026-08-27 22:50:00,pink,ความฝัน & เซ็มบัตสึ 🌟,0,25,100,cherry
+tb-00002,test2,test test test test test test test test test test test,2026-08-28 14:18:00,blue,ความฝัน & เซ็มบัตสึ 🌟,1,25,80,bambo`;
+*/
+    }
+
+    results = parseCSVTanabataWishes(csvText);
+
+    //console.log('results: ', results);
+
+    if (results.length === 0) {
+      console.error('ดึงข้อมูลสำเร็จแต่ไม่พบรายการโดเนทในรูปแบบ CSV');
+    } 
+  } catch (err: any) {
+    console.error('เกิดข้อผิดพลาดในการเชื่อมต่อกับ Google Sheet', err);    
+  } finally {
+    
+  }
+
+  //console.log('fetchTanabataCSV() end');
+  return results;
 }
