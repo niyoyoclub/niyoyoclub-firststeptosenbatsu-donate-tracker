@@ -9,7 +9,13 @@ const TANABATA_KEY = 'niya_tanabata_wishes_v1';
 export function getCampaign(): CampaignData {
   try {
     const saved = localStorage.getItem(CAMPAIGN_KEY);
-    if (saved) return JSON.parse(saved);
+    if (saved)  {
+      const jsonData = JSON.parse(saved);
+      //console.log('jsonData:', jsonData);
+      if (jsonData) {
+        return jsonData;
+      }
+    }
   } catch (e) {
     console.error("Failed to parse campaign state", e);
   }
@@ -27,7 +33,13 @@ export function saveCampaign(data: CampaignData) {
 export function getDonations(): Donation[] {
   try {
     const saved = localStorage.getItem(DONATIONS_KEY);
-    if (saved) return JSON.parse(saved);
+    if (saved)  {
+      const jsonData = JSON.parse(saved);
+      //console.log('jsonData:', jsonData);
+      if (jsonData) {
+        return jsonData;
+      }
+    }
   } catch (e) {
     console.error("Failed to parse donations state", e);
   }
@@ -45,7 +57,13 @@ export function saveDonations(donations: Donation[]) {
 export function getWishes(): WishMessage[] {
   try {
     const saved = localStorage.getItem(WISHES_KEY);
-    if (saved) return JSON.parse(saved);
+    if (saved)  {
+      const jsonData = JSON.parse(saved);
+      //console.log('jsonData:', jsonData);
+      if (jsonData) {
+        return jsonData;
+      }
+    }
   } catch (e) {
     console.error("Failed to parse wishes state", e);
   }
@@ -65,7 +83,16 @@ export function getTanabataWishes(): TanabataWish[] {
 
   try {    
     const saved = localStorage.getItem(TANABATA_KEY);
-    if (saved) return JSON.parse(saved);
+    
+    //console.log('saved:', saved);
+
+    if (saved)  {
+      const jsonData = JSON.parse(saved);
+      //console.log('jsonData:', jsonData);
+      if (jsonData) {
+        return jsonData;
+      }
+    }
   } catch (e) {
     console.error("Failed to parse tanabata wishes", e);
   }
@@ -76,6 +103,8 @@ export function getTanabataWishes(): TanabataWish[] {
 
 export function saveTanabataWishes(wishes: TanabataWish[]) {
   try {
+    //console.log('wishes:', wishes);
+
     localStorage.setItem(TANABATA_KEY, JSON.stringify(wishes));
   } catch (e) {
     console.error("Failed to save tanabata wishes", e);
