@@ -4,7 +4,7 @@ import { INITIAL_CAMPAIGN, INITIAL_DONATIONS, INITIAL_WISHES, INITIAL_MILESTONES
 const CAMPAIGN_KEY = 'niya_campaign_data_v1.2';
 const DONATIONS_KEY = 'niya_donations_data_v1';
 const WISHES_KEY = 'niya_wishes_data_v1';
-const TANABATA_KEY = 'niya_tanabata_wishes_v1';
+const TANABATA_KEY = 'niya_tanabata_wishes_v1.1';
 
 export function getCampaign(): CampaignData {
   try {
@@ -162,6 +162,8 @@ export function parseCSVDonations(csvText: string): Donation[] {
 
 // Parse Google Sheets CSV format if user attaches a sheet link
 export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
+  console.log("parseCSVTanabataWishes(string) called");
+
   const lines = csvText.split(/\r?\n/).filter(line => line.trim().length > 0);
   if (lines.length <= 1) return [];
 
@@ -169,9 +171,9 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
   // Skip header line
   for (let i = 1; i < lines.length; i++) {
     // Basic CSV splitting handling quotes
-    //console.log('line=', lines[i]);
+    console.log('line=', lines[i]);
     const row = lines[i].split(',');
-    //console.log('row=', row);
+    console.log('row=', row);
     if (row && row.length >= 2) {
       const id = row[0] ? row[0].trim() : `tb-${i}-${Date.now()}`;
       const author = row[1] ? row[1].trim() : 'Donation';
@@ -181,19 +183,21 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
       const category = row[5] ? row[5].trim() : '';
       const rawBranchIndex = row[6] ? row[6].replace(/[^0-9.]/g, '') : '5';
       const branchIndex = parseInt(rawBranchIndex);
-      const rawHangPositionPercent = row[7] ? row[7].replace(/[^0-9.]/g, '') : '0';
+      const rawDonationAmount = row[7] ? row[7].replace(/[^0-9.]/g, '') : '0';
+      const donationAmount = parseInt(rawDonationAmount);
+      const rawHangPositionPercent = row[8] ? row[8].replace(/[^0-9.]/g, '') : '0';
       const hangPositionPercent = parseInt(rawHangPositionPercent);
-      const rawBlessings = row[8] ? row[8].replace(/[^0-9.]/g, '') : '0';
+      const rawBlessings = row[9] ? row[9].replace(/[^0-9.]/g, '') : '0';
       const blessings = parseInt(rawBlessings);
-      const pattern =  row[9] ? row[9].trim() : 'cherry';
+      const pattern =  row[10] ? row[10].trim() : 'cherry';
 
-      if (blessings > 0) {
+      if (donationAmount > 0) {
         let idx = 5;
-        if (blessings >= 100) idx = 0;
-        else if (blessings >= 80) idx = 1;
-        else if (blessings >= 60) idx = 2;
-        else if (blessings >= 40) idx = 3;
-        else if (blessings >= 20) idx = 4;
+        if (donationAmount >= 2000) idx = 0;
+        else if (donationAmount >= 500) idx = 1;
+        else if (donationAmount >= 200) idx = 2;
+        else if (donationAmount >= 100) idx = 3;
+        else if (donationAmount >= 50) idx = 4;
 
         results.push({
           id,
@@ -203,6 +207,7 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
           color,
           category,
           branchIndex: idx,
+          donationAmount,
           hangPositionPercent,
           blessings,
           pattern
@@ -211,6 +216,7 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
     }
   }
 
+  console.log("parseCSVTanabataWishes(string) end");
   return results;
 }
 
@@ -230,20 +236,19 @@ export async function fetchTanabataCSV(): TanabataWish[] {
 
     let csvText = await res.text();
     
-    //console.log("csvText:", csvText);
+    console.log("csvText:", csvText);
     
     if (csvText.startsWith('import')) {
-      csvText='';
-/*      
-      csvText = `id,author,wish,timestamp,color,category,branchIndex,hangPositionPercent,blessings,pattern
-tb-00001,test1,test test test test test test test test test test test,2026-08-27 22:50:00,pink,ความฝัน & เซ็มบัตสึ 🌟,0,25,100,cherry
-tb-00002,test2,test test test test test test test test test test test,2026-08-28 14:18:00,blue,ความฝัน & เซ็มบัตสึ 🌟,1,25,80,bambo`;
-*/
+//      csvText='';
+      
+      csvText = `id,author,wish,timestamp,color,category,branchIndex,donationAmount,hangPositionPercent,blessings,pattern
+tb-00001,Niyoyo Club,ขอพลังใจและความรักจากพวกเราทุกคน ร่วมกันส่งนีญ่าน้องรักก้าวขึ้นสู่ตำแหน่ง Senbatsu หรือ Center อันดับ 13 ตามที่หัวใจน้องตั้งเป้าไว้ ขอให้นีญ่ามั่นใจในตัวเองและเปล่งประกายให้เต็มที่บนเวที ส่วนบันไดที่จะพาน้องขึ้นสู่จุดที่คู่ควรที่สุด... พวกเราพร้อมทุ่มเทสุดกำลังเพื่อทำให้ความฝันนี้เป็นจริงไปด้วยกัน!,2026-08-27 22:50:00,pink,ความฝัน & เซ็มบัตสึ 🌟,0,1000,25,0,cherry`;
+
     }
 
     results = parseCSVTanabataWishes(csvText);
 
-    //console.log('results: ', results);
+    console.log('results: ', results);
 
     if (results.length === 0) {
       console.error('ดึงข้อมูลสำเร็จแต่ไม่พบรายการโดเนทในรูปแบบ CSV');

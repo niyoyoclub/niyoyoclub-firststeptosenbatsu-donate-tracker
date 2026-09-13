@@ -79,6 +79,17 @@ export interface CampaignData {
 
 export type TanzakuColor = 'pink' | 'blue' | 'yellow' | 'green' | 'purple' | 'red';
 
+export interface TanabataTierInfo {
+  index: number; // 0 to 5
+  name: string;
+  nameEn: string;
+  minDonation: number;
+  badge: string;
+  icon: string;
+  colorName: string;
+  description: string;
+}
+
 export interface TanabataWish {
   id: string;
   author: string;
@@ -86,7 +97,8 @@ export interface TanabataWish {
   timestamp: string; // e.g. '2026-07-07 19:30'
   color: TanzakuColor;
   category: string; // e.g. 'Senbatsu Dream', 'Health & Happiness', 'Daily Cheer'
-  branchIndex: number; // 0 to 5 for bamboo branch position
+  branchIndex: number; // 0 = Diamond (>5k), 1 = Gold (>2k), 2 = Silver (>500), 3 = Fan (>100), 4 = Fan (>1), 5 = General
+  donationAmount?: number;
   hangPositionPercent: number; // 10 to 90% along branch
   blessings: number; // likes / prayers จำนวนยอดเงินโดเนท
   pattern?: 'stars' | 'cherry' | 'bamboo' | 'plain';

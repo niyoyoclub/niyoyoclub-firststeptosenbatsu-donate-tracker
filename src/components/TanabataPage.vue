@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
-import { Sparkles, Heart, Plus, Search, Filter, Wind, Bell, Clock, User, Compass, RefreshCcw } from 'lucide-vue-next';
+import { ref, computed, onUnmounted, onMounted, watch } from 'vue';
+import { Sparkles, Heart, Plus, Search, Filter, Wind, Bell, Clock, User, Compass, Gem, Crown, Award, RefreshCcw } from 'lucide-vue-next';
 import { TanabataWish, CampaignData, TanzakuColor } from '../types';
+import { getTierByBranchIndex, TANABATA_TIERS } from '../utils/tanabataTiers';
 import TanabataBambooTree from './TanabataBambooTree.vue';
 import TanabataModal from './TanabataModal.vue';
 import TanabataWriteModal from './TanabataWriteModal.vue';
@@ -24,22 +25,15 @@ const isWriteOpen = ref(false);
 
 const searchQuery = ref('');
 const selectedCategory = ref('All');
-const selectedColorFilter = ref<'All' | TanzakuColor>('All');
+const selectedTierFilter = ref<number | 'All'>('All');
 
 // ตัวแปรสำหรับ Auto Fetch
 const isAutoFetchEnabled = ref(true);
 let autoFetchInterval: number | null = null;
 const isLoading = ref(false);
-
 const openInspect = (wish: TanabataWish) => {
-  //console.log('openInspect(TanabataWish) called');
-
-  //console.log('wish: ', wish);
-
   selectedWish.value = wish;
   isInspectOpen.value = true;
-
-  //console.log('openInspect(TanabataWish) end');
 };
 
 const handleAddWish = (newWish: TanabataWish) => {
@@ -56,7 +50,7 @@ const handleBless = (id: string) => {
 const filteredWishes = computed(() => {
   return props.wishes.filter((w) => {
     if (selectedCategory.value !== 'All' && w.category !== selectedCategory.value) return false;
-    if (selectedColorFilter.value !== 'All' && w.color !== selectedColorFilter.value) return false;
+    if (selectedTierFilter.value !== 'All' && w.branchIndex !== selectedTierFilter.value) return false;
     if (searchQuery.value.trim()) {
       const q = searchQuery.value.toLowerCase();
       return w.author.toLowerCase().includes(q) || w.wish.toLowerCase().includes(q);
@@ -180,45 +174,60 @@ watch(isAutoFetchEnabled, (newVal) => {
       </div>
     </div>
 
-    <!-- The Interactive Bamboo Tree (ต้นไผ่และกระดาษคำอธิษฐานปลิวไหวตามลม) -->
+    <!-- The Interactive Bamboo Tree (ต้นไผ่และกระดาษคำอธิษฐาน 6 ระดับปลิวไหวตามลม) -->
     <TanabataBambooTree
       :wishes="wishes"
       @selectWish="openInspect"
       @openWriteModal="isWriteOpen = true"
     />
 
-    <!-- Cultural Guide: Meanings of 5 Colors Tanzaku -->
-    <div class="bg-white rounded-3xl p-6 sm:p-8 soft-purple-card">
+    <!-- 6 Levels Donor Tiers Infographic Card -->
+    <div class="bg-white rounded-3xl p-6 sm:p-8 soft-pink-card border border-pink-100">
       <div class="flex items-center gap-2 mb-1">
-        <span class="p-2 rounded-xl bg-purple-50 text-purple-500">
-          <Sparkles class="w-5 h-5" />
+        <span class="p-2 rounded-xl bg-amber-50 text-amber-500">
+          <Crown class="w-5 h-5" />
         </span>
         <h3 class="text-xl font-bold text-slate-900 font-heading">
-          ความหมายของสีกระดาษทังซาขุทั้ง 5 (Five Colors of Tanabata)
+          ระดับกิ่งไผ่และกระดาษคำอวยพร (6 Donor & Wish Tiers)
         </h3>
       </div>
       <p class="text-xs text-slate-500 mb-6 pl-9">
-        ประเพณีโบราณอิงตามธาตุทั้ง 5 เลือกสีที่ตรงกับความตั้งใจของคุณ
+        ลำดับกิ่งไผ่จากยอดบนสุดลงสู่ล่างสุด ยิ่งโดเนทมาก กระดาษทังซาขุจะยิ่งวิจิตรงดงามและอยู่ระดับสูงขึ้น
       </p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
         <div
-          v-for="item in colorMeanings"
-          :key="item.name"
-          class="p-4 rounded-2xl border transition-all flex items-start gap-3"
-          :class="item.bg"
+          v-for="tier in TANABATA_TIERS"
+          :key="tier.index"
+          class="p-4 rounded-2xl border transition-all"
+          :class="[
+            tier.index === 0 ? 'bg-gradient-to-br from-indigo-900 via-purple-900 to-amber-900/90 text-white border-amber-400/50 shadow-md' :
+            tier.index === 1 ? 'bg-gradient-to-br from-amber-950 via-yellow-900 to-amber-900 text-amber-50 border-amber-400/40 shadow-sm' :
+            tier.index === 2 ? 'bg-slate-900 text-slate-100 border-slate-400/30' :
+            tier.index === 3 ? 'bg-rose-50 text-rose-950 border-rose-200' :
+            tier.index === 4 ? 'bg-pink-50 text-pink-950 border-pink-200' :
+            'bg-stone-50 text-stone-900 border-stone-200'
+          ]"
         >
-          <div class="w-3.5 h-3.5 rounded-full mt-1 shrink-0 shadow-xs border border-white" />
-          <div>
-            <h4 class="font-bold text-xs font-heading">{{ item.name }}</h4>
-            <p class="text-xs opacity-90 mt-0.5">{{ item.meaning }}</p>
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="flex items-center gap-1.5 font-bold text-sm">
+              <span class="text-base">{{ tier.icon }}</span>
+              <span>กิ่ง {{ tier.index }}: {{ tier.name }}</span>
+            </div>
+            <span
+              class="px-2 py-0.5 rounded-full text-[10px] font-bold border"
+              :class="tier.index <= 2 ? 'bg-white/20 border-white/30 text-white' : 'bg-white border-slate-200 text-slate-700'"
+            >
+              {{ tier.minDonation > 0 ? `${tier.minDonation.toLocaleString()} บาท` : 'ทั่วไป' }}
+            </span>
           </div>
+          <p class="text-xs opacity-90 leading-snug">{{ tier.description }}</p>
         </div>
       </div>
     </div>
 
     <!-- All Wishes Gallery / Search & Filter Section -->
-    <div class="bg-white rounded-3xl p-6 sm:p-8 soft-pink-card">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 soft-purple-card">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
           <div class="flex items-center gap-2 mb-1">
@@ -230,11 +239,11 @@ watch(isAutoFetchEnabled, (newVal) => {
             </h3>
           </div>
           <p class="text-xs text-slate-500 pl-9">
-            คลิกที่การ์ดเพื่อขยายดูชื่อผู้เขียน คำอธิษฐาน และเวลาที่บันทึก
+            คลิกที่การ์ดเพื่อขยายดูกระดาษตามระดับผู้สนับสนุน ชื่อผู้เขียน คำอธิษฐาน และเวลาที่บันทึก
           </p>
         </div>
 
-        <!-- Search input -->
+        <!-- Search and Filter Inputs -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
           <div class="relative">
             <Search class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -245,7 +254,8 @@ watch(isAutoFetchEnabled, (newVal) => {
               class="pl-9 pr-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-pink-300 text-xs w-full sm:w-56 bg-slate-50/50"
             />
           </div>
-          <!-- disable
+
+          <!--
           <button
             @click="isWriteOpen = true"
             class="px-3.5 py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs shadow-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
@@ -257,53 +267,99 @@ watch(isAutoFetchEnabled, (newVal) => {
         </div>
       </div>
 
+      <!-- Quick Tier Filter Chips -->
+      <div class="flex items-center gap-1.5 mb-6 overflow-x-auto pb-1 no-scrollbar">
+        <span class="text-xs font-semibold text-slate-500 shrink-0 mr-1">กรองระดับกิ่ง:</span>
+        <button
+          type="button"
+          @click="selectedTierFilter = 'All'"
+          class="px-3 py-1 rounded-xl text-xs font-semibold transition-all cursor-pointer shrink-0 border"
+          :class="selectedTierFilter === 'All' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'"
+        >
+          ทั้งหมด ({{ wishes.length }})
+        </button>
+
+        <button
+          v-for="tier in TANABATA_TIERS"
+          :key="`filter-${tier.index}`"
+          type="button"
+          @click="selectedTierFilter = tier.index"
+          class="px-2.5 py-1 rounded-xl text-xs font-medium transition-all cursor-pointer shrink-0 border flex items-center gap-1"
+          :class="selectedTierFilter === tier.index ? 'bg-pink-500 text-white border-pink-500 font-bold shadow-xs' : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'"
+        >
+          <span>{{ tier.icon }}</span>
+          <span>กิ่ง {{ tier.index }}: {{ tier.name }}</span>
+        </button>
+      </div>
+
       <!-- Wishes Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div
           v-for="w in filteredWishes"
           :key="w.id"
           @click="openInspect(w)"
-          class="p-5 rounded-2xl border transition-all duration-300 hover:shadow-md hover:-translate-y-1 cursor-pointer flex flex-col justify-between group"
+          class="p-5 rounded-2xl border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer flex flex-col justify-between group relative overflow-hidden"
           :class="[
-            w.color === 'pink' ? 'bg-pink-50/50 border-pink-200 hover:border-pink-300' :
-            w.color === 'blue' ? 'bg-sky-50/50 border-sky-200 hover:border-sky-300' :
-            w.color === 'yellow' ? 'bg-amber-50/50 border-amber-200 hover:border-amber-300' :
-            w.color === 'green' ? 'bg-emerald-50/50 border-emerald-200 hover:border-emerald-300' :
-            w.color === 'purple' ? 'bg-purple-50/50 border-purple-200 hover:border-purple-300' :
-            'bg-rose-50/50 border-rose-200 hover:border-rose-300'
+            w.branchIndex === 0 ? 'bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-950 text-white border-amber-400/60 shadow-md ring-1 ring-amber-400/30' :
+            w.branchIndex === 1 ? 'bg-gradient-to-br from-amber-900/90 via-yellow-950 to-stone-900 text-amber-50 border-amber-400/40' :
+            w.branchIndex === 2 ? 'bg-slate-900 text-slate-100 border-slate-400/30' :
+            w.branchIndex === 3 ? 'bg-rose-50/70 border-rose-200 hover:border-rose-300' :
+            w.branchIndex === 4 ? 'bg-pink-50/70 border-pink-200 hover:border-pink-300' :
+            'bg-stone-50 border-stone-200 hover:border-stone-300'
           ]"
         >
           <div>
             <!-- Top Tag & Time -->
-            <div class="flex items-center justify-between gap-2 mb-2 pb-2 border-b border-slate-900/5">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/80 text-slate-700 shadow-2xs">
-                {{ w.category }}
+            <div class="flex items-center justify-between gap-2 mb-2 pb-2 border-b" :class="w.branchIndex <= 2 ? 'border-white/10' : 'border-slate-900/5'">
+              <!-- Tier Badge -->
+              <span
+                class="px-2 py-0.5 rounded-full text-[10px] font-bold shadow-2xs flex items-center gap-1 border"
+                :class="[
+                  w.branchIndex === 0 ? 'bg-amber-400 text-indigo-950 border-amber-300 font-black' :
+                  w.branchIndex === 1 ? 'bg-yellow-400 text-amber-950 border-yellow-300' :
+                  w.branchIndex === 2 ? 'bg-slate-300 text-slate-900 border-slate-400' :
+                  w.branchIndex === 3 ? 'bg-rose-100 text-rose-700 border-rose-200' :
+                  w.branchIndex === 4 ? 'bg-pink-100 text-pink-700 border-pink-200' :
+                  'bg-stone-200 text-stone-700 border-stone-300'
+                ]"
+              >
+                <span>{{ getTierByBranchIndex(w.branchIndex).icon }}</span>
+                <span>กิ่ง {{ w.branchIndex }}: {{ getTierByBranchIndex(w.branchIndex).name }}</span>
               </span>
 
-              <div class="flex items-center gap-1 text-[10px] text-slate-400 font-medium">
+              <div class="flex items-center gap-1 text-[10px] font-medium" :class="w.branchIndex <= 2 ? 'text-slate-400' : 'text-slate-400'">
                 <Clock class="w-3 h-3" />
                 <span>{{ w.timestamp }}</span>
               </div>
             </div>
 
             <!-- Wish Text -->
-            <p class="text-xs sm:text-sm text-slate-800 leading-relaxed font-medium my-2 line-clamp-4">
+            <p
+              class="text-xs sm:text-sm leading-relaxed font-medium my-2 line-clamp-4"
+              :class="w.branchIndex <= 2 ? 'text-slate-100' : 'text-slate-800'"
+            >
               "{{ w.wish }}"
             </p>
           </div>
 
           <!-- Bottom: Author Name & Blessings (3 Core Requirements shown) -->
-          <div class="mt-4 pt-3 border-t border-slate-900/5 flex items-center justify-between">
+          <div class="mt-4 pt-3 border-t flex items-center justify-between" :class="w.branchIndex <= 2 ? 'border-white/10' : 'border-slate-900/5'">
             <div class="flex items-center gap-2">
-              <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-[10px] font-bold text-slate-700 shadow-2xs border border-slate-200/60">
-                {{ w.author }}
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shadow-2xs border"
+                :class="w.branchIndex <= 2 ? 'bg-white/20 text-white border-white/30' : 'bg-white text-slate-700 border-slate-200/60'"
+              >
+                {{ w.author.charAt(0) }}
               </div>
-              <span class="text-xs font-bold text-slate-800 font-heading">
+              <span
+                class="text-xs font-bold font-heading truncate max-w-[120px]"
+                :class="w.branchIndex <= 2 ? 'text-white' : 'text-slate-800'"
+              >
                 {{ w.author }}
               </span>
             </div>
 
-            <div class="flex items-center gap-1 text-xs text-pink-600 font-semibold group-hover:scale-105 transition-transform">
+            <div class="flex items-center gap-1 text-xs font-semibold group-hover:scale-105 transition-transform text-pink-400">
               <Heart class="w-3.5 h-3.5 fill-pink-500 text-pink-500" />
               <span>{{ w.blessings }}</span>
             </div>
