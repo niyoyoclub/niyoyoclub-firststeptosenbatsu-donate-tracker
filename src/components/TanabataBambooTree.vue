@@ -497,7 +497,7 @@ const getSwayClass = (idx: number, branchIdx: number) => {
             <!-- Silver Fan Badge -->
             <div class="mb-0.5 sm:mb-1 flex items-center justify-center">
               <span class="px-1 sm:px-1.5 py-0.2 sm:py-0.5 rounded text-[6.5px] sm:text-[7.5px] md:text-[8px] font-bold bg-slate-600 text-white shadow-2xs">
-                🌸 Whisper
+                🌸 Sakura
               </span>
             </div>
 

@@ -137,11 +137,11 @@ const handleCopyWish = () => {
         <div class="mt-3 sm:mt-4 pt-2 sm:pt-2.5 border-t border-amber-300/50 flex items-center justify-between gap-2 min-w-0">
           <div class="flex items-center gap-1.5 sm:gap-2.5 min-w-0">
             <div class="w-6 h-6 sm:w-8 md:w-9 sm:h-8 md:h-9 rounded-full bg-gradient-to-tr from-amber-400 via-pink-500 to-indigo-600 text-white shadow-md flex items-center justify-center text-[9px] sm:text-xs font-black shrink-0">
-              💎
+              🐱
             </div>
             <div class="min-w-0">
               <div class="text-[8px] sm:text-[9px] md:text-[10px] uppercase font-bold tracking-wider text-amber-800 truncate">
-                ผู้เขียนคำอธิษฐาน (Diamond Patron)
+                ผู้เขียนคำอธิษฐาน บอสแมวสายเปย์
               </div>
               <div class="text-[11px] sm:text-xs md:text-sm font-black text-indigo-950 font-heading flex items-center gap-1 min-w-0">
                 <span class="truncate max-w-[80px] sm:max-w-[120px] md:max-w-[160px]">{{ wish.author }}</span>
@@ -154,7 +154,7 @@ const handleCopyWish = () => {
           <div class="text-right shrink-0">
             <span class="inline-flex items-center gap-1 px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-amber-400/30 border border-amber-400 text-indigo-950 text-[9px] sm:text-xs font-black shadow-xs whitespace-nowrap">
               <Heart class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-rose-500 text-rose-500 shrink-0" />
-              <span>{{ wish.blessings }} พรเพชร</span>
+              <span>{{ wish.blessings }} พร Boss Meow</span>
             </span>
           </div>
         </div>
@@ -193,11 +193,11 @@ const handleCopyWish = () => {
         <div class="mt-3 sm:mt-4 pt-2 sm:pt-2.5 border-t border-amber-300/60 flex items-center justify-between gap-2 min-w-0">
           <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
             <div class="w-6 h-6 sm:w-7 md:w-8 sm:h-7 md:h-8 rounded-full bg-amber-500 text-white shadow-xs flex items-center justify-center text-[9px] sm:text-xs font-bold shrink-0">
-              👑
+              💖
             </div>
             <div class="min-w-0">
               <div class="text-[8px] sm:text-[9px] md:text-[10px] uppercase font-bold tracking-wider text-amber-800 truncate">
-                ผู้เขียนคำอธิษฐาน (Gold Fan)
+                ผู้เขียนคำอธิษฐาน หัวใจเต็มร้อย
               </div>
               <div class="text-[11px] sm:text-xs md:text-sm font-bold text-amber-950 font-heading truncate max-w-[80px] sm:max-w-[120px] md:max-w-[160px]">
                 {{ wish.author }}
@@ -209,7 +209,7 @@ const handleCopyWish = () => {
           <div class="text-right shrink-0">
             <span class="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-amber-200 text-amber-900 text-[9px] sm:text-xs font-bold shadow-2xs border border-amber-300 whitespace-nowrap">
               <Heart class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-rose-500 text-rose-500 shrink-0" />
-              <span>{{ wish.blessings }} พรทอง</span>
+              <span>{{ wish.blessings }} พรหัวใจ</span>
             </span>
           </div>
         </div>
@@ -245,11 +245,11 @@ const handleCopyWish = () => {
         <div class="mt-3 sm:mt-4 pt-2 sm:pt-2.5 border-t border-slate-200 flex items-center justify-between gap-2 min-w-0">
           <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
             <div class="w-6 h-6 sm:w-7 md:w-8 sm:h-7 md:h-8 rounded-full bg-slate-600 text-white shadow-xs flex items-center justify-center text-[9px] sm:text-xs font-bold shrink-0">
-              ✨
+              🌸
             </div>
             <div class="min-w-0">
               <div class="text-[8px] sm:text-[9px] md:text-[10px] uppercase font-bold tracking-wider text-slate-500 truncate">
-                ผู้เขียนคำอธิษฐาน (Silver Fan)
+                ผู้เขียนคำอธิษฐาน ซากุระแรกแย้ม
               </div>
               <div class="text-[11px] sm:text-xs md:text-sm font-bold text-slate-900 font-heading truncate max-w-[80px] sm:max-w-[120px] md:max-w-[160px]">
                 {{ wish.author }}
@@ -260,7 +260,7 @@ const handleCopyWish = () => {
           <div class="text-right shrink-0">
             <span class="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-slate-200 text-slate-800 text-[9px] sm:text-xs font-bold shadow-2xs whitespace-nowrap">
               <Heart class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-rose-500 text-rose-500 shrink-0" />
-              <span>{{ wish.blessings }} พรเงิน</span>
+              <span>{{ wish.blessings }} พรซากุระ</span>
             </span>
           </div>
         </div>
@@ -277,7 +277,7 @@ const handleCopyWish = () => {
 
         <div class="flex items-center justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-3 pb-1.5 sm:pb-2 border-b border-rose-200 min-w-0">
           <div class="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-bold text-rose-800 truncate">
-            <span class="shrink-0">🌸</span>
+            <span class="shrink-0">🌟</span>
             <span class="truncate">{{ wish.category }}</span>
           </div>
 
@@ -296,11 +296,11 @@ const handleCopyWish = () => {
         <div class="mt-3 sm:mt-4 pt-2 sm:pt-2.5 border-t border-rose-200 flex items-center justify-between gap-2 min-w-0">
           <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
             <div class="w-6 h-6 sm:w-7 md:w-8 sm:h-7 md:h-8 rounded-full bg-rose-500 text-white shadow-2xs flex items-center justify-center text-[9px] sm:text-xs font-bold shrink-0">
-              🌸
+              🌟
             </div>
             <div class="min-w-0">
               <div class="text-[8px] sm:text-[9px] md:text-[10px] uppercase font-semibold tracking-wider text-rose-700 truncate">
-                ผู้เขียนคำอธิษฐาน (Fan >100฿)
+                ผู้เขียนคำอธิษฐาน ประกายดาว
               </div>
               <div class="text-[11px] sm:text-xs md:text-sm font-bold text-rose-950 font-heading truncate max-w-[80px] sm:max-w-[120px] md:max-w-[160px]">
                 {{ wish.author }}
@@ -311,7 +311,7 @@ const handleCopyWish = () => {
           <div class="text-right shrink-0">
             <span class="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-white/80 text-rose-600 text-[9px] sm:text-xs font-bold shadow-2xs whitespace-nowrap">
               <Heart class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-rose-500 text-rose-500 shrink-0" />
-              <span>{{ wish.blessings }} ร่วมส่งพร</span>
+              <span>{{ wish.blessings }} พรประกายดาว</span>
             </span>
           </div>
         </div>
@@ -347,11 +347,11 @@ const handleCopyWish = () => {
         <div class="mt-3 sm:mt-4 pt-2 sm:pt-2.5 border-t border-slate-200 flex items-center justify-between gap-2 min-w-0">
           <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
             <div class="w-6 h-6 sm:w-7 md:w-8 sm:h-7 md:h-8 rounded-full bg-pink-400 text-white shadow-2xs flex items-center justify-center text-[9px] sm:text-xs font-bold shrink-0">
-              💖
+              ✨
             </div>
             <div class="min-w-0">
               <div class="text-[8px] sm:text-[9px] md:text-[10px] uppercase font-semibold tracking-wider text-slate-500 truncate">
-                ผู้เขียนคำอธิษฐาน (Fan >1฿)
+                ผู้เขียนคำอธิษฐาน ละอองดารา
               </div>
               <div class="text-[11px] sm:text-xs md:text-sm font-bold text-slate-900 font-heading truncate max-w-[80px] sm:max-w-[120px] md:max-w-[160px]">
                 {{ wish.author }}
@@ -362,7 +362,7 @@ const handleCopyWish = () => {
           <div class="text-right shrink-0">
             <span class="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-white text-pink-600 text-[9px] sm:text-xs font-bold shadow-2xs whitespace-nowrap">
               <Heart class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-pink-500 text-pink-500 shrink-0" />
-              <span>{{ wish.blessings }} ร่วมส่งพร</span>
+              <span>{{ wish.blessings }} พรละอองดารา</span>
             </span>
           </div>
         </div>
@@ -413,7 +413,7 @@ const handleCopyWish = () => {
           <div class="text-right shrink-0">
             <span class="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-white/90 text-stone-700 text-[9px] sm:text-xs font-bold shadow-2xs whitespace-nowrap">
               <Heart class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-stone-500 text-stone-500 shrink-0" />
-              <span>{{ wish.blessings }} ร่วมส่งพร</span>
+              <span>{{ wish.blessings }} พร</span>
             </span>
           </div>
         </div>
