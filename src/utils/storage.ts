@@ -192,12 +192,12 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
       const pattern =  row[10] ? row[10].trim() : 'cherry';
 
       if (donationAmount > 0) {
-        let idx = 5;
-        if (donationAmount >= 2000) idx = 0;
-        else if (donationAmount >= 500) idx = 1;
-        else if (donationAmount >= 200) idx = 2;
-        else if (donationAmount >= 100) idx = 3;
-        else if (donationAmount >= 50) idx = 4;
+        // let idx = 5;
+        // if (donationAmount >= 2000) idx = 0;
+        // else if (donationAmount >= 500) idx = 1;
+        // else if (donationAmount >= 200) idx = 2;
+        // else if (donationAmount >= 100) idx = 3;
+        // else if (donationAmount >= 50) idx = 4;
 
         results.push({
           id,
@@ -206,7 +206,7 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
           timestamp: time,
           color,
           category,
-          branchIndex: idx,
+          branchIndex,
           donationAmount,
           hangPositionPercent,
           blessings,
@@ -217,7 +217,7 @@ export function parseCSVTanabataWishes(csvText: string): TanabataWish[] {
   }
 
   console.log("parseCSVTanabataWishes(string) end");
-  return results;
+  return results.reverse();
 }
 
 export async function fetchTanabataCSV(): TanabataWish[] {
