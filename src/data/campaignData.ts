@@ -237,18 +237,19 @@ export const INITIAL_TANABATA_WISHES: TanabataWish[] = [
   {
     id: "tb-1",
     author: "น้องส้มส้ม 🍊",
-    wish: "ขอให้นีญ่าติด Senbatsu 1 ใน 16 คนในงาน General Election ครั้งนี้ให้ได้นะคะ! รอยยิ้มของนีญ่าเปล่งประกายที่สุดในหัวใจแฟนคลับทุกคนเลย ✨",
+    wish: "ขอให้นีย่าติด Senbatsu 1 ใน 16 คนในงาน General Election ครั้งนี้ให้ได้นะคะ! รอยยิ้มของนีย่าเปล่งประกายที่สุดในหัวใจแฟนคลับทุกคนเลย ✨",
     timestamp: "2026-07-07 19:45",
     color: "pink",
     category: "ความฝัน & เซ็มบัตสึ 🌟",
     branchIndex: 0,
+    donationAmount: 8888,
     hangPositionPercent: 25,
-    blessings: 10,
+    blessings: 64,
     pattern: "cherry"
-  }
-];
-*/
-/*  
+  },
+//];
+
+
   {
     id: "tb-2",
     author: "Niya_Oshi_Always",
