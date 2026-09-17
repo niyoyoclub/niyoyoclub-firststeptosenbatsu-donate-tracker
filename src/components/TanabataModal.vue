@@ -371,49 +371,49 @@ const handleCopyWish = () => {
       <!-- TIER 5: GENERAL PUBLIC / WASHI PAPER CARD -->
       <div
         v-else
-        class="relative rounded-xl sm:rounded-2xl p-3 sm:p-5 md:p-6 lg:p-7 border-2 border-stone-300 washi-paper-bg shadow-sm mb-3.5 sm:mb-5 text-stone-900 overflow-hidden min-w-0"
+        class="relative rounded-xl sm:rounded-2xl p-3 sm:p-5 md:p-6 lg:p-7 border-2 border-pink-200 bg-gradient-to-b from-pink-50 via-purple-50 to-sky-50 shadow-sm mb-3.5 sm:mb-5 text-slate-900 overflow-hidden min-w-0"
       >
         <div class="flex justify-center -mt-5 sm:-mt-8 mb-2 sm:mb-3">
-          <div class="w-3 sm:w-3.5 md:w-4 h-5 sm:h-6 md:h-7 border-2 border-stone-400 rounded-full bg-stone-300/60 shadow-xs" />
+          <div class="w-3 sm:w-3.5 md:w-4 h-5 sm:h-6 md:h-7 border-2 border-pink-400/80 rounded-full bg-pink-300/40 shadow-xs" />
         </div>
 
-        <div class="flex items-center justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-3 pb-1.5 sm:pb-2 border-b border-stone-200 min-w-0">
-          <div class="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-medium text-stone-700 truncate">
+        <div class="flex items-center justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-3 pb-1.5 sm:pb-2 border-b border-slate-200 min-w-0">
+          <div class="flex items-center gap-1 sm:gap-1.5 text-[10px] sm:text-xs font-medium text-pink-800 truncate">
             <Tag class="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-70 shrink-0" />
             <span class="truncate">{{ wish.category }}</span>
           </div>
 
-          <div class="text-[9px] sm:text-[10px] md:text-[11px] font-medium text-stone-500 flex items-center gap-1 shrink-0">
+          <div class="text-[9px] sm:text-[10px] md:text-[11px] font-medium text-slate-500 flex items-center gap-1 shrink-0">
             <Clock class="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
             <span>{{ wish.timestamp }}</span>
           </div>
         </div>
 
         <div class="my-2.5 sm:my-3">
-          <p class="text-xs sm:text-base md:text-lg font-serif leading-relaxed text-stone-900 whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
+          <p class="text-xs sm:text-base md:text-lg font-medium leading-relaxed font-sans text-slate-800 whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
             "{{ wish.wish }}"
           </p>
         </div>
 
-        <div class="mt-3 sm:mt-4 pt-2 sm:pt-2.5 border-t border-stone-200 flex items-center justify-between gap-2 min-w-0">
+        <div class="mt-3 sm:mt-4 pt-2 sm:pt-2.5 border-t border-slate-200 flex items-center justify-between gap-2 min-w-0">
           <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
-            <div class="w-6 h-6 sm:w-7 md:w-8 sm:h-7 md:h-8 rounded-full bg-stone-200 text-stone-700 shadow-2xs flex items-center justify-center text-[9px] sm:text-xs font-bold shrink-0">
-              🎋
+            <div class="w-6 h-6 sm:w-7 md:w-8 sm:h-7 md:h-8 rounded-full bg-pink-400 text-white shadow-2xs flex items-center justify-center text-[9px] sm:text-xs font-bold shrink-0">
+              ✨
             </div>
             <div class="min-w-0">
-              <div class="text-[8px] sm:text-[9px] md:text-[10px] uppercase font-semibold tracking-wider text-stone-500 truncate">
-                ผู้เขียนคำอธิษฐาน (ทั่วไป)
+              <div class="text-[8px] sm:text-[9px] md:text-[10px] uppercase font-semibold tracking-wider text-slate-500 truncate">
+                ผู้เขียนคำอธิษฐาน ละอองดารา
               </div>
-              <div class="text-[11px] sm:text-xs md:text-sm font-bold text-stone-900 font-heading truncate max-w-[80px] sm:max-w-[120px] md:max-w-[160px]">
+              <div class="text-[11px] sm:text-xs md:text-sm font-bold text-slate-900 font-heading truncate max-w-[80px] sm:max-w-[120px] md:max-w-[160px]">
                 {{ wish.author }}
               </div>
             </div>
           </div>
 
           <div class="text-right shrink-0">
-            <span class="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-white/90 text-stone-700 text-[9px] sm:text-xs font-bold shadow-2xs whitespace-nowrap">
-              <Heart class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-stone-500 text-stone-500 shrink-0" />
-              <span>{{ wish.blessings }} พร</span>
+            <span class="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-white text-pink-600 text-[9px] sm:text-xs font-bold shadow-2xs whitespace-nowrap">
+              <Heart class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-pink-500 text-pink-500 shrink-0" />
+              <span>{{ wish.blessings }} พรละอองดารา</span>
             </span>
           </div>
         </div>

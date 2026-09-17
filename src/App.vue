@@ -20,7 +20,8 @@ import {
   INITIAL_MILESTONES,
   INITIAL_REWARD_TIERS,
   INITIAL_WISHES,
-  INITIAL_EXPENSES
+  INITIAL_EXPENSES,
+  INITIAL_TANABATA_WISHES
 } from './data/campaignData';
 import {
   getCampaign,
@@ -144,7 +145,11 @@ const refreshTanabata = async () => {
     //tanabataWishes.value = datas;      
   //});  
 
-  const datas = await fetchTanabataCSV();
+  let datas = await fetchTanabataCSV();
+  if(datas.length === 0)
+  {
+    datas = INITIAL_TANABATA_WISHES;
+  }
   tanabataWishes.value = datas
 
   //console.log('refreshTanabata() end');

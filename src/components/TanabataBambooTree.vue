@@ -608,42 +608,43 @@ const getSwayClass = (idx: number, branchIdx: number) => {
           <!-- Tier 5: General Public / Non-donate (Traditional Washi Paper) -->
           <div
             v-else
-            class="relative w-[66px] sm:w-18 md:w-20 lg:w-23 rounded-md sm:rounded-lg p-1 sm:p-1.5 md:p-2 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border border-amber-200/80 washi-paper-bg shadow-xs"
+            class="relative w-[66px] sm:w-18 md:w-20 lg:w-23 rounded-md sm:rounded-lg p-1 sm:p-1.5 md:p-2 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border border-pink-200 bg-gradient-to-b from-pink-50/95 via-purple-50/95 to-sky-50/95 shadow-sm"
             :class="getSwayClass(idx, wish.branchIndex)"
           >
             <!-- Top String Hole -->
-            <div class="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-stone-900/20 mx-auto -mt-1 mb-0.5 sm:mb-1" />
+            <div class="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-slate-900/20 mx-auto -mt-1 mb-0.5 sm:mb-1" />
 
-            <!-- General Tag -->
+            <!-- Heart Fan Badge -->
             <div class="mb-0.5 sm:mb-1 flex items-center justify-center">
-              <span class="px-1 sm:px-1.5 py-0.2 sm:py-0.5 rounded text-[6.5px] sm:text-[7.5px] md:text-[8px] font-medium bg-emerald-700 text-emerald-50">
-                🎋 ทั่วไป
+              <span class="px-1 sm:px-1.5 py-0.2 sm:py-0.5 rounded text-[6.5px] sm:text-[7.5px] md:text-[8px] font-medium bg-pink-400 text-white">
+                🌟 Stardust
               </span>
             </div>
 
             <!-- Wish text preview -->
             <div class="min-h-[32px] sm:min-h-[38px] md:min-h-[44px] lg:min-h-[50px] flex items-center justify-center">
-              <p class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[10.5px] font-serif leading-tight sm:leading-snug line-clamp-3 text-stone-800 break-words [overflow-wrap:anywhere]">
+              <p class="text-[8px] sm:text-[9px] md:text-[10px] lg:text-[10.5px] font-medium leading-tight sm:leading-snug line-clamp-3 text-slate-800 break-words [overflow-wrap:anywhere]">
                 {{ wish.wish }}
               </p>
             </div>
 
             <!-- Wisher Author Name -->
-            <div class="mt-0.5 sm:mt-1 pt-0.5 sm:pt-1 border-t border-stone-200 flex items-center justify-center gap-1">
-              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-medium text-stone-700 truncate max-w-[45px] sm:max-w-[55px] md:max-w-[65px]">
+            <div class="mt-0.5 sm:mt-1 pt-0.5 sm:pt-1 border-t border-slate-200 flex items-center justify-center gap-1">
+              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-bold text-slate-700 truncate max-w-[45px] sm:max-w-[55px] md:max-w-[65px]">
                 {{ wish.author }}
               </span>
             </div>
 
-            <!-- Minimalist Tassel -->
-            <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 sm:w-2.5 h-1 rounded-b bg-stone-300 opacity-75" />
+            <!-- Heart Ribbon -->
+            <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 sm:w-2.5 h-1 rounded-b bg-pink-300 opacity-80" />
 
             <!-- Hover Hint Badge -->
             <div class="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 hidden group-hover:flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-slate-900/90 text-white text-[9px] sm:text-[10px] whitespace-nowrap shadow-md z-30 pointer-events-none">
-              <Eye class="w-2.5 sm:w-3 h-2.5 sm:h-3 text-emerald-400" />
-              <span>🎋 คลิกเพื่ออ่าน</span>
+              <Eye class="w-2.5 sm:w-3 h-2.5 sm:h-3 text-pink-400" />
+              <span>🌟 คลิกเพื่ออ่าน</span>
             </div>
           </div>
+
         </div>
       </div>
     </div>

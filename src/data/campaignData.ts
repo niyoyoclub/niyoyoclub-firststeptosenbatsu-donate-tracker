@@ -247,9 +247,9 @@ export const INITIAL_TANABATA_WISHES: TanabataWish[] = [
     blessings: 64,
     pattern: "cherry"
   },
-];
-*/
-/*
+//];
+
+
   {
     id: "tb-2",
     author: "Niya_Oshi_Always",

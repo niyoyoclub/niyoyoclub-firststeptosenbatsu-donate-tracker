@@ -53,13 +53,13 @@ export const TANABATA_TIERS: TanabataTierInfo[] = [
     },
     {
         index: 5,
-        name: 'คนทั่วไป (Free)',
-        nameEn: 'General Wisher',
-        minDonation: 0,
-        badge: '🎋 ทั่วไป (Free)',
-        icon: '🎋',
-        colorName: 'Traditional Washi',
-        description: 'คนทั่วไป หรือไม่ได้ร่วมโดเนท • กระดาษสาญี่ปุ่นธรรมชาติ เรียบง่าย จริงใจ อบอุ่น'
+        name: 'Stardust',
+        nameEn: 'Stardust Supporter',
+        minDonation: 50,
+        badge: '✨ Stardust',
+        icon: '✨',
+        colorName: 'Stardust Pastel',
+        description: 'โดเนท 50 บาท • ดาราดวงน้อย แสงดาวเริ่มต้นที่มีพลัง จุดรวมพลังใจก้อนใหญ่'
     }
 ];
 
