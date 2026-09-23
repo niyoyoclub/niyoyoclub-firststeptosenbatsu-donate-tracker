@@ -1,7 +1,7 @@
 import { CampaignData, Donation, WishMessage, Milestone, TanabataWish } from '../types';
 import { INITIAL_CAMPAIGN, INITIAL_DONATIONS, INITIAL_WISHES, INITIAL_MILESTONES, INITIAL_TANABATA_WISHES } from '../data/campaignData';
 
-const CAMPAIGN_KEY = 'niya_campaign_data_v1.2';
+const CAMPAIGN_KEY = 'niya_campaign_data_v1.3';
 const DONATIONS_KEY = 'niya_donations_data_v1';
 const WISHES_KEY = 'niya_wishes_data_v1';
 const TANABATA_KEY = 'niya_tanabata_wishes_v1.1';
