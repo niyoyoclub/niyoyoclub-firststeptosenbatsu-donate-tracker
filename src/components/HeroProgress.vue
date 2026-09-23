@@ -183,6 +183,14 @@ const setCurrentIndex = (index) => {
           เพจป่าป๊าของเจนหก กิจกรรม FANBASE CHALLENGE GE6: ศึกล่า Token รวมพลังเพื่อคนที่รัก! อันดับที่ 4 ได้รางวัล 100 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <span class="font-bold">กิจกรรมที่ 5</span>
+          [CAM FOR NIYA] เป็นกิจกรรมนำส่ง link ภาพ/คลิป ในงาน Ponytail to Shushu เมื่อวันที่ 19 กันยายน 2569 @MBK Center มีจำนวน link ที่เข้าเงื่อนไขทั้งหมด 50 และทบ Tokens จากผู้สนับสนุน 15 Tokens ต่อ link คิดเป็น 750 Tokens
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <span class="font-bold">กิจกรรมที่ 6</span>
+          PRE-ORDER T-Shirt GE เป็นกิจกรรมที่ผู้สนับสนุนทบ Tokens จากยอดพรีออเดอร์เสื้อ T-Shirt ลายโปรเตอร์ GE2026 ของน้องนีญ่า ตัวละ 20 Tokens (กำลังดำเนินการ) และ ยังได้รับ cashback ให้ตัวละ 200฿ ถ้าลงทะเบียนกับทาง Niyoyo Club (50 สิทธิ์)
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">          
