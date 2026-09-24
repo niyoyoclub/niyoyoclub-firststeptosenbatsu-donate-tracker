@@ -402,7 +402,7 @@ const getSwayClass = (idx: number, branchIdx: number) => {
           <!-- Tier 0: Diamond Fan (Holographic + Glow + Shimmer) -->
           <div
             v-if="wish.branchIndex === 0"
-            class="relative w-[78px] sm:w-22 md:w-24 lg:w-28 rounded-lg sm:rounded-xl p-1.5 sm:p-2 md:p-2.5 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border sm:border-2 border-amber-300/90 diamond-glow animate-shimmer"
+            class="relative w-[56px] sm:w-16 md:w-18 lg:w-20 rounded-lg sm:rounded-xl p-1 sm:p-1.5 md:p-2 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border sm:border-2 border-amber-300/90 diamond-glow animate-shimmer"
             :class="[
               'bg-gradient-to-b from-indigo-100/95 via-pink-100/95 to-amber-100/95 shadow-xl',
               getSwayClass(idx, wish.branchIndex)
@@ -427,7 +427,7 @@ const getSwayClass = (idx: number, branchIdx: number) => {
 
             <!-- Wisher Author Name -->
             <div class="mt-0.5 sm:mt-1 pt-0.5 sm:pt-1 border-t border-amber-300/60 flex items-center justify-center gap-1">
-              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-black text-indigo-900 truncate max-w-[55px] sm:max-w-[65px] md:max-w-[75px]">
+              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-black text-indigo-900 truncate max-w-[42px] sm:max-w-[48px] md:max-w-[56px]">
                 {{ wish.author }}
               </span>
             </div>
@@ -435,7 +435,7 @@ const getSwayClass = (idx: number, branchIdx: number) => {
             <!-- Gold Silk Tassel & Crystal Bell on bottom -->
             <div class="absolute -bottom-2.5 sm:-bottom-3 left-1/2 -translate-x-1/2 flex flex-col items-center">
               <div class="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-amber-400 shadow-xs border border-white" />
-              <div class="w-2.5 sm:w-3.5 h-1.5 sm:h-2 rounded-b bg-gradient-to-b from-amber-400 via-pink-500 to-purple-600" />
+              <div class="w-2 sm:w-2.5 h-1.5 sm:h-2 rounded-b bg-gradient-to-b from-amber-400 via-pink-500 to-purple-600" />
             </div>
 
             <!-- Hover Hint Badge -->
@@ -448,7 +448,7 @@ const getSwayClass = (idx: number, branchIdx: number) => {
           <!-- Tier 1: Gold Fan (Imperial Gold Leaf + Gold Foil) -->
           <div
             v-else-if="wish.branchIndex === 1"
-            class="relative w-[74px] sm:w-20 md:w-22 lg:w-26 rounded-lg sm:rounded-xl p-1.5 sm:p-2 md:p-2.5 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border sm:border-2 border-amber-400 bg-gradient-to-b from-amber-100/95 via-yellow-50/95 to-amber-200/95 shadow-[0_0_12px_rgba(245,158,11,0.35)]"
+            class="relative w-[52px] sm:w-15 md:w-17 lg:w-19 rounded-lg sm:rounded-xl p-1 sm:p-1.5 md:p-2 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border sm:border-2 border-amber-400 bg-gradient-to-b from-amber-100/95 via-yellow-50/95 to-amber-200/95 shadow-[0_0_12px_rgba(245,158,11,0.35)]"
             :class="getSwayClass(idx, wish.branchIndex)"
           >
             <!-- Top String Hole -->
@@ -470,13 +470,13 @@ const getSwayClass = (idx: number, branchIdx: number) => {
 
             <!-- Wisher Author Name -->
             <div class="mt-0.5 sm:mt-1 pt-0.5 sm:pt-1 border-t border-amber-300/50 flex items-center justify-center gap-1">
-              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-bold text-amber-900 truncate max-w-[50px] sm:max-w-[60px] md:max-w-[70px]">
+              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-bold text-amber-900 truncate max-w-[38px] sm:max-w-[45px] md:max-w-[52px]">
                 {{ wish.author }}
               </span>
             </div>
 
             <!-- Gold Tassel -->
-            <div class="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 w-2.5 sm:w-3.5 h-1.5 sm:h-2 rounded-b bg-gradient-to-b from-amber-400 to-yellow-600 shadow-xs" />
+            <div class="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 w-2 sm:w-2.5 h-1.5 sm:h-2 rounded-b bg-gradient-to-b from-amber-400 to-yellow-600 shadow-xs" />
 
             <!-- Hover Hint Badge -->
             <div class="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 hidden group-hover:flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-slate-900/90 text-yellow-300 text-[9px] sm:text-[10px] font-semibold whitespace-nowrap shadow-md z-30 pointer-events-none">
@@ -488,7 +488,7 @@ const getSwayClass = (idx: number, branchIdx: number) => {
           <!-- Tier 2: Silver Fan (Platinum / Silver Luster) -->
           <div
             v-else-if="wish.branchIndex === 2"
-            class="relative w-[70px] sm:w-19 md:w-21 lg:w-24 rounded-md sm:rounded-lg p-1 sm:p-1.5 md:p-2 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border sm:border-2 border-slate-300 bg-gradient-to-b from-slate-100/95 via-sky-50/95 to-slate-200/95 shadow-md"
+            class="relative w-[48px] sm:w-14 md:w-16 lg:w-18 rounded-md sm:rounded-lg p-0.5 sm:p-1 md:p-1.5 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border sm:border-2 border-slate-300 bg-gradient-to-b from-slate-100/95 via-sky-50/95 to-slate-200/95 shadow-md"
             :class="getSwayClass(idx, wish.branchIndex)"
           >
             <!-- Top String Hole -->
@@ -510,13 +510,13 @@ const getSwayClass = (idx: number, branchIdx: number) => {
 
             <!-- Wisher Author Name -->
             <div class="mt-0.5 sm:mt-1 pt-0.5 sm:pt-1 border-t border-slate-300 flex items-center justify-center gap-1">
-              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-bold text-slate-800 truncate max-w-[48px] sm:max-w-[58px] md:max-w-[68px]">
+              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-bold text-slate-800 truncate max-w-[36px] sm:max-w-[42px] md:max-w-[48px]">
                 {{ wish.author }}
               </span>
             </div>
 
             <!-- Silver Tassel -->
-            <div class="absolute -bottom-1.5 sm:-bottom-2 left-1/2 -translate-x-1/2 w-2 sm:w-3 h-1 sm:h-1.5 rounded-b bg-slate-400" />
+            <div class="absolute -bottom-1.5 sm:-bottom-2 left-1/2 -translate-x-1/2 w-1.5 sm:w-2 h-1 sm:h-1.5 rounded-b bg-slate-400" />
 
             <!-- Hover Hint Badge -->
             <div class="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 hidden group-hover:flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-slate-900/90 text-slate-200 text-[9px] sm:text-[10px] whitespace-nowrap shadow-md z-30 pointer-events-none">
@@ -528,7 +528,7 @@ const getSwayClass = (idx: number, branchIdx: number) => {
           <!-- Tier 3: Fan > 100฿ (Sakura Supporter Paper) -->
           <div
             v-else-if="wish.branchIndex === 3"
-            class="relative w-[70px] sm:w-19 md:w-21 lg:w-24 rounded-md sm:rounded-lg p-1 sm:p-1.5 md:p-2 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border border-rose-300 bg-gradient-to-b from-rose-50/95 via-pink-100/95 to-rose-100/95 shadow-md shadow-pink-500/20"
+            class="relative w-[48px] sm:w-14 md:w-16 lg:w-18 rounded-md sm:rounded-lg p-0.5 sm:p-1 md:p-1.5 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border border-rose-300 bg-gradient-to-b from-rose-50/95 via-pink-100/95 to-rose-100/95 shadow-md shadow-pink-500/20"
             :class="getSwayClass(idx, wish.branchIndex)"
           >
             <!-- Top String Hole -->
@@ -550,13 +550,13 @@ const getSwayClass = (idx: number, branchIdx: number) => {
 
             <!-- Wisher Author Name -->
             <div class="mt-0.5 sm:mt-1 pt-0.5 sm:pt-1 border-t border-rose-200 flex items-center justify-center gap-1">
-              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-bold text-rose-800 truncate max-w-[48px] sm:max-w-[58px] md:max-w-[68px]">
+              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-bold text-rose-800 truncate max-w-[36px] sm:max-w-[42px] md:max-w-[48px]">
                 {{ wish.author }}
               </span>
             </div>
 
             <!-- Sakura Ribbon -->
-            <div class="absolute -bottom-1.5 sm:-bottom-2 left-1/2 -translate-x-1/2 w-2.5 sm:w-3.5 h-1 sm:h-1.5 rounded-b-md bg-rose-400 opacity-80" />
+            <div class="absolute -bottom-1.5 sm:-bottom-2 left-1/2 -translate-x-1/2 w-2 sm:w-2.5 h-1 sm:h-1.5 rounded-b-md bg-rose-400 opacity-80" />
 
             <!-- Hover Hint Badge -->
             <div class="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 hidden group-hover:flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-slate-900/90 text-white text-[9px] sm:text-[10px] whitespace-nowrap shadow-md z-30 pointer-events-none">
@@ -568,7 +568,7 @@ const getSwayClass = (idx: number, branchIdx: number) => {
           <!-- Tier 4: Fan > 1฿ (Sweet Heart Supporter Paper) -->
           <div
             v-else-if="wish.branchIndex === 4"
-            class="relative w-[66px] sm:w-18 md:w-20 lg:w-23 rounded-md sm:rounded-lg p-1 sm:p-1.5 md:p-2 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border border-pink-200 bg-gradient-to-b from-pink-50/95 via-purple-50/95 to-sky-50/95 shadow-sm"
+            class="relative w-[44px] sm:w-13 md:w-15 lg:w-17 rounded-md sm:rounded-lg p-0.5 sm:p-1 md:p-1.5 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border border-pink-200 bg-gradient-to-b from-pink-50/95 via-purple-50/95 to-sky-50/95 shadow-sm"
             :class="getSwayClass(idx, wish.branchIndex)"
           >
             <!-- Top String Hole -->
@@ -590,13 +590,13 @@ const getSwayClass = (idx: number, branchIdx: number) => {
 
             <!-- Wisher Author Name -->
             <div class="mt-0.5 sm:mt-1 pt-0.5 sm:pt-1 border-t border-slate-200 flex items-center justify-center gap-1">
-              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-bold text-slate-700 truncate max-w-[45px] sm:max-w-[55px] md:max-w-[65px]">
+              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-bold text-slate-700 truncate max-w-[34px] sm:max-w-[40px] md:max-w-[46px]">
                 {{ wish.author }}
               </span>
             </div>
 
             <!-- Heart Ribbon -->
-            <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 sm:w-2.5 h-1 rounded-b bg-pink-300 opacity-80" />
+            <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 sm:w-2 h-1 rounded-b bg-pink-300 opacity-80" />
 
             <!-- Hover Hint Badge -->
             <div class="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 hidden group-hover:flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-slate-900/90 text-white text-[9px] sm:text-[10px] whitespace-nowrap shadow-md z-30 pointer-events-none">
@@ -608,7 +608,7 @@ const getSwayClass = (idx: number, branchIdx: number) => {
           <!-- Tier 5: General Public / Non-donate (Traditional Washi Paper) -->
           <div
             v-else
-            class="relative w-[66px] sm:w-18 md:w-20 lg:w-23 rounded-md sm:rounded-lg p-1 sm:p-1.5 md:p-2 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border border-pink-200 bg-gradient-to-b from-pink-50/95 via-purple-50/95 to-sky-50/95 shadow-sm"
+            class="relative w-[44px] sm:w-13 md:w-15 lg:w-17 rounded-md sm:rounded-lg p-0.5 sm:p-1 md:p-1.5 text-center transition-all duration-300 hover:scale-105 active:scale-95 group border border-pink-200 bg-gradient-to-b from-pink-50/95 via-purple-50/95 to-sky-50/95 shadow-sm"
             :class="getSwayClass(idx, wish.branchIndex)"
           >
             <!-- Top String Hole -->
@@ -630,13 +630,13 @@ const getSwayClass = (idx: number, branchIdx: number) => {
 
             <!-- Wisher Author Name -->
             <div class="mt-0.5 sm:mt-1 pt-0.5 sm:pt-1 border-t border-slate-200 flex items-center justify-center gap-1">
-              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-bold text-slate-700 truncate max-w-[45px] sm:max-w-[55px] md:max-w-[65px]">
+              <span class="text-[7.5px] sm:text-[8px] md:text-[9px] font-bold text-slate-700 truncate max-w-[34px] sm:max-w-[40px] md:max-w-[46px]">
                 {{ wish.author }}
               </span>
             </div>
 
             <!-- Heart Ribbon -->
-            <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 sm:w-2.5 h-1 rounded-b bg-pink-300 opacity-80" />
+            <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 sm:w-2 h-1 rounded-b bg-pink-300 opacity-80" />
 
             <!-- Hover Hint Badge -->
             <div class="absolute -top-7 sm:-top-8 left-1/2 -translate-x-1/2 hidden group-hover:flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-slate-900/90 text-white text-[9px] sm:text-[10px] whitespace-nowrap shadow-md z-30 pointer-events-none">
