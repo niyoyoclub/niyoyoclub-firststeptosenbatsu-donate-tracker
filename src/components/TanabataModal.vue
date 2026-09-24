@@ -49,7 +49,7 @@ const handleCopyWish = () => {
     @click.self="emit('close')"
   >
     <div
-      class="rounded-2xl sm:rounded-3xl max-w-sm sm:max-w-md md:max-w-lg w-full max-h-[92dvh] overflow-y-auto p-3.5 sm:p-5 md:p-6 lg:p-8 shadow-2xl relative overflow-x-hidden transform transition-all border my-auto"
+      class="rounded-2xl sm:rounded-3xl max-w-xs sm:max-w-sm md:max-w-md w-full max-h-[92dvh] overflow-y-auto p-3.5 sm:p-5 md:p-6 lg:p-8 shadow-2xl relative overflow-x-hidden transform transition-all border my-auto"
       :class="[
         wish.branchIndex === 0 ? 'bg-slate-950 border-amber-400/50 shadow-amber-500/20' :
         wish.branchIndex === 1 ? 'bg-amber-950/95 border-amber-400/50 shadow-amber-500/20 text-amber-50' :
