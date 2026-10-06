@@ -188,7 +188,15 @@ const setCurrentIndex = (index) => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 6</span>
-          PRE-ORDER T-Shirt GE เป็นกิจกรรมที่ผู้สนับสนุนทบ Tokens จากยอดพรีออเดอร์เสื้อ T-Shirt ลายโปรเตอร์ GE2026 ของน้องนีญ่า ตัวละ 20 Tokens (กำลังดำเนินการ) และ ยังได้รับ cashback ให้ตัวละ 200฿ ถ้าลงทะเบียนกับทาง Niyoyo Club (50 สิทธิ์)
+          PRE-ORDER T-Shirt GE เป็นกิจกรรมที่ผู้สนับสนุนทบ Tokens จากยอดพรีออเดอร์เสื้อ T-Shirt ลายโปรเตอร์ GE2026 ของน้องนีญ่า ตัวละ 20 Tokens (กำลังดำเนินการ) และ ยังได้รับ cashback ให้ตัวละ 200฿ ถ้าลงทะเบียนกับทาง Niyoyo Club (50 สิทธิ์) สิ้นสุดวันที่ 18 ต.ค. 2569
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <span class="font-bold">กิจกรรมที่ 7</span>
+          PRE-ORDER HS/MYO ทบใบละ 3 Tokens (กำลังดำเนินการ) สิ้นสุดวันที่ 28 ต.ค. 2569
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <span class="font-bold">กิจกรรมที่ 8</span>
+          กดหัวใจ / กด Repost / Comment Post ของน้องนีญ่า account รายการละ 10 Tokens มีผู้ร่วมกิจกรรม 5 account ได้ 50 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
