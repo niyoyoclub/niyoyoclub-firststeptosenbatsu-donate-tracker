@@ -188,7 +188,7 @@ const setCurrentIndex = (index) => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 6</span>
-          PRE-ORDER T-Shirt GE เป็นกิจกรรมที่ผู้สนับสนุนทบ Tokens จากยอดพรีออเดอร์เสื้อ T-Shirt ลายโปรเตอร์ GE2026 ของน้องนีญ่า ตัวละ 20 Tokens (กำลังดำเนินการ) และ ยังได้รับ cashback ให้ตัวละ 200฿ ถ้าลงทะเบียนกับทาง Niyoyo Club (50 สิทธิ์) สิ้นสุดวันที่ 18 ต.ค. 2569
+          PRE-ORDER T-Shirt GE เป็นกิจกรรมที่ผู้สนับสนุนทบ Tokens จากยอดพรีออเดอร์เสื้อ T-Shirt ลายโปรเตอร์ GE2026 ของน้องนีญ่า ตัวละ 20 Tokens (กำลังดำเนินการ) และ ยังได้รับ cashback ให้ตัวละ 200฿ ถ้าลงทะเบียนกับทาง Niyoyo Club (50 สิทธิ์) สิ้นสุดวันที่ 18 ต.ค. 2569 มีการพรีออเดอร์เสื้อรวม 27 ตัว ทบ 540 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 7</span>
