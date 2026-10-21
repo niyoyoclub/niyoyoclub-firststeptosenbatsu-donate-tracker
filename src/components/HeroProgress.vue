@@ -199,6 +199,14 @@ const setCurrentIndex = (index) => {
           กดหัวใจ / กด Repost / Comment Post ของน้องนีญ่า account รายการละ 10 Tokens มีผู้ร่วมกิจกรรม 5 account ได้ 50 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <span class="font-bold">กิจกรรมที่ 9</span>
+          โดเนท Token ให้บ้าน หรือ โหวตให้น้องนีญ่า ผู้สนับสนุนทบโทเคนให้ 6 Tokens มีผู้โดเนท 15 Tokens โหวต 40 Tokens รวมทบ 345 Tokens (ยังรับอยู่)
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <span class="font-bold">กิจกรรมที่ 10</span>
+          กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าเต้นเพลง Yobisute Fantasy! Platform ละ 25 Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด 1,900 Tokens สิ้นสุด 20 ต.ค. 2569 20:00 น.
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">          
