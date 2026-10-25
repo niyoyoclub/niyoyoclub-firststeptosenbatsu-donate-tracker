@@ -207,6 +207,10 @@ const setCurrentIndex = (index) => {
           กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าเต้นเพลง Yobisute Fantasy! Platform ละ 25 Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด 1,900 Tokens สิ้นสุด 20 ต.ค. 2569 20:00 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <span class="font-bold">กิจกรรมที่ 11</span>
+          กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าโปรโมทหาเสียง GE2026 Platform ละ 25 Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด 2,000 Tokens สิ้นสุด 25 ต.ค. 2569 20:00 น.
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">          
