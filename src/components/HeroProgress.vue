@@ -211,6 +211,10 @@ const setCurrentIndex = (index) => {
           กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าโปรโมทหาเสียง GE2026 Platform ละ 25 Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด 2,000 Tokens สิ้นสุด 25 ต.ค. 2569 20:00 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <span class="font-bold">กิจกรรมที่ 12</span>
+          👻เก็บโมเมนต์ชวนหลอน แต่ใจฟูไปกับนีญ่า! 🍡✨(ในงาน THE HAUNTED GRAVEYARD 28 Oct 2026 และ งาน Busking 30 Oct 2026) Content ละ 25 Tokens มีแฟนคลับส่ง 72 links ผู้สนับสนุนทบให้ 1,775 Tokens สิ้นสุด 31 ต.ค. 2026 23:59 น.
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">          
