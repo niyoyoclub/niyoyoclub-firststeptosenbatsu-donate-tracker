@@ -68,11 +68,11 @@ export const INITIAL_MILESTONES: Milestone[] = [
   {
     id: "m6",
     amount: 136000,
-    title: "136,000 ฿ — Final Bonus +6,800 Tokens",
-    description: "ทบจากผู้สนับสนุน +6,800 Tokens รวมทบตลอดแคมเปญ 13,600 Tokens",
+    title: "136,000 ฿ — Final Bonus +7,800 Tokens",
+    description: "ทบจากผู้สนับสนุน ในกิจกรรมกระดานที่ 12 ยอด 50,000 บาท",
     icon: "Trophy",
     isUnlocked: false,
-    tokenBonus: 13600
+    tokenBonus: 6800
   }
 ];
 
