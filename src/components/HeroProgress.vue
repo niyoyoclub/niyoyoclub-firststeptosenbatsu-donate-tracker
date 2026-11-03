@@ -215,6 +215,10 @@ const setCurrentIndex = (index) => {
           👻เก็บโมเมนต์ชวนหลอน แต่ใจฟูไปกับนีญ่า! 🍡✨(ในงาน THE HAUNTED GRAVEYARD 28 Oct 2026 และ งาน Busking 30 Oct 2026) Content ละ 25 Tokens มีแฟนคลับส่ง 72 links ผู้สนับสนุนทบให้ 1,775 Tokens สิ้นสุด 31 ต.ค. 2026 23:59 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
+          <span class="font-bold">กิจกรรมที่ 13</span>
+           กิจกรรมที่ 13 🎉 ภารกิจ 1-Shot ตกหัวใจ(ป้ายยา)แฟนคลับมาแล้วจ้าาา! ในงานจับมือ 31 Oct - 1 Nov 2026 ผู้สนับสนุนทบให้ link ละ 50 Tokens มีผู้ร่วมกิจกรรมทั้งหมด 35 ลิ้งค์ ผู้สนับสนุนทบให้ 1,750 Tokens สิ้นสุด 3 พ.ย. 2026 17:00 น.
+        </p>
+        <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">          
