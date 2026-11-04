@@ -192,7 +192,7 @@ const setCurrentIndex = (index) => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 7</span>
-          PRE-ORDER HS/MYO ทบใบละ 3 Tokens (กำลังดำเนินการ) สิ้นสุดวันที่ 28 ต.ค. 2569
+          PRE-ORDER HS/MYO ทบใบละ 3 Tokens ได้ x87 ใบ ผู้สนับสนุนทบ x,x61 Tokens สิ้นสุดวันที่ 28 ต.ค. 2569 23:59 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 8</span>
@@ -200,7 +200,7 @@ const setCurrentIndex = (index) => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 9</span>
-          โดเนท Token ให้บ้าน หรือ โหวตให้น้องนีญ่า ผู้สนับสนุนทบโทเคนให้ 6 Tokens มีผู้โดเนท 15 Tokens โหวต 40 Tokens รวมทบ 345 Tokens (ยังรับอยู่)
+          โดเนท Token ให้บ้าน หรือ โหวตให้น้องนีญ่า ผู้สนับสนุนทบโทเคนให้ 6 Tokens มีผู้โดเนท 18 Tokens โหวต 298 Tokens รวมทบ 1,896 Tokens (ยังรับอยู่ นับยอดถึง 4 Nov 2026 00:00 น.)
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 10</span>
@@ -219,7 +219,7 @@ const setCurrentIndex = (index) => {
            กิจกรรมที่ 13 🎉 ภารกิจ 1-Shot ตกหัวใจ(ป้ายยา)แฟนคลับมาแล้วจ้าาา! ในงานจับมือ 31 Oct - 1 Nov 2026 ผู้สนับสนุนทบให้ link ละ 50 Tokens มีผู้ร่วมกิจกรรมทั้งหมด 35 ลิ้งค์ ผู้สนับสนุนทบให้ 1,750 Tokens สิ้นสุด 3 พ.ย. 2026 17:00 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
-          <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
+          <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} + x,x61 Tokens</span>
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">          
           และ ทุกๆ การซื้อ 5 Tokens ผู้สนับสนุนจะทบให้อีก 10 Tokens ทบสูงสุด 6,000 Tokens
@@ -306,7 +306,7 @@ const setCurrentIndex = (index) => {
           <div>
             <div class="text-xs text-slate-500 font-medium">คะแนนโหวตโดยประมาณ {{ totalVotes.toLocaleString() }} ทบ {{ addOnVotes.toLocaleString() }} โบนัส {{ props.campaign.currentBonusToken.toLocaleString() }}</div>
             <div class="text-base sm:text-lg font-bold text-slate-800 font-heading">
-              {{ gTotalVotes.toLocaleString() }} <span class="text-xs font-normal text-slate-500">Tokens</span>
+              {{ gTotalVotes.toLocaleString() }} + x,x61 <span class="text-xs font-normal text-slate-500">Tokens</span>
             </div>
           </div>
         </div>
