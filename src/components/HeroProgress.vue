@@ -192,7 +192,7 @@ const setCurrentIndex = (index) => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 7</span>
-          PRE-ORDER HS/MYO ทบใบละ 3 Tokens (กำลังดำเนินการ) สิ้นสุดวันที่ 28 ต.ค. 2569
+          PRE-ORDER HS/MYO ทบใบละ 3 Tokens ได้ 287 ใบ ผู้สนับสนุนทบ 861 Tokens สิ้นสุดวันที่ 28 ต.ค. 2569 23:59 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 8</span>
@@ -200,7 +200,7 @@ const setCurrentIndex = (index) => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 9</span>
-          โดเนท Token ให้บ้าน หรือ โหวตให้น้องนีญ่า ผู้สนับสนุนทบโทเคนให้ 6 Tokens มีผู้โดเนท 15 Tokens โหวต 40 Tokens รวมทบ 345 Tokens (ยังรับอยู่)
+          โดเนท Token ให้บ้าน หรือ โหวตให้น้องนีญ่า ผู้สนับสนุนทบโทเคนให้ 6 Tokens มีผู้โดเนท 18 Tokens โหวต 298 Tokens รวมทบ 1,896 Tokens (ยังรับอยู่ นับยอดถึง 4 Nov 2026 00:00 น.)
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 10</span>
