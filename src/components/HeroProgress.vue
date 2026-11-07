@@ -196,33 +196,33 @@ const setCurrentIndex = (index) => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 8</span>
-          กดหัวใจ / กด Repost / Comment Post ของน้องนีญ่า account รายการละ 10 Tokens มีผู้ร่วมกิจกรรม 5 account ได้ 50 Tokens
+          กดหัวใจ / กด Repost / Comment Post ของน้องนีญ่า account รายการละ x0 Tokens มีผู้ร่วมกิจกรรม 5 account ได้ x0 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 9</span>
-          โดเนท Token ให้บ้าน หรือ โหวตให้น้องนีญ่า ผู้สนับสนุนทบโทเคนให้ 6 Tokens มีผู้โดเนท 15 Tokens โหวต 40 Tokens รวมทบ 345 Tokens (ยังรับอยู่)
+          โดเนท Token ให้บ้าน หรือ โหวตให้น้องนีญ่า ผู้สนับสนุนทบโทเคนให้ 6 Tokens มีผู้โดเนท x5 Tokens โหวต x0 Tokens รวมทบ x45 Tokens (ยังรับอยู่)
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 10</span>
-          กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าเต้นเพลง Yobisute Fantasy! Platform ละ 25 Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด 1,900 Tokens สิ้นสุด 20 ต.ค. 2569 20:00 น.
+          กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าเต้นเพลง Yobisute Fantasy! Platform ละ xx Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด x,x00 Tokens สิ้นสุด 20 ต.ค. 2569 20:00 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 11</span>
-          กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าโปรโมทหาเสียง GE2026 Platform ละ 25 Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด 2,000 Tokens สิ้นสุด 25 ต.ค. 2569 20:00 น.
+          กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าโปรโมทหาเสียง GE2026 Platform ละ xx Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด x,x00 Tokens สิ้นสุด 25 ต.ค. 2569 20:00 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 12</span>
-          👻เก็บโมเมนต์ชวนหลอน แต่ใจฟูไปกับนีญ่า! 🍡✨(ในงาน THE HAUNTED GRAVEYARD 28 Oct 2026 และ งาน Busking 30 Oct 2026) Content ละ 25 Tokens มีแฟนคลับส่ง 72 links ผู้สนับสนุนทบให้ 1,775 Tokens สิ้นสุด 31 ต.ค. 2026 23:59 น.
+          👻เก็บโมเมนต์ชวนหลอน แต่ใจฟูไปกับนีญ่า! 🍡✨(ในงาน THE HAUNTED GRAVEYARD 28 Oct 2026 และ งาน Busking 30 Oct 2026) Content ละ xx Tokens มีแฟนคลับส่ง xx links ผู้สนับสนุนทบให้ x,x75 Tokens สิ้นสุด 31 ต.ค. 2026 23:59 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 13</span>
-           กิจกรรมที่ 13 🎉 ภารกิจ 1-Shot ตกหัวใจ(ป้ายยา)แฟนคลับมาแล้วจ้าาา! ในงานจับมือ 31 Oct - 1 Nov 2026 ผู้สนับสนุนทบให้ link ละ 50 Tokens มีผู้ร่วมกิจกรรมทั้งหมด 35 ลิ้งค์ ผู้สนับสนุนทบให้ 1,750 Tokens สิ้นสุด 3 พ.ย. 2026 17:00 น.
+           กิจกรรมที่ 13 🎉 ภารกิจ 1-Shot ตกหัวใจ(ป้ายยา)แฟนคลับมาแล้วจ้าาา! ในงานจับมือ 31 Oct - 1 Nov 2026 ผู้สนับสนุนทบให้ link ละ xx Tokens มีผู้ร่วมกิจกรรมทั้งหมด xx ลิ้งค์ ผู้สนับสนุนทบให้ x,x50 Tokens สิ้นสุด 3 พ.ย. 2026 17:00 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">          
-          และ ทุกๆ การซื้อ 5 Tokens ผู้สนับสนุนจะทบให้อีก 10 Tokens ทบสูงสุด 6,000 Tokens
+          และ ทุกๆ การซื้อ xx Tokens ผู้สนับสนุนจะทบให้อีก xx Tokens ทบสูงสุด x,000 Tokens
         </p>
       </div>
 
