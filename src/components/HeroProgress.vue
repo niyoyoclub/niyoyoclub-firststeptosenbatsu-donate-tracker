@@ -168,15 +168,15 @@ const setCurrentIndex = (index) => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 1</span>
-          บ้านใหม่น้องนีญ่า ทบ token ตามจำนวนสมาชิกใน open chat x 5 สิ้นสุดวันที่ 30 Jun 2026 23:59 น. มีจำนวนสมาชิก 191 คน ได้ 191 x 5 = 955 Tokens
+          บ้านใหม่น้องนีญ่า ทบ token ตามจำนวนสมาชิกใน open chat x 5 สิ้นสุดวันที่ 30 Jun 2026 23:59 น. มีจำนวนสมาชิก xx1 คน ได้ xx1 x 5 = xx5 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 2</span>
-          ส่งลิ้งค์แฟนแคมน้องนีญ่า จำนวนลิ้งค์ 75 ลิ้งค์ ทบลิ้งค์ละ 10 Tokens สิ้นสุด 31 Jul 26 20:00 ได้ 75 x 10 = 750 Tokens
+          ส่งลิ้งค์แฟนแคมน้องนีญ่า จำนวนลิ้งค์ x5 ลิ้งค์ ทบลิ้งค์ละ x0 Tokens สิ้นสุด 31 Jul 26 20:00 ได้ x5 x x0 = xx0 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 3</span>
-          ดันคลิป Tiktok น้องนีญ่า จำนวนลิ้งค์ 19 รายการ ทบรายการละ 10 Tokens สิ้นสุด 10 Aug 26 18:00 ได้ 19 x 10 = 190 Tokens ผู้สนับสนุนทบให้อีก 190 Tokens = 380 Tokens
+          ดันคลิป Tiktok น้องนีญ่า จำนวนลิ้งค์ xx รายการ ทบรายการละ x0 Tokens สิ้นสุด 10 Aug 26 18:00 ได้ xx x x0 = xx0 Tokens ผู้สนับสนุนทบให้อีก xx0 Tokens = xx80 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 4</span>
@@ -184,11 +184,11 @@ const setCurrentIndex = (index) => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 5</span>
-          [CAM FOR NIYA] เป็นกิจกรรมนำส่ง link ภาพ/คลิป ในงาน Ponytail to Shushu เมื่อวันที่ 19 กันยายน 2569 @MBK Center มีจำนวน link ที่เข้าเงื่อนไขทั้งหมด 50 และทบ Tokens จากผู้สนับสนุน 15 Tokens ต่อ link คิดเป็น 750 Tokens
+          [CAM FOR NIYA] เป็นกิจกรรมนำส่ง link ภาพ/คลิป ในงาน Ponytail to Shushu เมื่อวันที่ 19 กันยายน 2569 @MBK Center มีจำนวน link ที่เข้าเงื่อนไขทั้งหมด x0 และทบ Tokens จากผู้สนับสนุน x5 Tokens ต่อ link คิดเป็น xx0 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 6</span>
-          PRE-ORDER T-Shirt GE เป็นกิจกรรมที่ผู้สนับสนุนทบ Tokens จากยอดพรีออเดอร์เสื้อ T-Shirt ลายโปรเตอร์ GE2026 ของน้องนีญ่า ตัวละ 20 Tokens (กำลังดำเนินการ) และ ยังได้รับ cashback ให้ตัวละ 200฿ ถ้าลงทะเบียนกับทาง Niyoyo Club (50 สิทธิ์) สิ้นสุดวันที่ 18 ต.ค. 2569 มีการพรีออเดอร์เสื้อรวม 27 ตัว ทบ 540 Tokens
+          PRE-ORDER T-Shirt GE เป็นกิจกรรมที่ผู้สนับสนุนทบ Tokens จากยอดพรีออเดอร์เสื้อ T-Shirt ลายโปรเตอร์ GE2026 ของน้องนีญ่า ตัวละ x0 Tokens (กำลังดำเนินการ) และ ยังได้รับ cashback ให้ตัวละ 200฿ ถ้าลงทะเบียนกับทาง Niyoyo Club (50 สิทธิ์) สิ้นสุดวันที่ 18 ต.ค. 2569 มีการพรีออเดอร์เสื้อรวม x7 ตัว ทบ xx0 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 7</span>
