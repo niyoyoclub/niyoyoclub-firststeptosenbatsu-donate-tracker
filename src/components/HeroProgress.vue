@@ -422,11 +422,12 @@ const setCurrentIndex = (index) => {
         <!-- Column 2: Donation -->
         <div class="flex flex-col items-center justify-center gap-3 w-full">
           <button
+            disabled
             @click="emit('openDonate')"
             class="w-full max-w-xs px-6 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold text-sm shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group cursor-pointer"
           >
             <Heart class="w-4 h-4 fill-white group-hover:scale-110 transition-transform" />
-            <span>แจ้งการโดเนท (ส่งสลิป)</span>
+            <span>แจ้งการโดเนท (ปิดแล้ว)</span>
             <ChevronRight class="w-4 h-4 opacity-75" />
           </button>
           <img

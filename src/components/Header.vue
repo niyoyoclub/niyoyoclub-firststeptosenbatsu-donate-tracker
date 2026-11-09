@@ -131,11 +131,12 @@ const handleShare = () => {
         </button>
 
         <button
+          disabled
           @click="emit('openDonate')"
           class="flex-1 sm:flex-initial px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-rose-400 text-white font-medium text-xs sm:text-sm shadow-xs hover:shadow-md hover:opacity-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap"
         >
           <Heart class="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white shrink-0" />
-          <span>ร่วมโดเนท</span>
+          <span>ร่วมโดเนท (ปิดแล้ว)</span>
         </button>
       </div>
     </div>
