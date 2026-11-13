@@ -13,8 +13,8 @@ export const INITIAL_CAMPAIGN: CampaignData = {
   bankName: "ธนาคารกสิกรไทย (KBank)",
   bankAccountNumber: "23x-x-xxxx2-9",
   sheetCsvUrl: "",
-  //startToken: 955+750+380+100+750+540+861+50+2400+1900+2000+1775+1750,
-  startToken: 0,
+  startToken: 955+750+380+100+750+540+861+50+2400+1900+2000+1775+1750,
+  //startToken: 0,
   maxAddonToken: 6000,
   currentBonusToken: 0,
   refreshEveryMinutes: 3,
@@ -24,56 +24,56 @@ export const INITIAL_MILESTONES: Milestone[] = [
   {
     id: "m1",
     amount: 6000,
-    title: "6,000 ฿ — Bonus +x00 Tokens",
-    description: "ทบจากผู้สนับสนุน +x00 Tokens",
+    title: "6,000 ฿ — Bonus +600 Tokens",
+    description: "ทบจากผู้สนับสนุน +600 Tokens",
     icon: "Tv",
     isUnlocked: true,
-    tokenBonus: 0
+    tokenBonus: 600
   },
   {
     id: "m2",
     amount: 12000,
-    title: "12,000 ฿ — Bonus +x00 Tokens",
-    description: "ทบจากผู้สนับสนุน +x00 Tokens รวมทบ x,x00 Tokens",
+    title: "12,000 ฿ — Bonus +600 Tokens",
+    description: "ทบจากผู้สนับสนุน +600 Tokens รวมทบ 1,200 Tokens",
     icon: "Daifuku",
     isUnlocked: true,
-    tokenBonus: 0,
+    tokenBonus: 1200,
   },
   {
     id: "m3",
     amount: 24000,
-    title: "24,000 ฿ — Bonus +x,x00 Tokens",
-    description: "ทบจากผู้สนับสนุน +x,x00 Tokens รวมทบ x,x00 Tokens",
+    title: "24,000 ฿ — Bonus +1,200 Tokens",
+    description: "ทบจากผู้สนับสนุน +1,200 Tokens รวมทบ 2,400 Tokens",
     icon: "Sparkles",
     isUnlocked: false,
-    tokenBonus: 0
+    tokenBonus: 2400
   },
   {
     id: "m4",
     amount: 48000,
-    title: "48,000 ฿ — Bonus +x,000 Tokens",
-    description: "ทบจากผู้สนับสนุน +x,x00 Tokens รวมทบ x,x00 Tokens",
+    title: "48,000 ฿ — Bonus +2,400 Tokens",
+    description: "ทบจากผู้สนับสนุน +2,400 Tokens รวมทบ 4,800 Tokens",
     icon: "Trophy",
     isUnlocked: false,
-    tokenBonus: 0
+    tokenBonus: 4800
   },
   {
     id: "m5",
     amount: 68000,
-    title: "68,000 ฿ — Bonus +x,000 Tokens",
-    description: "ทบจากผู้สนับสนุน +x,000 Tokens รวมทบ x,x00 Tokens",
+    title: "68,000 ฿ — Bonus +2,000 Tokens",
+    description: "ทบจากผู้สนับสนุน +2,000 Tokens รวมทบ 6,800 Tokens",
     icon: "Trophy",
     isUnlocked: false,
-    tokenBonus: 0
+    tokenBonus: 6800
   },
   {
     id: "m6",
     amount: 136000,
-    title: "136,000 ฿ — Final Bonus +x,800 Tokens",
+    title: "136,000 ฿ — Final Bonus +7,800 Tokens",
     description: "ทบจากผู้สนับสนุน ในกิจกรรมกระดานที่ 12 ยอด 50,000 บาท",
     icon: "Trophy",
     isUnlocked: false,
-    tokenBonus: 0
+    tokenBonus: 14600
   }
 ];
 
@@ -221,7 +221,7 @@ export const INITIAL_WISHES: WishMessage[] = [
 */
 
 export const INITIAL_EXPENSES: ExpenseCategory[] = [
-  { category: "โหวตคะแนนเลือกตั้ง (Election Tokens)", percentage: 0, allocatedAmount: 136000, color: "bg-pink-500" },  
+  { category: "โหวต 2,486 GE6", percentage: 100, allocatedAmount: 154364, color: "bg-pink-500" },  
 ];
 /*
 export const INITIAL_EXPENSES: ExpenseCategory[] = [

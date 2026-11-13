@@ -168,15 +168,15 @@ const setCurrentIndex = (index) => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 1</span>
-          บ้านใหม่น้องนีญ่า ทบ token ตามจำนวนสมาชิกใน open chat x 5 สิ้นสุดวันที่ 30 Jun 2026 23:59 น. มีจำนวนสมาชิก xx1 คน ได้ xx1 x 5 = xx5 Tokens
+          บ้านใหม่น้องนีญ่า ทบ token ตามจำนวนสมาชิกใน open chat x 5 สิ้นสุดวันที่ 30 Jun 2026 23:59 น. มีจำนวนสมาชิก 191 คน ได้ 191 x 5 = 955 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 2</span>
-          ส่งลิ้งค์แฟนแคมน้องนีญ่า จำนวนลิ้งค์ x5 ลิ้งค์ ทบลิ้งค์ละ x0 Tokens สิ้นสุด 31 Jul 26 20:00 ได้ x5 x x0 = xx0 Tokens
+          ส่งลิ้งค์แฟนแคมน้องนีญ่า จำนวนลิ้งค์ 75 ลิ้งค์ ทบลิ้งค์ละ 10 Tokens สิ้นสุด 31 Jul 26 20:00 ได้ 75 x 10 = 750 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 3</span>
-          ดันคลิป Tiktok น้องนีญ่า จำนวนลิ้งค์ xx รายการ ทบรายการละ x0 Tokens สิ้นสุด 10 Aug 26 18:00 ได้ xx x x0 = xx0 Tokens ผู้สนับสนุนทบให้อีก xx0 Tokens = xx80 Tokens
+          ดันคลิป Tiktok น้องนีญ่า จำนวนลิ้งค์ 19 รายการ ทบรายการละ 10 Tokens สิ้นสุด 10 Aug 26 18:00 ได้ 19 x 10 = 190 Tokens ผู้สนับสนุนทบให้อีก 190 Tokens = 380 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 4</span>
@@ -184,45 +184,45 @@ const setCurrentIndex = (index) => {
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 5</span>
-          [CAM FOR NIYA] เป็นกิจกรรมนำส่ง link ภาพ/คลิป ในงาน Ponytail to Shushu เมื่อวันที่ 19 กันยายน 2569 @MBK Center มีจำนวน link ที่เข้าเงื่อนไขทั้งหมด x0 และทบ Tokens จากผู้สนับสนุน x5 Tokens ต่อ link คิดเป็น xx0 Tokens
+          [CAM FOR NIYA] เป็นกิจกรรมนำส่ง link ภาพ/คลิป ในงาน Ponytail to Shushu เมื่อวันที่ 19 กันยายน 2569 @MBK Center มีจำนวน link ที่เข้าเงื่อนไขทั้งหมด 50 และทบ Tokens จากผู้สนับสนุน 25 Tokens ต่อ link คิดเป็น 750 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 6</span>
-          PRE-ORDER T-Shirt GE เป็นกิจกรรมที่ผู้สนับสนุนทบ Tokens จากยอดพรีออเดอร์เสื้อ T-Shirt ลายโปรเตอร์ GE2026 ของน้องนีญ่า ตัวละ x0 Tokens (กำลังดำเนินการ) และ ยังได้รับ cashback ให้ตัวละ 200฿ ถ้าลงทะเบียนกับทาง Niyoyo Club (50 สิทธิ์) สิ้นสุดวันที่ 18 ต.ค. 2569 มีการพรีออเดอร์เสื้อรวม x7 ตัว ทบ xx0 Tokens
+          PRE-ORDER T-Shirt GE เป็นกิจกรรมที่ผู้สนับสนุนทบ Tokens จากยอดพรีออเดอร์เสื้อ T-Shirt ลายโปรเตอร์ GE2026 ของน้องนีญ่า ตัวละ 20 Tokens (กำลังดำเนินการ) และ ยังได้รับ cashback ให้ตัวละ 200฿ ถ้าลงทะเบียนกับทาง Niyoyo Club (50 สิทธิ์) สิ้นสุดวันที่ 18 ต.ค. 2569 มีการพรีออเดอร์เสื้อรวม 27 ตัว ทบ 540 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 7</span>
-          PRE-ORDER HS/MYO ทบใบละ 3 Tokens ได้ x87 ใบ ผู้สนับสนุนทบ x,x61 Tokens สิ้นสุดวันที่ 28 ต.ค. 2569 23:59 น.
+          PRE-ORDER HS/MYO ทบใบละ 3 Tokens ได้ 287 ใบ ผู้สนับสนุนทบ 861 Tokens สิ้นสุดวันที่ 28 ต.ค. 2569 23:59 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 8</span>
-          กดหัวใจ / กด Repost / Comment Post ของน้องนีญ่า account รายการละ x0 Tokens มีผู้ร่วมกิจกรรม 5 account ได้ x0 Tokens
+          กดหัวใจ / กด Repost / Comment Post ของน้องนีญ่า account รายการละ 10 Tokens มีผู้ร่วมกิจกรรม 5 account ได้ 50 Tokens
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 9</span>
-          โดเนท Token ให้บ้าน หรือ โหวตให้น้องนีญ่า ผู้สนับสนุนทบโทเคนให้ 6 Tokens มีผู้โดเนท xx Tokens โหวต xx8 Tokens รวมทบ x,x96 Tokens (ยังรับอยู่ นับยอดถึง 4 Nov 2026 00:00 น.)
+          โดเนท Token ให้บ้าน หรือ โหวตให้น้องนีญ่า ผู้สนับสนุนทบโทเคนให้ 6 Tokens มีผู้โดเนท 18 Tokens โหวต 382 Tokens รวมทบ 2,400 Tokens (ยังรับอยู่ นับยอดถึง 4 Nov 2026 00:00 น.)
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 10</span>
-          กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าเต้นเพลง Yobisute Fantasy! Platform ละ xx Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด x,x00 Tokens สิ้นสุด 20 ต.ค. 2569 20:00 น.
+          กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าเต้นเพลง Yobisute Fantasy! Platform ละ 25 Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด 1,900 Tokens สิ้นสุด 20 ต.ค. 2569 20:00 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 11</span>
-          กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าโปรโมทหาเสียง GE2026 Platform ละ xx Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด x,x00 Tokens สิ้นสุด 25 ต.ค. 2569 20:00 น.
+          กดหัวใจ / กด Repost / Comment Post ของ อฟช ที่น้องนีญ่าโปรโมทหาเสียง GE2026 Platform ละ 25 Tokens (Tiktok/IG/FB/X) ได้ทั้งหมด 2,000 Tokens สิ้นสุด 25 ต.ค. 2569 20:00 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 12</span>
-          👻เก็บโมเมนต์ชวนหลอน แต่ใจฟูไปกับนีญ่า! 🍡✨(ในงาน THE HAUNTED GRAVEYARD 28 Oct 2026 และ งาน Busking 30 Oct 2026) Content ละ xx Tokens มีแฟนคลับส่ง xx links ผู้สนับสนุนทบให้ x,x75 Tokens สิ้นสุด 31 ต.ค. 2026 23:59 น.
+          👻เก็บโมเมนต์ชวนหลอน แต่ใจฟูไปกับนีญ่า! 🍡✨(ในงาน THE HAUNTED GRAVEYARD 28 Oct 2026 และ งาน Busking 30 Oct 2026) Content ละ 25 Tokens มีแฟนคลับส่ง 71 links ผู้สนับสนุนทบให้ 1,775 Tokens สิ้นสุด 31 ต.ค. 2026 23:59 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
           <span class="font-bold">กิจกรรมที่ 13</span>
-           กิจกรรมที่ 13 🎉 ภารกิจ 1-Shot ตกหัวใจ(ป้ายยา)แฟนคลับมาแล้วจ้าาา! ในงานจับมือ 31 Oct - 1 Nov 2026 ผู้สนับสนุนทบให้ link ละ xx Tokens มีผู้ร่วมกิจกรรมทั้งหมด xx ลิ้งค์ ผู้สนับสนุนทบให้ x,x50 Tokens สิ้นสุด 3 พ.ย. 2026 17:00 น.
+           กิจกรรมที่ 13 🎉 ภารกิจ 1-Shot ตกหัวใจ(ป้ายยา)แฟนคลับมาแล้วจ้าาา! ในงานจับมือ 31 Oct - 1 Nov 2026 ผู้สนับสนุนทบให้ link ละ 25 Tokens มีผู้ร่วมกิจกรรมทั้งหมด 72 ลิ้งค์ ผู้สนับสนุนทบให้ 1,750 Tokens สิ้นสุด 3 พ.ย. 2026 17:00 น.
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">
-          <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} + x,x61 Tokens</span>
+          <span class="font-bold">จากกิจกรรมทั้งหมดน้องนีญ่ามี Token สะสมรวม {{ props.campaign.startToken.toLocaleString() }} Tokens</span>
         </p>
         <p class="text-sm text-slate-600 leading-relaxed max-w-2xl">          
-          และ ทุกๆ การซื้อ xx Tokens ผู้สนับสนุนจะทบให้อีก xx Tokens ทบสูงสุด x,000 Tokens
+          และ ทุกๆ การซื้อ 5 Tokens ผู้สนับสนุนจะทบให้อีก 10 Tokens ทบสูงสุด 6,000 Tokens
         </p>
       </div>
 
@@ -306,7 +306,7 @@ const setCurrentIndex = (index) => {
           <div>
             <div class="text-xs text-slate-500 font-medium">คะแนนโหวตโดยประมาณ {{ totalVotes.toLocaleString() }} ทบ {{ addOnVotes.toLocaleString() }} โบนัส {{ props.campaign.currentBonusToken.toLocaleString() }}</div>
             <div class="text-base sm:text-lg font-bold text-slate-800 font-heading">
-              {{ gTotalVotes.toLocaleString() }} + x,x61 <span class="text-xs font-normal text-slate-500">Tokens</span>
+              {{ gTotalVotes.toLocaleString() }} <span class="text-xs font-normal text-slate-500">Tokens</span>
             </div>
           </div>
         </div>
