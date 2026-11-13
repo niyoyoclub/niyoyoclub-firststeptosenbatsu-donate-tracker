@@ -221,7 +221,7 @@ export const INITIAL_WISHES: WishMessage[] = [
 */
 
 export const INITIAL_EXPENSES: ExpenseCategory[] = [
-  { category: "โหวตคะแนนเลือกตั้ง (Election Tokens)", percentage: 0, allocatedAmount: 136000, color: "bg-pink-500" },  
+  { category: "โหวต 2,486 GE6", percentage: 100, allocatedAmount: 154364, color: "bg-pink-500" },  
 ];
 /*
 export const INITIAL_EXPENSES: ExpenseCategory[] = [
